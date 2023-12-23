@@ -1,12 +1,23 @@
 using _httpRequest;
 using Assets.Script.Library.Request;
-using Newtonsoft.Json;
-using System.Collections;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Networking;
 public class LogIn : MonoBehaviour
 {
+    private void Start()
+    {
+        AuthResponse token = loadSaved();
+        if (token == null)
+        {
+            Debug.Log("No first connection register");
+        }
+        else
+        {
+            Debug.Log("Token found" + token.Token);
+        }
+    }
     public string URL = @"http://localhost:5292/auth/log";
     public TMP_InputField UsernameLogin;
     public TMP_InputField PasswordLogin;
@@ -17,27 +28,39 @@ public class LogIn : MonoBehaviour
         AuthRequest tempRequest = new AuthRequest() { Username = UsernameLogin.text, Password = PasswordLogin.text };
         var token = await HttpClient.Post<AuthResponse>(URL, tempRequest);
         Debug.Log(token.Token);
-    }
-
-    public IEnumerator LogInReq(AuthRequest request)
-    {
-        var uwr = new UnityWebRequest(URL, "POST");
-        string jsonDATA =JsonConvert.SerializeObject(request);
-
-        byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(jsonDATA);
-
-        uwr.uploadHandler= (UploadHandler)new UploadHandlerRaw(jsonToSend);
-        uwr.downloadHandler=(DownloadHandler)new DownloadHandlerBuffer();
-        uwr.SetRequestHeader("Content-Type", "application/json");
-
-        yield return uwr.SendWebRequest();
-        if (uwr.result == UnityWebRequest.Result.ConnectionError)
+        if (token.Token != null)
         {
-            Debug.Log(uwr.error);
+            SaveToken(token);
+            Debug.Log("Connection succes and token saved");
         }
         else
         {
-            Debug.Log(uwr.downloadHandler.text);
+            Debug.LogError("Password or Username incorect");
+        }
+    }
+    public static void SaveToken(AuthResponse response)
+    {
+        BinaryFormatter bf = new BinaryFormatter();
+        string path = Application.persistentDataPath + "/player.info";
+        FileStream stream = new FileStream(path, FileMode.Create);
+        Debug.Log(path);
+        
+        bf.Serialize(stream,response);
+        stream.Close();
+    }
+    public static AuthResponse loadSaved()
+    {
+        string path = Application.persistentDataPath + "/player.info";
+        if (File.Exists(path))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream stream = new FileStream(path,FileMode.Open);
+            AuthResponse data = bf.Deserialize(stream) as AuthResponse;
+            return data;
+        }
+        else
+        {
+            return null;
         }
     }
 }
