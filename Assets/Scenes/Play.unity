@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -325,8 +325,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1842126364}
-        m_TargetAssemblyTypeName: authmanager, Assembly-CSharp
-        m_MethodName: SignIn
+        m_TargetAssemblyTypeName: LogIn, Assembly-CSharp
+        m_MethodName: OnLogInButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -335,7 +335,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!114 &332103353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -696,7 +696,7 @@ GameObject:
   - component: {fileID: 693234534}
   - component: {fileID: 693234533}
   m_Layer: 5
-  m_Name: Email Input
+  m_Name: Username Input
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2380,9 +2380,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1842126363}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c96b258f959ad8c4f81d802de02af026, type: 3}
+  m_Script: {fileID: 11500000, guid: 71925710194e4a2498fd32c8669f1373, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  URL: https://localhost:7196/auth/log
+  UsernameLogin: {fileID: 693234533}
+  PasswordLogin: {fileID: 537290705}
 --- !u!4 &1842126365
 Transform:
   m_ObjectHideFlags: 0
