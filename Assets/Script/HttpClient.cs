@@ -31,7 +31,7 @@ namespace _httpRequest
 
             if (data != null)
             {
-                var bodyRaw = Encoding.UTF8.GetBytes(JsonUtility.ToJson(data));
+                var bodyRaw = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(data));
                 request.uploadHandler = new UploadHandlerRaw(bodyRaw);
             }
             request.downloadHandler = new DownloadHandlerBuffer();
