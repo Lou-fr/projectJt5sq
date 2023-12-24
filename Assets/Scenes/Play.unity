@@ -325,8 +325,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1842126364}
-        m_TargetAssemblyTypeName: LogIn, Assembly-CSharp
-        m_MethodName: OnLogInButton
+        m_TargetAssemblyTypeName: LogInManager, Assembly-CSharp
+        m_MethodName: OnLoginButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1696,7 +1696,6 @@ GameObject:
   - component: {fileID: 961739752}
   - component: {fileID: 961739751}
   - component: {fileID: 961739750}
-  - component: {fileID: 961739754}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1822,18 +1821,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &961739754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 961739749}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44d4b322b3c247f48b95107b300b1b28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &990963997
 GameObject:
   m_ObjectHideFlags: 0
@@ -2501,17 +2488,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1842126363}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71925710194e4a2498fd32c8669f1373, type: 3}
+  m_Script: {fileID: 11500000, guid: d16337445a8c1ae45b8a9d01c87406eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ConectionMenu: {fileID: 1896692541}
-  PlayButton: {fileID: 2111095301}
-  LogOutButton: {fileID: 767279393}
-  ErrorConection: {fileID: 371937162}
-  _ErrorConection: {fileID: 371937164}
-  URL: https://localhost:7196/auth/log
-  UsernameLogin: {fileID: 693234533}
-  PasswordLogin: {fileID: 537290705}
+  ConnectionMenu: {fileID: 1896692541}
+  LogoutButton: {fileID: 767279393}
+  ErrorConnection: {fileID: 371937164}
+  URL: http://localhost:5292/auth/log
+  Username: {fileID: 693234533}
+  Password: {fileID: 537290705}
 --- !u!4 &1842126365
 Transform:
   m_ObjectHideFlags: 0
@@ -2844,7 +2829,6 @@ GameObject:
   - component: {fileID: 2111095305}
   - component: {fileID: 2111095304}
   - component: {fileID: 2111095303}
-  - component: {fileID: 2111095306}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -2927,8 +2911,8 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 1
-      - m_Target: {fileID: 2111095306}
+        m_CallState: 0
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: mainMenu, Assembly-CSharp
         m_MethodName: PlayGame
         m_Mode: 1
@@ -2939,7 +2923,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 1
+        m_CallState: 0
 --- !u!114 &2111095304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2978,18 +2962,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2111095301}
   m_CullTransparentMesh: 1
---- !u!114 &2111095306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2111095301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b8d1e18c08558d4aaa8da2c88753772, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
