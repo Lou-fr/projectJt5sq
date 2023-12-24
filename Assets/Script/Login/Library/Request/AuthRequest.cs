@@ -1,4 +1,4 @@
-namespace Assets.Script.Library.Request
+namespace Login.Library.Request
 {
     public class AuthRequest
     {
