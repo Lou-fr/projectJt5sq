@@ -1,26 +1,31 @@
 using Login.Library.Request;
 using Login.Library.Resonses;
 using Newtonsoft.Json;
-using System.Collections;
 using System.Text;
 using System.Threading;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Networking;
+using TokenManager;
 
 public class LogInManager : MonoBehaviour
 {
+    public GameObject PlayButton;
+    public GameObject LogOutConfirm;
     public GameObject ConnectionMenu;
     public GameObject LogoutButton;
     public TextMeshProUGUI ErrorConnection;
-    public string URL = @"https://localhost:7196/auth/log:";
+    public string URL = @"https://localhost:7196/auth/log";
     public TMP_InputField Username;
     public TMP_InputField Password;
     // Start is called before the first frame update
     void Start()
     {
-        
+        AuthResponse token = TokenManager.TokenManager.LoadToken();
+        if (token != null)
+        {
+            ConnectionMenu.SetActive(false); LogoutButton.SetActive(true); PlayButton.SetActive(true);
+        }
     }
     public void OnLoginButton()
     {
@@ -30,9 +35,24 @@ public class LogInManager : MonoBehaviour
         {
             if (Token !=null)
             {
-                Debug.Log(Token.Token);
+                TokenManager.TokenManager.SaveToken(Token);
+                ConnectionMenu.SetActive(false);LogoutButton.SetActive(true);PlayButton.SetActive(true);
             }
         }
+    }
+    public void OnLogoutButton()
+    {
+        ConnectionMenu.SetActive(false); LogoutButton.SetActive(false); PlayButton.SetActive(false);LogOutConfirm.SetActive(true);
+
+    }
+    public void OnLogOutConfirmButton()
+    {
+        TokenManager.TokenManager.UnloadToken();
+        ConnectionMenu.SetActive(true);LogOutConfirm.SetActive(false);
+    }
+    public void OnLogoutCancelButton()
+    {
+        LogoutButton.SetActive(true); PlayButton.SetActive(true); LogOutConfirm.SetActive(false);
     }
     public AuthResponse LogInRequest(AuthRequest request)
     {
@@ -45,7 +65,8 @@ public class LogInManager : MonoBehaviour
         while (!uwr.isDone) Thread.Sleep(10);
         if (uwr.result == UnityWebRequest.Result.Success)
         {
-            Debug.Log("auth receive and token transmision");
+            Debug.Log(uwr.responseCode);
+            ErrorConnection.gameObject.SetActive(false);
             return JsonConvert.DeserializeObject<AuthResponse>(uwr.downloadHandler.text);
         }
         else
@@ -53,12 +74,12 @@ public class LogInManager : MonoBehaviour
             ErrorConnection.gameObject.SetActive(true);
             if (uwr.result == UnityWebRequest.Result.ProtocolError)
             {
-                Debug.LogWarning(uwr.downloadHandler.text);
+                Debug.LogWarning(uwr.responseCode);
                 ErrorConnection.text = uwr.downloadHandler.text;
             }
             else
             {
-                Debug.LogError(uwr.error);
+                Debug.LogError(uwr.responseCode);
                 ErrorConnection.text = uwr.error;
             }
             return null;
