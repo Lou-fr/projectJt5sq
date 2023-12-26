@@ -6,8 +6,6 @@ using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
-using TokenManager;
-
 public class LogInManager : MonoBehaviour
 {
     public GameObject PlayButton;
