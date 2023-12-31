@@ -35,5 +35,18 @@ namespace TokenManager
             string path = Application.persistentDataPath + "/player.info";
             File.Delete(path);
         }
+        public static void SaveTokenTemp(AuthResponse response)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            string path = Application.persistentDataPath + "/player.temp";
+            FileStream stream = new FileStream(path, FileMode.Create);
+            bf.Serialize(stream, response);
+            stream.Close();
+        }
+        public static void UnloadTempToken()
+        {
+            string path = Application.persistentDataPath + "/player.temp";
+            File.Delete(path);
+        }
     }
 }
