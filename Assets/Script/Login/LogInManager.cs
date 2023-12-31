@@ -6,12 +6,15 @@ using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 public class LogInManager : MonoBehaviour
 {
     public GameObject PlayButton;
     public GameObject LogOutConfirm;
     public GameObject ConnectionMenu;
     public GameObject LogoutButton;
+    public UnityEngine.UI.Toggle StayLogIn;
     public TextMeshProUGUI ErrorConnection;
     public string URL = @"https://localhost:7196/auth/log";
     public TMP_InputField Username;
@@ -19,6 +22,7 @@ public class LogInManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        TokenManager.TokenManager.UnloadTempToken();
         AuthResponse token = TokenManager.TokenManager.LoadToken();
         if (token != null)
         {
@@ -31,10 +35,19 @@ public class LogInManager : MonoBehaviour
         var Token = LogInRequest(TempRequest);
         if (Token != null)
         {
-            if (Token !=null)
+            if (Token.Token !=null)
             {
-                TokenManager.TokenManager.SaveToken(Token);
-                ConnectionMenu.SetActive(false);LogoutButton.SetActive(true);PlayButton.SetActive(true);
+                if (StayLogIn.isOn)
+                {
+                    TokenManager.TokenManager.SaveToken(Token);
+                    ConnectionMenu.SetActive(false); LogoutButton.SetActive(true); PlayButton.SetActive(true);
+                }
+                else
+                {
+                    TokenManager.TokenManager.SaveTokenTemp(Token);
+                    ConnectionMenu.SetActive(false); LogoutButton.SetActive(true); PlayButton.SetActive(true);
+                }
+                
             }
         }
     }
@@ -45,8 +58,9 @@ public class LogInManager : MonoBehaviour
     }
     public void OnLogOutConfirmButton()
     {
+        TokenManager.TokenManager.UnloadTempToken();
         TokenManager.TokenManager.UnloadToken();
-        ConnectionMenu.SetActive(true);LogOutConfirm.SetActive(false);
+        ConnectionMenu.SetActive(true); LogOutConfirm.SetActive(false);
     }
     public void OnLogoutCancelButton()
     {
