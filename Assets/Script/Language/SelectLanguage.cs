@@ -3,12 +3,27 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
+using UnityEngine.Localization.SmartFormat.Core.Parsing;
 
 
 public class SelectLanguage : MonoBehaviour
 {
     private bool active = false;
     public TMP_Dropdown dropdown;
+    IEnumerator Start()
+    {
+        int selected = 0;
+        yield return LocalizationSettings.SelectedLocale;
+        for (int i = 0; i < LocalizationSettings.AvailableLocales.Locales.Count; ++i)
+        {
+            var locale = LocalizationSettings.AvailableLocales.Locales[i];
+            if (LocalizationSettings.SelectedLocale == locale)
+            {
+                selected = i;
+            }
+            dropdown.value = selected;
+        }
+    }
     public void OnSubmit()
     {
         ChangeLocale(dropdown.value);

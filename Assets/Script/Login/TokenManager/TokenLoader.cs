@@ -4,7 +4,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 namespace TokenManager
 {
-    public static class TokenManager
+    public static class TokenLoader
     {
         public static void SaveToken(AuthResponse response)
         {

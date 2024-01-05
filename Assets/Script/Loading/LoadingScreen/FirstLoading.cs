@@ -11,6 +11,7 @@ public class AsyncLoadinWorld : MonoBehaviour
     public Button PlayButton;
     void Start()
     {
+        Application.targetFrameRate = 60;
         PlayButton.onClick.AddListener(OnButtonPress);
     }
     void OnButtonPress()
