@@ -6,6 +6,7 @@ using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
+using TokenManager;
 public class LogInManager : MonoBehaviour
 {
     public GameObject PlayButton;
@@ -20,11 +21,18 @@ public class LogInManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        TokenManager.TokenManager.UnloadTempToken();
-        AuthResponse token = TokenManager.TokenManager.LoadToken();
+        TokenLoader.UnloadTempToken();
+        AuthResponse token = TokenLoader.LoadToken();
         if (token != null)
         {
-            ConnectionMenu.SetActive(false); LogoutButton.SetActive(true); PlayButton.SetActive(true);
+            if (TokenVerification.VerifToken() == true)
+            {
+                ConnectionMenu.SetActive(false); LogoutButton.SetActive(true); PlayButton.SetActive(true);
+            }
+            else
+            {
+                TokenLoader.UnloadToken();
+            }
         }
     }
     public void OnLoginButton()
@@ -37,12 +45,12 @@ public class LogInManager : MonoBehaviour
             {
                 if (StayLogIn.isOn)
                 {
-                    TokenManager.TokenManager.SaveToken(Token);
+                    TokenLoader.SaveToken(Token);
                     ConnectionMenu.SetActive(false); LogoutButton.SetActive(true); PlayButton.SetActive(true);
                 }
                 else
                 {
-                    TokenManager.TokenManager.SaveTokenTemp(Token);
+                    TokenLoader.SaveTokenTemp(Token);
                     ConnectionMenu.SetActive(false); LogoutButton.SetActive(true); PlayButton.SetActive(true);
                 }
                 
@@ -56,8 +64,8 @@ public class LogInManager : MonoBehaviour
     }
     public void OnLogOutConfirmButton()
     {
-        TokenManager.TokenManager.UnloadTempToken();
-        TokenManager.TokenManager.UnloadToken();
+        TokenLoader.UnloadTempToken();
+        TokenLoader.UnloadToken();
         ConnectionMenu.SetActive(true); LogOutConfirm.SetActive(false);
     }
     public void OnLogoutCancelButton()
