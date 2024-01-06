@@ -16,8 +16,7 @@ MonoBehaviour:
     m_Code: en
   m_SharedData: {fileID: 11400000, guid: 454cbbf8432f8cd48b37197d5a4b850a, type: 2}
   m_Metadata:
-    m_Items:
-    - rid: 982370805056012323
+    m_Items: []
   m_TableData:
   - m_Id: 15470739456
     m_Localized: Username
@@ -56,14 +55,29 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 16842552819712
-    m_Localized: 'Loading : {0}'
+    m_Localized: 'Loading '
     m_Metadata:
-      m_Items:
-      - rid: 982370805056012323
+      m_Items: []
+  - m_Id: 1382910131224576
+    m_Localized: ERROR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1383288193204224
+    m_Localized: Your token is no longer valid
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1385053026304000
+    m_Localized: Acknowledge
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1390799436693504
+    m_Localized: Press spacebar to continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1410644677017600
+    m_Localized: 'You are connected as '
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
-    RefIds:
-    - rid: 982370805056012323
-      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
-      data:
-        m_Entries: 00c06076510f0000
+    RefIds: []

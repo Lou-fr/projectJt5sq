@@ -1,9 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
-using UnityEngine.Localization.SmartFormat.Core.Parsing;
 
 
 public class SelectLanguage : MonoBehaviour

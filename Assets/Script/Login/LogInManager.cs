@@ -7,8 +7,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 using TokenManager;
+using TokenVerfication;
+using GetLocal;
 public class LogInManager : MonoBehaviour
 {
+    public TextMeshProUGUI _Username;
+    public GameObject ErrorTokenPopup;
     public GameObject PlayButton;
     public GameObject LogOutConfirm;
     public GameObject ConnectionMenu;
@@ -25,15 +29,24 @@ public class LogInManager : MonoBehaviour
         AuthResponse token = TokenLoader.LoadToken();
         if (token != null)
         {
-            if (TokenVerification.VerifToken() == true)
+            var (succes, _username) = TokenVerification.VerifToken();
+            if ((succes) == (true))
             {
+                string temp = GetLocalal.GetString("StartScreen", "Welcome");
+                _Username.text = temp+_username;
+                _Username.gameObject.SetActive(true);
                 ConnectionMenu.SetActive(false); LogoutButton.SetActive(true); PlayButton.SetActive(true);
             }
             else
             {
-                TokenLoader.UnloadToken();
+                ConnectionMenu.SetActive(false); ErrorTokenPopup.SetActive(true); _Username.gameObject.SetActive(false);
             }
         }
+    }
+    public void OnAcknowledgeButton()
+    {
+        TokenLoader.UnloadToken();
+        ConnectionMenu.SetActive(true); ErrorTokenPopup.SetActive(false);
     }
     public void OnLoginButton()
     {
@@ -45,13 +58,17 @@ public class LogInManager : MonoBehaviour
             {
                 if (StayLogIn.isOn)
                 {
-                    TokenLoader.SaveToken(Token);
-                    ConnectionMenu.SetActive(false); LogoutButton.SetActive(true); PlayButton.SetActive(true);
+                    TokenLoader.SaveToken(Token); 
+                    string temp = GetLocalal.GetString("StartScreen", "Welcome");
+                    _Username.text = temp + Username.text;
+                    _Username.gameObject.SetActive(true);ConnectionMenu.SetActive(false); LogoutButton.SetActive(true); PlayButton.SetActive(true);
                 }
                 else
                 {
                     TokenLoader.SaveTokenTemp(Token);
-                    ConnectionMenu.SetActive(false); LogoutButton.SetActive(true); PlayButton.SetActive(true);
+                    string temp = GetLocalal.GetString("StartScreen", "Welcome");
+                    _Username.text = temp + Username.text;
+                    _Username.gameObject.SetActive(true);ConnectionMenu.SetActive(false); LogoutButton.SetActive(true); PlayButton.SetActive(true);
                 }
                 
             }
@@ -59,7 +76,7 @@ public class LogInManager : MonoBehaviour
     }
     public void OnLogoutButton()
     {
-        ConnectionMenu.SetActive(false); LogoutButton.SetActive(false); PlayButton.SetActive(false);LogOutConfirm.SetActive(true);
+        ConnectionMenu.SetActive(false); LogoutButton.SetActive(false); PlayButton.SetActive(false);LogOutConfirm.SetActive(true); _Username.gameObject.SetActive(false);
 
     }
     public void OnLogOutConfirmButton()
@@ -70,7 +87,7 @@ public class LogInManager : MonoBehaviour
     }
     public void OnLogoutCancelButton()
     {
-        LogoutButton.SetActive(true); PlayButton.SetActive(true); LogOutConfirm.SetActive(false);
+        LogoutButton.SetActive(true); PlayButton.SetActive(true); LogOutConfirm.SetActive(false); _Username.gameObject.SetActive(true);
     }
     public AuthResponse LogInRequest(AuthRequest request)
     {
