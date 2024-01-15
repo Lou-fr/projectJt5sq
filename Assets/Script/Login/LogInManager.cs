@@ -6,89 +6,50 @@ using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
-using TokenManager;
-using TokenVerfication;
+using TokenManage;
 using GetLocal;
+using TempTokenManager;
 public class LogInManager : MonoBehaviour
 {
-    public TextMeshProUGUI _Username;
-    public GameObject ErrorTokenPopup;
-    public GameObject PlayButton;
-    public GameObject LogOutConfirm;
-    public GameObject ConnectionMenu;
-    public GameObject LogoutButton;
-    public UnityEngine.UI.Toggle StayLogIn;
-    public TextMeshProUGUI ErrorConnection;
-    public string URL = @"https://localhost:7196/auth/log";
-    public TMP_InputField Username;
-    public TMP_InputField Password;
+    public bool LogInSucces = false;
+    [SerializeField] TextMeshProUGUI _Username;
+    [SerializeField] GameObject PlayButton;
+    [SerializeField] GameObject ConnectionMenu;
+    [SerializeField] GameObject LogoutButton;
+    [SerializeField] UnityEngine.UI.Toggle StayLogIn;
+    [SerializeField] TextMeshProUGUI ErrorConnection;
+    public AuthResponse token;
+    private string URL = @"https://localhost:7196/auth/log";
+    [SerializeField] TMP_InputField Username;
+    [SerializeField] TMP_InputField Password;
     // Start is called before the first frame update
     void Start()
     {
-        TokenLoader.UnloadTempToken();
-        AuthResponse token = TokenLoader.LoadToken();
-        if (token != null)
-        {
-            var (succes, _username) = TokenVerification.VerifToken();
-            if ((succes) == (true))
-            {
-                string temp = GetLocalal.GetString("StartScreen", "Welcome");
-                _Username.text = temp+_username;
-                _Username.gameObject.SetActive(true);
-                ConnectionMenu.SetActive(false); LogoutButton.SetActive(true); PlayButton.SetActive(true);
-            }
-            else
-            {
-                ConnectionMenu.SetActive(false); ErrorTokenPopup.SetActive(true); _Username.gameObject.SetActive(false);
-            }
-        }
-    }
-    public void OnAcknowledgeButton()
-    {
-        TokenLoader.UnloadToken();
-        ConnectionMenu.SetActive(true); ErrorTokenPopup.SetActive(false);
+        token = TokenLoader.LoadToken();
+        if (token != null)this.gameObject.SetActive(false); this.enabled = false;
     }
     public void OnLoginButton()
     {
         AuthRequest TempRequest = new AuthRequest() { Username = Username.text, Password = Password.text};
-        var Token = LogInRequest(TempRequest);
-        if (Token != null)
+        token = LogInRequest(TempRequest);
+        if (token != null)
         {
-            if (Token.Token !=null)
+            if (token.Token !=null)
             {
+                LogInSucces = true;
+                string temp = GetLocalal.GetString("StartScreen", "Welcome");
+                _Username.text = temp + Username.text;
+                _Username.gameObject.SetActive(true); ConnectionMenu.SetActive(false); LogoutButton.SetActive(true); PlayButton.SetActive(true);
                 if (StayLogIn.isOn)
                 {
-                    TokenLoader.SaveToken(Token); 
-                    string temp = GetLocalal.GetString("StartScreen", "Welcome");
-                    _Username.text = temp + Username.text;
-                    _Username.gameObject.SetActive(true);ConnectionMenu.SetActive(false); LogoutButton.SetActive(true); PlayButton.SetActive(true);
+                    TokenLoader.SaveToken(token); 
                 }
-                else
-                {
-                    TokenLoader.SaveTokenTemp(Token);
-                    string temp = GetLocalal.GetString("StartScreen", "Welcome");
-                    _Username.text = temp + Username.text;
-                    _Username.gameObject.SetActive(true);ConnectionMenu.SetActive(false); LogoutButton.SetActive(true); PlayButton.SetActive(true);
-                }
-                
+                this.gameObject.SetActive(false);
+                this.enabled = false;
             }
         }
     }
-    public void OnLogoutButton()
-    {
-        ConnectionMenu.SetActive(false); LogoutButton.SetActive(false); PlayButton.SetActive(false);LogOutConfirm.SetActive(true); _Username.gameObject.SetActive(false);
 
-    }
-    public void OnLogOutConfirmButton()
-    {
-        TokenLoader.UnloadTempToken();
-        TokenLoader.UnloadToken();
-        ConnectionMenu.SetActive(true); LogOutConfirm.SetActive(false);
-    }
-    public void OnLogoutCancelButton()
-    {
-        LogoutButton.SetActive(true); PlayButton.SetActive(true); LogOutConfirm.SetActive(false); _Username.gameObject.SetActive(true);
-    }
     public AuthResponse LogInRequest(AuthRequest request)
     {
         var uwr = new UnityWebRequest(URL,"POST");

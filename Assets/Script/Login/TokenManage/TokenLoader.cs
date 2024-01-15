@@ -2,7 +2,7 @@ using Login.Library.Resonses;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
-namespace TokenManager
+namespace TokenManage
 {
     public static class TokenLoader
     {

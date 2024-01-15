@@ -357,8 +357,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1842126364}
-        m_TargetAssemblyTypeName: LogInManager, Assembly-CSharp
+      - m_Target: {fileID: 2036840501}
+        m_TargetAssemblyTypeName: TokenManager, Assembly-CSharp
         m_MethodName: OnAcknowledgeButton
         m_Mode: 1
         m_Arguments:
@@ -3581,8 +3581,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1842126364}
-        m_TargetAssemblyTypeName: LogInManager, Assembly-CSharp
+      - m_Target: {fileID: 2036840501}
+        m_TargetAssemblyTypeName: TokenManager, Assembly-CSharp
         m_MethodName: OnLogoutButton
         m_Mode: 1
         m_Arguments:
@@ -4742,8 +4742,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1842126364}
-        m_TargetAssemblyTypeName: LogInManager, Assembly-CSharp
+      - m_Target: {fileID: 2036840501}
+        m_TargetAssemblyTypeName: TokenManager, Assembly-CSharp
         m_MethodName: OnLogoutCancelButton
         m_Mode: 1
         m_Arguments:
@@ -5070,8 +5070,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1842126364}
-        m_TargetAssemblyTypeName: LogInManager, Assembly-CSharp
+      - m_Target: {fileID: 2036840501}
+        m_TargetAssemblyTypeName: TokenManager, Assembly-CSharp
         m_MethodName: OnLogOutConfirmButton
         m_Mode: 1
         m_Arguments:
@@ -5993,15 +5993,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d16337445a8c1ae45b8a9d01c87406eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LogInSucces: 0
   _Username: {fileID: 1606618540}
-  ErrorTokenPopup: {fileID: 1342327164}
   PlayButton: {fileID: 2111095301}
-  LogOutConfirm: {fileID: 450349896}
   ConnectionMenu: {fileID: 1896692541}
   LogoutButton: {fileID: 767279393}
   StayLogIn: {fileID: 1424764093}
   ErrorConnection: {fileID: 371937164}
-  URL: http://localhost:5292/auth/log
   Username: {fileID: 693234533}
   Password: {fileID: 537290705}
 --- !u!4 &1842126365
@@ -6492,6 +6490,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2032462067}
   m_CullTransparentMesh: 1
+--- !u!1 &2036840500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2036840502}
+  - component: {fileID: 2036840501}
+  m_Layer: 0
+  m_Name: TempTokenManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2036840501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2036840500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 954853ca14a7f454790fa9f1d90800a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  authmanager: {fileID: 1842126363}
+  LogInManager: {fileID: 1842126364}
+  _Username: {fileID: 1606618540}
+  ConnectionMenu: {fileID: 1896692541}
+  LogoutButton: {fileID: 767279393}
+  PlayButton: {fileID: 2111095301}
+  ErrorTokenPopup: {fileID: 1342327164}
+  LogOutConfirm: {fileID: 450349896}
+--- !u!4 &2036840502
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2036840500}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 318.31625, y: 201.9617, z: -298.8049}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2064631859
 GameObject:
   m_ObjectHideFlags: 0
@@ -6789,6 +6839,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LogOut: {fileID: 767279393}
+  Welcome: {fileID: 1606618538}
   SwitchLanguage: {fileID: 938438231}
   loadingtext: {fileID: 585262500}
   PlayButton: {fileID: 2111095303}
@@ -6818,3 +6869,4 @@ SceneRoots:
   - {fileID: 1281170958}
   - {fileID: 2146595762}
   - {fileID: 1418769862}
+  - {fileID: 2036840502}

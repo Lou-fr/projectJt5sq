@@ -8,6 +8,7 @@ using GetLocal;
 public class AsyncLoadinWorld : MonoBehaviour
 {
     public GameObject LogOut;
+    public GameObject Welcome;
     public GameObject SwitchLanguage;
     public TextMeshProUGUI loadingtext;
     public Button PlayButton;
@@ -18,7 +19,7 @@ public class AsyncLoadinWorld : MonoBehaviour
     }
     void OnButtonPress()
     {
-        SwitchLanguage.SetActive(false); LogOut.SetActive(false); loadingtext.gameObject.SetActive(true); PlayButton.gameObject.SetActive(false);
+        SwitchLanguage.SetActive(false); LogOut.SetActive(false); loadingtext.gameObject.SetActive(true); PlayButton.gameObject.SetActive(false); Welcome.SetActive(false);
         StartCoroutine(LoadScene());
 
     }
