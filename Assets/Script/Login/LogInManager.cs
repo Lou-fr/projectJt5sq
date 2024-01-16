@@ -11,14 +11,14 @@ using GetLocal;
 using TempTokenManager;
 public class LogInManager : MonoBehaviour
 {
-    public bool LogInSucces = false;
     [SerializeField] TextMeshProUGUI _Username;
     [SerializeField] GameObject PlayButton;
     [SerializeField] GameObject ConnectionMenu;
     [SerializeField] GameObject LogoutButton;
+    [SerializeField] TempTokenManager.TokenManager _TempTokenManager;
     [SerializeField] UnityEngine.UI.Toggle StayLogIn;
     [SerializeField] TextMeshProUGUI ErrorConnection;
-    public AuthResponse token;
+    [HideInInspector] public Tokens token;
     private string URL = @"https://localhost:7196/auth/log";
     [SerializeField] TMP_InputField Username;
     [SerializeField] TMP_InputField Password;
@@ -26,7 +26,7 @@ public class LogInManager : MonoBehaviour
     void Start()
     {
         token = TokenLoader.LoadToken();
-        if (token != null)this.gameObject.SetActive(false); this.enabled = false;
+        if (token.Token  != null) _TempTokenManager.enabled = true;this.enabled = false;
     }
     public void OnLoginButton()
     {
@@ -36,21 +36,21 @@ public class LogInManager : MonoBehaviour
         {
             if (token.Token !=null)
             {
-                LogInSucces = true;
                 string temp = GetLocalal.GetString("StartScreen", "Welcome");
                 _Username.text = temp + Username.text;
-                _Username.gameObject.SetActive(true); ConnectionMenu.SetActive(false); LogoutButton.SetActive(true); PlayButton.SetActive(true);
+                _Username.gameObject.SetActive(true);
+                ConnectionMenu.SetActive(false); LogoutButton.SetActive(true); PlayButton.SetActive(true);
+                _TempTokenManager.enabled = true;
                 if (StayLogIn.isOn)
                 {
                     TokenLoader.SaveToken(token); 
                 }
-                this.gameObject.SetActive(false);
                 this.enabled = false;
             }
         }
     }
 
-    public AuthResponse LogInRequest(AuthRequest request)
+    public Tokens LogInRequest(AuthRequest request)
     {
         var uwr = new UnityWebRequest(URL,"POST");
         var JsonData= Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(request));
@@ -63,7 +63,7 @@ public class LogInManager : MonoBehaviour
         {
             Debug.Log(uwr.responseCode);
             ErrorConnection.gameObject.SetActive(false);
-            return JsonConvert.DeserializeObject<AuthResponse>(uwr.downloadHandler.text);
+            return JsonConvert.DeserializeObject<Tokens>(uwr.downloadHandler.text);
         }
         else
         {
