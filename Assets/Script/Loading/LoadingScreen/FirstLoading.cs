@@ -7,11 +7,13 @@ using GetLocal;
 
 public class AsyncLoadinWorld : MonoBehaviour
 {
-    public GameObject LogOut;
-    public GameObject Welcome;
-    public GameObject SwitchLanguage;
-    public TextMeshProUGUI loadingtext;
-    public Button PlayButton;
+    [SerializeField] GameObject LogOut;
+    [SerializeField] GameObject Welcome;
+    [SerializeField] GameObject SwitchLanguage;
+    [SerializeField] TextMeshProUGUI loadingtext;
+    [SerializeField] Button PlayButton;
+    [SerializeField] TokenManager tokenmanager;
+    [SerializeField] GameObject tokenObjectManager;
     void Start()
     {
         Application.targetFrameRate = 60;
@@ -26,7 +28,7 @@ public class AsyncLoadinWorld : MonoBehaviour
     IEnumerator LoadScene()
     {
         yield return null;
-
+        tokenmanager.enabled = true;tokenObjectManager.SetActive(true);
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(1);
         asyncOperation.allowSceneActivation = false;
         Debug.Log("Progression " + asyncOperation.progress);

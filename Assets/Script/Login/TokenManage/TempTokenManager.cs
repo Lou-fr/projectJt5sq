@@ -19,15 +19,16 @@ namespace TempTokenManager
         [SerializeField] GameObject PlayButton;
         [SerializeField] GameObject ErrorTokenPopup;
         [SerializeField] GameObject LogOutConfirm;
-        [SerializeField][HideInInspector] AuthResponse token;
+        public Tokens token;
         void Start()
         {
-            token = TokenLoader.LoadToken();
+            token = LogInManager.token;
             if (token != null)
             {
-                var (succes, _username, ResponseCode) = TokenVerification.VerifToken();
+                var (succes, _username, ResponseCode) = TokenVerification.VerifToken(token);
                 if (succes == true)
                 {
+                    Debug.Log("ok");
                     string temp = GetLocalal.GetString("StartScreen", "Welcome");
                     _Username.text = temp + _username;
                     _Username.gameObject.SetActive(true);
@@ -57,13 +58,12 @@ namespace TempTokenManager
         public void OnAcknowledgeButton()
         {
             TokenLoader.UnloadToken();
-            ConnectionMenu.SetActive(true); ErrorTokenPopup.SetActive(false); authmanager.SetActive(true);
+            ConnectionMenu.SetActive(true); ErrorTokenPopup.SetActive(false); authmanager.SetActive(true); LogInManager.enabled = true; this.enabled = false;
         }
         public void OnLogOutConfirmButton()
         {
-            TokenLoader.UnloadTempToken();
             TokenLoader.UnloadToken();
-            ConnectionMenu.SetActive(true); LogOutConfirm.SetActive(false); authmanager.SetActive(true); LogInManager.enabled = true;
+            ConnectionMenu.SetActive(true); LogOutConfirm.SetActive(false); authmanager.SetActive(true); LogInManager.enabled = true; this.enabled = false;
         }
         public void OnLogoutCancelButton()
         {

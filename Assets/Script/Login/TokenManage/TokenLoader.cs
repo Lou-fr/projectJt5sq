@@ -6,7 +6,7 @@ namespace TokenManage
 {
     public static class TokenLoader
     {
-        public static void SaveToken(AuthResponse response)
+        public static void SaveToken(Tokens response)
         {
             BinaryFormatter bf = new BinaryFormatter();
             string path = Application.persistentDataPath + "/player.info";
@@ -14,14 +14,14 @@ namespace TokenManage
             bf.Serialize(stream, response);
             stream.Close();
         }
-        public static AuthResponse LoadToken()
+        public static Tokens LoadToken()
         {
             string path = Application.persistentDataPath + "/player.info";
             if (File.Exists(path))
             {
                 BinaryFormatter binaryFormatter = new BinaryFormatter();
                 FileStream stream = new FileStream(path, FileMode.Open);
-                AuthResponse Token = binaryFormatter.Deserialize(stream) as AuthResponse;
+                Tokens Token = binaryFormatter.Deserialize(stream) as Tokens;
                 stream.Close();
                 return Token;
             }
@@ -35,7 +35,10 @@ namespace TokenManage
             string path = Application.persistentDataPath + "/player.info";
             File.Delete(path);
         }
-        public static void SaveTokenTemp(AuthResponse response)
+    }
+    /*public static class TempTokenLoader
+    {
+        public static void SaveTokenTemp(Tokens response)
         {
             BinaryFormatter bf = new BinaryFormatter();
             string path = Application.persistentDataPath + "/player.temp";
@@ -48,5 +51,21 @@ namespace TokenManage
             string path = Application.persistentDataPath + "/player.temp";
             File.Delete(path);
         }
-    }
+        public static Tokens LoadTempToken()
+        {
+            string path = Application.persistentDataPath + "/player.temp";
+            if (File.Exists(path))
+            {
+                BinaryFormatter binaryFormatter = new BinaryFormatter();
+                FileStream stream = new FileStream(path, FileMode.Open);
+                Tokens Token = binaryFormatter.Deserialize(stream) as Tokens;
+                stream.Close();
+                return Token;
+            }
+            else
+            {
+                return null;
+            }
+        }
+    }*/
 }
