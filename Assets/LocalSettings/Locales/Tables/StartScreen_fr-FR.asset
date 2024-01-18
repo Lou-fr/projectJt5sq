@@ -80,6 +80,11 @@ MonoBehaviour:
     m_Localized: "Vous \xEAtes connectez en tant que "
     m_Metadata:
       m_Items: []
+  - m_Id: 6094663406632960
+    m_Localized: "Impossible de se connecter au serveur, merci de ressayer ult\xE9rieurement
+      ou de v\xE9rifier votre connexion"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

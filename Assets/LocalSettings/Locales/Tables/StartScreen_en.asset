@@ -78,6 +78,11 @@ MonoBehaviour:
     m_Localized: 'You are connected as '
     m_Metadata:
       m_Items: []
+  - m_Id: 6094663406632960
+    m_Localized: Couldn't  connect to the server please retry later or check your
+      internet connection
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
