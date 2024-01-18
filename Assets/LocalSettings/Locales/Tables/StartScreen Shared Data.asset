@@ -75,6 +75,10 @@ MonoBehaviour:
     m_Key: Welcome
     m_Metadata:
       m_Items: []
+  - m_Id: 6094663406632960
+    m_Key: error
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
