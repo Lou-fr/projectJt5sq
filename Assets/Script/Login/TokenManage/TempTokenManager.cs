@@ -19,6 +19,7 @@ namespace TempTokenManager
         [SerializeField] GameObject PlayButton;
         [SerializeField] GameObject ErrorTokenPopup;
         [SerializeField] GameObject LogOutConfirm;
+        [SerializeField] GameObject ErrorServer;
         public Tokens token;
         void Start()
         {
@@ -40,6 +41,10 @@ namespace TempTokenManager
                     {
                         Debug.LogWarning("Token no more valid");
                         ConnectionMenu.SetActive(false); ErrorTokenPopup.SetActive(true); _Username.gameObject.SetActive(false); this.enabled = false;
+                    }
+                    else
+                    {
+                        ErrorServer.SetActive(true);ConnectionMenu.SetActive(false);
                     }
                 }
             }
@@ -68,6 +73,13 @@ namespace TempTokenManager
         public void OnLogoutCancelButton()
         {
             LogoutButton.SetActive(true); PlayButton.SetActive(true); LogOutConfirm.SetActive(false); _Username.gameObject.SetActive(true);
+        }
+        public void OnAcknowledgeButtonConServ()
+        {
+            Application.Quit();
+#if (UNITY_EDITOR)
+            UnityEditor.EditorApplication.isPlaying = false;
+#endif
         }
     }
 }
