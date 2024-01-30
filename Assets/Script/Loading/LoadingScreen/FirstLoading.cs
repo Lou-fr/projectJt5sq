@@ -33,18 +33,27 @@ public class AsyncLoadinWorld : MonoBehaviour
         asyncOperation.allowSceneActivation = false;
         Debug.Log("Progression " + asyncOperation.progress);
         string loadingtextLen = GetLocalal.GetString("StartScreen", "Loading");
-        string startText = GetLocalal.GetString("StartScreen", "Start");
         while (!asyncOperation.isDone)
         {
             loadingtext.text = loadingtextLen + (asyncOperation.progress * 100 +10) + " %";
             if (asyncOperation.progress >=   0.9f)
             {
+#if UNITY_STANDALONE
+                string startText = GetLocalal.GetString("StartScreen", "Start");
                 loadingtext.text = startText;
                 if (Input.GetKeyUp(KeyCode.Space))
                 {
                     asyncOperation.allowSceneActivation = true;
                 }
-
+#endif
+#if UNITY_ANDROID || UNITY_IOS
+                string startText = GetLocalal.GetString("StartScreen", "StartPhone");
+                loadingtext.text = startText;
+                if (Input.touchCount > 0)
+                {
+                    asyncOperation.allowSceneActivation = true;
+                }
+#endif
             }
             yield return null;
         }

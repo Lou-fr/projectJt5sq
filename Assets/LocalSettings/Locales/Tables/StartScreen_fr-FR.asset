@@ -16,8 +16,7 @@ MonoBehaviour:
     m_Code: fr-FR
   m_SharedData: {fileID: 11400000, guid: 454cbbf8432f8cd48b37197d5a4b850a, type: 2}
   m_Metadata:
-    m_Items:
-    - rid: 982370892905971714
+    m_Items: []
   m_TableData:
   - m_Id: 15470739456
     m_Localized: Nom d'utilisateur
@@ -74,8 +73,7 @@ MonoBehaviour:
   - m_Id: 1390799436693504
     m_Localized: Appuiez sur la barre espace pour continuez
     m_Metadata:
-      m_Items:
-      - rid: 982370892905971714
+      m_Items: []
   - m_Id: 1410644677017600
     m_Localized: "Vous \xEAtes connectez en tant que "
     m_Metadata:
@@ -85,10 +83,14 @@ MonoBehaviour:
       ou de v\xE9rifier votre connexion"
     m_Metadata:
       m_Items: []
+  - m_Id: 10394297125879808
+    m_Localized: Appuiez n'importe ou pour continuez
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10400539164590080
+    m_Localized: Quittez
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
-    RefIds:
-    - rid: 982370892905971714
-      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
-      data:
-        m_Entries: 00c060baecf00400
+    RefIds: []

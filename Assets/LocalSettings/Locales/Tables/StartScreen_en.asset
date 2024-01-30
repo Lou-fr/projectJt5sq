@@ -83,6 +83,14 @@ MonoBehaviour:
       internet connection
     m_Metadata:
       m_Items: []
+  - m_Id: 10394297125879808
+    m_Localized: Press anywhere to continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10400539164590080
+    m_Localized: Quit
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
