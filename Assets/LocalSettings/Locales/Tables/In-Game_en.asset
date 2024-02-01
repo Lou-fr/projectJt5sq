@@ -58,6 +58,26 @@ MonoBehaviour:
     m_Localized: Language
     m_Metadata:
       m_Items: []
+  - m_Id: 384324216078336
+    m_Localized: Full Screen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 385542766247936
+    m_Localized: Vsync
+    m_Metadata:
+      m_Items: []
+  - m_Id: 386222998470656
+    m_Localized: Apply
+    m_Metadata:
+      m_Items: []
+  - m_Id: 401949184802816
+    m_Localized: Resolution
+    m_Metadata:
+      m_Items: []
+  - m_Id: 402071096442880
+    m_Localized: Antialiasing Mode
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
