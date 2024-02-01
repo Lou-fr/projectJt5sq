@@ -6,6 +6,7 @@ public class Menu : MonoBehaviour
 {
     [SerializeField] GameObject panel;
     [SerializeField] GameObject LanguagePanel;
+    [SerializeField] GameObject GraphicPanel;
     [SerializeField] GameObject RTTMPopUp;
     [SerializeField] GameObject QuitPopUp;
     static bool GameIsPaused = false;
@@ -32,6 +33,18 @@ public class Menu : MonoBehaviour
     public void LanguageMenu()
     {
         LanguagePanel.SetActive(true);
+        if (GraphicPanel.active)
+        {
+            GraphicPanel.SetActive(false);
+        }
+    }
+    public void GraphicMenu()
+    {
+        GraphicPanel.SetActive(true);
+        if (LanguagePanel.active)
+        {
+            LanguagePanel.SetActive(false);
+        }
     }
     public void RTMM()
     {
@@ -47,6 +60,8 @@ public class Menu : MonoBehaviour
     }
     public void RTMMConfirm()
     {
+        GameIsPaused = false;
+        Time.timeScale = 1f;
         SceneManager.LoadScene(0);
     }
     public void Quit()
