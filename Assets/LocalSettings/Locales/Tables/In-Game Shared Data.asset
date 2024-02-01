@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: In-Game Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: In-Game
+  m_TableCollectionNameGuidString: a5840d78cae124a4281904217aef2bef
+  m_Entries:
+  - m_Id: 34055700480
+    m_Key: Graphics
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1309874896896
+    m_Key: RTM
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10752675069952
+    m_Key: Quit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 298420092846080
+    m_Key: RTMM_Text_Confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 301342050533376
+    m_Key: RTMM_Confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 303446899081216
+    m_Key: cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 306163289735168
+    m_Key: 'Quit_text_confirm
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 306398250450944
+    m_Key: Quit_Confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 308016593289216
+    m_Key: Ge_St
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309147151155200
+    m_Key: Lng_st
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 982371476355678208
+  references:
+    version: 2
+    RefIds:
+    - rid: 982371476355678208
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
+        asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1706719338837
