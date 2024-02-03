@@ -1,16 +1,17 @@
 
 using System.Collections.Generic;
 using TMPro;
-using UnityEngine.Rendering;
+using System;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public class Graphics : MonoBehaviour
 {
-    [SerializeField] Toggle Vsync, F_S;
-    [SerializeField] TMP_Dropdown Dresolution;
-    [SerializeField] TMP_Dropdown DAAMode;
+    [SerializeField] Toggle Vsync, F_S, fps;
+    [SerializeField] TMP_Dropdown Dresolution, D_FPS, DAAMode;
+    [SerializeField] GameObject fps_counter;
+    [SerializeField] UniversalAdditionalCameraData CameraData;
     Resolution[] resolutions;
     // Start is called before the first frame update
     void Start()
@@ -27,26 +28,29 @@ public class Graphics : MonoBehaviour
         resolutions = Screen.resolutions;
 
         List<string> options = new List<string>();
-        int currentResolutionIndex = 0;
+        int CurrentIndex = 0;
         for (int i = 0; i < resolutions.Length; i++)
         {
             string option = resolutions[i].width + "x" + resolutions[i].height;
             options.Add(option);
             if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
             {
-                currentResolutionIndex = i;
+                CurrentIndex = i;
             }
         }
         Dresolution.AddOptions(options);
-        Dresolution.value = currentResolutionIndex;
+        Dresolution.value = CurrentIndex;
         options.Clear();
-        for (int i = 0;i < 4; i++)
+        CurrentIndex = 0;
+        for (AntialiasingMode i = 0;i < AntialiasingMode.TemporalAntiAliasing; i++)
         {
-            if(i == QualitySettings.antiAliasing)
+            if(i == CameraData.antialiasing)
             {
-                DAAMode.value = i;
+                CurrentIndex = ((int)i);
             }
         }
+        DAAMode.value = CurrentIndex;
+        if(Application.targetFrameRate == 60)D_FPS.value = 1;
     }
     public void ApplyChange()
     {
@@ -60,5 +64,29 @@ public class Graphics : MonoBehaviour
         }
         Resolution resolution = resolutions[Dresolution.value];
         Screen.SetResolution(resolution.width, resolution.height, F_S.isOn);
+        fps_counter.SetActive(fps.isOn);
+        switch (DAAMode.value)
+        {
+            case 0:
+                CameraData.antialiasing = AntialiasingMode.None;
+                break;
+            case 1:
+                CameraData.antialiasing = AntialiasingMode.FastApproximateAntialiasing; 
+                break;
+            case 2:
+                CameraData.antialiasing = AntialiasingMode.SubpixelMorphologicalAntiAliasing; 
+                break;
+            case 3:
+                CameraData.antialiasing = AntialiasingMode.TemporalAntiAliasing;
+                break;
+        }
+        if (D_FPS.value == 1)
+        {
+            Application.targetFrameRate = 60;
+        }
+        else
+        {
+            Application.targetFrameRate = 30;
+        }
     }
 }

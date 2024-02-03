@@ -77,6 +77,22 @@ MonoBehaviour:
     m_Key: Gr_AA
     m_Metadata:
       m_Items: []
+  - m_Id: 1153819599749120
+    m_Key: Gr_FPS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1157874619301888
+    m_Key: Gr_See_FPS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1164558553104384
+    m_Key: FPS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1166263294410752
+    m_Key: Lng_game
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

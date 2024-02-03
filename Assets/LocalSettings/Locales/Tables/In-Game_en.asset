@@ -78,6 +78,22 @@ MonoBehaviour:
     m_Localized: Antialiasing Mode
     m_Metadata:
       m_Items: []
+  - m_Id: 1153819599749120
+    m_Localized: FPS limiter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1157874619301888
+    m_Localized: FPS counter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1164558553104384
+    m_Localized: FPS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1166263294410752
+    m_Localized: Game language
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

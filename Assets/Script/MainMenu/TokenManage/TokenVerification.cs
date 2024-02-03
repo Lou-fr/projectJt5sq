@@ -20,5 +20,4 @@ namespace TokenManage
             return (false, "", uwr.result);
         }
     }
-
 }

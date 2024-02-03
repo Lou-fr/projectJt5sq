@@ -2,17 +2,17 @@ using UnityEngine;
 
 public class thirdpersonmovement : MonoBehaviour
 {
-    public CharacterController controller;
-    public float speed = 6f;
-    public float gravity = -9.81f;
-    Vector3 velocity;
-    public float turnSmoothTime = 0.1f;
+    [SerializeField] CharacterController controller;
+    private float speed = 6f;
+    private float gravity = -9.81f;
+    private Vector3 velocity;
+    private float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
-    public Transform cam;
-    public Transform groundcheck;
-    public float groundDistance = 0.4f;
-    public float jumpHeight = 3f;
-    public LayerMask groundmask;
+    [SerializeField] Transform cam;
+    [SerializeField] Transform groundcheck;
+    private float groundDistance = 0.4f;
+    private float jumpHeight = 3f;
+    [SerializeField] LayerMask groundmask;
     bool isGrounded;
 
     // Update is called once per frame
