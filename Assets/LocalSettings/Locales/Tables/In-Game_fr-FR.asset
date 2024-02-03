@@ -75,7 +75,23 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 402071096442880
-    m_Localized: "mode anticr\xE9nelage"
+    m_Localized: "mode d'anticr\xE9nelage"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1153819599749120
+    m_Localized: Limite d'IPS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1157874619301888
+    m_Localized: afficher IPS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1164558553104384
+    m_Localized: IPS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1166263294410752
+    m_Localized: Langue du jeux
     m_Metadata:
       m_Items: []
   references:
