@@ -6,11 +6,20 @@ public class Menu : MonoBehaviour
 {
     [SerializeField] GameObject panel;
     [SerializeField] GameObject LanguagePanel;
-    [SerializeField] GameObject GraphicPanel;
+    private GameObject GraphicPanel;
     [SerializeField] GameObject RTTMPopUp;
     [SerializeField] GameObject QuitPopUp;
     static bool GameIsPaused = false;
     static bool BtnSetPressed = false;
+    public void Start()
+    {
+#if UNITY_STANDALONE
+        GraphicPanel = GameObject.Find("Gr_computer");
+#endif
+#if UNITY_ANDROID || UNITY_IOS
+        GraphicPanel = GameObject.Find("Gr_phone");
+#endif
+    }
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape) || BtnSetPressed == true)
