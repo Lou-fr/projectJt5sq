@@ -19,7 +19,7 @@ public class LogInManager : MonoBehaviour
     [SerializeField] UnityEngine.UI.Toggle StayLogIn;
     [SerializeField] TextMeshProUGUI ErrorConnection;
     [HideInInspector] public Tokens token;
-    private string URL = @"https://localhost:7196/auth/log";
+    private string URL = @"https://5.48.12.31:7196/auth/log";
     [SerializeField] TMP_InputField Username;
     [SerializeField] TMP_InputField Password;
     // Start is called before the first frame update
@@ -54,6 +54,7 @@ public class LogInManager : MonoBehaviour
     {
         var uwr = new UnityWebRequest(URL,"POST");
         var JsonData= Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(request));
+        uwr.certificateHandler =(CertificateHandler) new BypassCertificate();
         uwr.uploadHandler = (UploadHandler)new UploadHandlerRaw(JsonData);
         uwr.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
         uwr.SetRequestHeader("Content-Type", "application/json");
