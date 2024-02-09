@@ -10,56 +10,48 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: In-Game_en
+  m_Name: In-Game_Menu_fr-FR
   m_EditorClassIdentifier: 
   m_LocaleId:
-    m_Code: en
+    m_Code: fr-FR
   m_SharedData: {fileID: 11400000, guid: a5840d78cae124a4281904217aef2bef, type: 2}
   m_Metadata:
     m_Items: []
   m_TableData:
   - m_Id: 34055700480
-    m_Localized: Graphic settings
+    m_Localized: Parametre graphique
     m_Metadata:
       m_Items: []
   - m_Id: 1309874896896
-    m_Localized: Return to the main menu
+    m_Localized: Retourner au menu principale
     m_Metadata:
       m_Items: []
   - m_Id: 10752675069952
-    m_Localized: Exit
+    m_Localized: Quiter
     m_Metadata:
       m_Items: []
   - m_Id: 298420092846080
-    m_Localized: Your about to return to the main menu
+    m_Localized: "Vous \xEAtes sur le point de retourner au menu principale"
     m_Metadata:
       m_Items: []
   - m_Id: 301342050533376
-    m_Localized: Yes, return to the main menu
+    m_Localized: Oui
     m_Metadata:
       m_Items: []
   - m_Id: 303446899081216
-    m_Localized: Cancel
+    m_Localized: Annuler
     m_Metadata:
       m_Items: []
   - m_Id: 306163289735168
-    m_Localized: Your about to quit the game
-    m_Metadata:
-      m_Items: []
-  - m_Id: 306398250450944
-    m_Localized: Yes, quit the game
-    m_Metadata:
-      m_Items: []
-  - m_Id: 308016593289216
-    m_Localized: General
+    m_Localized: "Vous \xEAtes sur le point de quitter le jeu"
     m_Metadata:
       m_Items: []
   - m_Id: 309147151155200
-    m_Localized: Language
+    m_Localized: Langue
     m_Metadata:
       m_Items: []
   - m_Id: 384324216078336
-    m_Localized: Full Screen
+    m_Localized: "Plein \xE9cran"
     m_Metadata:
       m_Items: []
   - m_Id: 385542766247936
@@ -67,7 +59,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 386222998470656
-    m_Localized: Apply
+    m_Localized: Appliquer
     m_Metadata:
       m_Items: []
   - m_Id: 401949184802816
@@ -75,23 +67,47 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 402071096442880
-    m_Localized: Antialiasing Mode
+    m_Localized: "Mode d'anticr\xE9nelage"
     m_Metadata:
       m_Items: []
   - m_Id: 1153819599749120
-    m_Localized: FPS limiter
+    m_Localized: Limite d'IPS
     m_Metadata:
       m_Items: []
   - m_Id: 1157874619301888
-    m_Localized: FPS counter
+    m_Localized: Afficher IPS
     m_Metadata:
       m_Items: []
   - m_Id: 1164558553104384
-    m_Localized: FPS
+    m_Localized: IPS
     m_Metadata:
       m_Items: []
   - m_Id: 1166263294410752
-    m_Localized: Game language
+    m_Localized: Langue du jeux
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3221336744837120
+    m_Localized: Controles
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3244266165944320
+    m_Localized: En avant
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3244345002082304
+    m_Localized: "En arri\xE8re"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3247681327644672
+    m_Localized: Vers la gauche
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3247700646608896
+    m_Localized: Vers la droite
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3247831483727872
+    m_Localized: Sauter
     m_Metadata:
       m_Items: []
   references:

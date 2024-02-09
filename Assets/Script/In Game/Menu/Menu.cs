@@ -6,6 +6,7 @@ public class Menu : MonoBehaviour
 {
     [SerializeField] GameObject panel;
     [SerializeField] GameObject LanguagePanel;
+    [SerializeField] GameObject CntrlPanel;
     private GameObject GraphicPanel;
     [SerializeField] GameObject RTTMPopUp;
     [SerializeField] GameObject QuitPopUp;
@@ -42,16 +43,27 @@ public class Menu : MonoBehaviour
     public void LanguageMenu()
     {
         LanguagePanel.SetActive(true);
-        if (GraphicPanel.active)
+        if (GraphicPanel.active|| CntrlPanel.active)
         {
             GraphicPanel.SetActive(false);
+            CntrlPanel.SetActive(false);
         }
     }
     public void GraphicMenu()
     {
         GraphicPanel.SetActive(true);
-        if (LanguagePanel.active)
+        if (LanguagePanel.active|| CntrlPanel.active)
         {
+            LanguagePanel.SetActive(false);
+            CntrlPanel.SetActive(false) ;
+        }
+    }
+    public void ControlMenu()
+    {
+        CntrlPanel.SetActive(true) ;
+        if(GraphicPanel.active || LanguagePanel.active)
+        {
+            GraphicPanel.SetActive(false);
             LanguagePanel.SetActive(false);
         }
     }
@@ -64,6 +76,10 @@ public class Menu : MonoBehaviour
         else
         {
             RTTMPopUp.SetActive(true);
+            if(QuitPopUp.active == true)
+            {
+                QuitPopUp.SetActive(false);
+            }
         }
         
     }
@@ -82,6 +98,10 @@ public class Menu : MonoBehaviour
         else
         {
             QuitPopUp.SetActive(true);
+            if (RTTMPopUp.active ==true)
+            {
+                RTTMPopUp.SetActive(false);
+            }
         }
     }
     public void QuitConfirm()
@@ -94,8 +114,11 @@ public class Menu : MonoBehaviour
 
     void Resume()
     {
-        QuitPopUp.SetActive(false);
-        RTTMPopUp.SetActive(false);
+        if (QuitPopUp.active == true || RTTMPopUp.active == true)
+        {
+            QuitPopUp.SetActive(false);
+            RTTMPopUp.SetActive(false);
+        }
         panel.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;

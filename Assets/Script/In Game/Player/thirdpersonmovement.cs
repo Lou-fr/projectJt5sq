@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class thirdpersonmovement : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class thirdpersonmovement : MonoBehaviour
     private float groundDistance = 0.4f;
     private float jumpHeight = 3f;
     [SerializeField] LayerMask groundmask;
+    [SerializeField] InputActionReference mouvement;
+    [SerializeField] InputActionReference jump;
     bool isGrounded;
 
     // Update is called once per frame
@@ -23,9 +26,8 @@ public class thirdpersonmovement : MonoBehaviour
         {
             velocity.y = -2f;
         }
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-        Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
+        Vector2 _movedir = mouvement.action.ReadValue<Vector2>();
+        Vector3 direction = new Vector3(_movedir.x, 0f, _movedir.y).normalized;
         if(direction.magnitude >= 0.1f)
         {
             float targatAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
@@ -35,7 +37,7 @@ public class thirdpersonmovement : MonoBehaviour
             Vector3 moveDir = Quaternion.Euler(0f, targatAngle, 0f) * Vector3.forward;
             controller.Move(moveDir.normalized * speed *Time.deltaTime);
         }
-        if (Input.GetButtonDown("Jump")&& isGrounded) 
+        if (jump.action.IsPressed() && isGrounded) 
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
