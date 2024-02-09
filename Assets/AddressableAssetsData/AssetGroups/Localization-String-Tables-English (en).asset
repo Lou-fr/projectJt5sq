@@ -25,7 +25,7 @@ MonoBehaviour:
     - Preload
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0f22142be6637e0418013c0b1716c327
-    m_Address: In-Game_en
+    m_Address: In-Game_Menu_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en
