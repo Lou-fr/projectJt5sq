@@ -3,6 +3,19 @@ using UnityEngine.InputSystem;
 
 public class thirdpersonmovement : MonoBehaviour
 {
+    private InputMaster playerinput;
+    private void Awake()
+    {
+        playerinput = new InputMaster();
+    }
+    private void OnEnable()
+    {
+        playerinput.Enable();
+    }
+    private void OnDisable()
+    {
+        playerinput.Disable();
+    }
     [SerializeField] private CharacterController controller;
     private float speed = 6f;
     private float gravity = -9.81f;
@@ -26,7 +39,7 @@ public class thirdpersonmovement : MonoBehaviour
         {
             velocity.y = -2f;
         }
-        Vector2 _movedir = mouvement.action.ReadValue<Vector2>();
+        Vector2 _movedir = playerinput.player.movement.ReadValue<Vector2>();
         Vector3 direction = new Vector3(_movedir.x, 0f, _movedir.y).normalized;
         if(direction.magnitude >= 0.1f)
         {
@@ -37,7 +50,7 @@ public class thirdpersonmovement : MonoBehaviour
             Vector3 moveDir = Quaternion.Euler(0f, targatAngle, 0f) * Vector3.forward;
             controller.Move(moveDir.normalized * speed *Time.deltaTime);
         }
-        if (jump.action.IsPressed() && isGrounded) 
+        if (playerinput.player.Jump.IsPressed() && isGrounded) 
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }

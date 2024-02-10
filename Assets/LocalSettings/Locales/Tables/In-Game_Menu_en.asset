@@ -138,6 +138,10 @@ MonoBehaviour:
     m_Localized: Reset
     m_Metadata:
       m_Items: []
+  - m_Id: 3690739085131776
+    m_Localized: Sory there is no option for controller on this device
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

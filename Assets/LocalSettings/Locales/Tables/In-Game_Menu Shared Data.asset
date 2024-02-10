@@ -137,6 +137,10 @@ MonoBehaviour:
     m_Key: reset
     m_Metadata:
       m_Items: []
+  - m_Id: 3690739085131776
+    m_Key: NoCntrlPhone
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -138,6 +138,11 @@ MonoBehaviour:
     m_Localized: renitialisez
     m_Metadata:
       m_Items: []
+  - m_Id: 3690739085131776
+    m_Localized: "D\xE9soler, il n'y a pas d'option des controles disponible sur
+      cette appareille"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
