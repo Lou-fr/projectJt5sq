@@ -8,8 +8,8 @@ using UnityEngine.UI;
 
 public class Graphics : MonoBehaviour
 {
-    [SerializeField] GameObject fps_counter;
-    [SerializeField] UniversalAdditionalCameraData CameraData;
+    [SerializeField] private GameObject fps_counter;
+    [SerializeField] private UniversalAdditionalCameraData CameraData;
 
 #if UNITY_STANDALONE
     private Toggle Vsync, F_S, fps;

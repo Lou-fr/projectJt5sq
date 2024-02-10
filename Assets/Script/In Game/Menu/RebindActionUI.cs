@@ -1,17 +1,14 @@
 using System;
+using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Events;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
-
-////TODO: localization support
-
-////TODO: deal with composites that have parts bound in different control schemes
-
-namespace UnityEngine.InputSystem.Samples.RebindUI
+using UnityEngine.InputSystem;
+using TMPro;
+/// DISCLAIMER: this come from the UNITY RebindUI sample
+namespace BleizEntertainment.RebindUI
 {
-    /// <summary>
-    /// A reusable component with a self-contained UI for rebinding a single action.
-    /// </summary>
     public class RebindActionUI : MonoBehaviour
     {
         /// <summary>
@@ -74,7 +71,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         /// </summary>
         /// <seealso cref="startRebindEvent"/>
         /// <seealso cref="rebindOverlay"/>
-        public Text rebindPrompt
+        public TextMeshProUGUI rebindPrompt
         {
             get => m_RebindText;
             set => m_RebindText = value;
@@ -259,6 +256,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                 .WithControlsExcluding("<Mouse>/rightButton")
                 .WithControlsExcluding("<Mouse>/press")
                 .WithControlsExcluding("<Pointer>/position")
+                .WithControlsExcluding("<Mouse>/scroll")
                 .WithCancelingThrough("<Keyboard>/escape")
                 .OnCancel(
                     operation =>
@@ -275,6 +273,14 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                         action.Enable();
                         m_RebindOverlay?.SetActive(false);
                         m_RebindStopEvent?.Invoke(this, operation);
+                        if (CheckDuplicateBindings(action, bindingIndex, allCompositeParts)==true)
+                        {
+                            action.RemoveBindingOverride(bindingIndex);
+                            CleanUp();
+                            PerformInteractiveRebind(action, bindingIndex, allCompositeParts);
+                            return;
+                        }
+
                         UpdateBindingDisplay();
                         CleanUp();
 
@@ -290,16 +296,22 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
 
             // If it's a part binding, show the name of the part in the UI.
             var partName = default(string);
-            if (action.bindings[bindingIndex].isPartOfComposite)
-                partName = $"Binding '{action.bindings[bindingIndex].name}'. ";
+            var binding = LocalizationSettings.StringDatabase.GetLocalizedString("In-Game_Menu", "WaitForInput0");
+            partName = action.name;
+            if (action.bindings[bindingIndex].isPartOfComposite)partName = $"{action.bindings[bindingIndex].id}";
+            Debug.Log($"{partName}| |{binding}");
+            partName = LocalizationSettings.StringDatabase.GetLocalizedString("In-Game_Menu",partName);
+            partName = $"{binding} '{partName}'. ";
 
             // Bring up rebind overlay, if we have one.
             m_RebindOverlay?.SetActive(true);
             if (m_RebindText != null)
             {
+                var translationpart1 = LocalizationSettings.StringDatabase.GetLocalizedString("In-Game_Menu", "WaitForInput1");
+                var translationpart2 = LocalizationSettings.StringDatabase.GetLocalizedString("In-Game_Menu", "WaitForInput2");
                 var text = !string.IsNullOrEmpty(m_RebindOperation.expectedControlType)
-                    ? $"{partName}Waiting for {m_RebindOperation.expectedControlType} input..."
-                    : $"{partName}Waiting for input...";
+                    ? $"{partName} {translationpart1} {translationpart2}..."
+                    : $"{partName} {translationpart1} {translationpart2}...";
                 m_RebindText.text = text;
             }
 
@@ -312,6 +324,36 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             m_RebindStartEvent?.Invoke(this, m_RebindOperation);
 
             m_RebindOperation.Start();
+        }
+        private bool CheckDuplicateBindings(InputAction action, int bindingIndex, bool allCompositeParts)
+        {
+            InputBinding newBinding = action.bindings[bindingIndex];
+            foreach(InputBinding binding in action.actionMap.bindings)
+            {
+                if (binding.action == newBinding.action)
+                {
+                    continue;
+                }
+                if (binding.effectivePath == newBinding.effectivePath)
+                {
+                    Debug.LogWarning("Duplicate bindings");
+                    return true;
+                }
+            }
+            /// check for duplicate composite bindings
+            if (allCompositeParts)
+            {
+                Debug.Log("test");
+                for (int i = 1; i < bindingIndex; i++)
+                {
+                    if (action.bindings[i].effectivePath == newBinding.effectivePath)
+                    {
+                        Debug.LogWarning("Duplicate bindings");
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         protected void OnEnable()
@@ -383,7 +425,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
 
         [Tooltip("Optional text label that will be updated with prompt for user input.")]
         [SerializeField]
-        private Text m_RebindText;
+        private TextMeshProUGUI m_RebindText;
 
         [Tooltip("Event that is triggered when the way the binding is display should be updated. This allows displaying "
             + "bindings in custom ways, e.g. using images instead of text.")]
@@ -406,13 +448,17 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
 
         // We want the label for the action name to update in edit mode, too, so
         // we kick that off from here.
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         protected void OnValidate()
         {
             UpdateBindingDisplay();
         }
 
-        #endif
+#endif
+        private void Start()
+        {
+            UpdateBindingDisplay();
+        }
 
         [Serializable]
         public class UpdateBindingUIEvent : UnityEvent<RebindActionUI, string, string, string>
@@ -425,3 +471,4 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         }
     }
 }
+

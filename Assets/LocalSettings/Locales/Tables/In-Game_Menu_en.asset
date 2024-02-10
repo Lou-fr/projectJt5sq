@@ -110,6 +110,34 @@ MonoBehaviour:
     m_Localized: Jump
     m_Metadata:
       m_Items: []
+  - m_Id: 3573082218348544
+    m_Localized: 'Waiting for '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3581929494462464
+    m_Localized: input
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3584544227770368
+    m_Localized: Binding
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587734373449728
+    m_Localized: Jump
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3609390286422016
+    m_Localized: Movement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3612730131005440
+    m_Localized: Reset all
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3612814801420288
+    m_Localized: Reset
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -3,19 +3,19 @@ using UnityEngine.InputSystem;
 
 public class thirdpersonmovement : MonoBehaviour
 {
-    [SerializeField] CharacterController controller;
+    [SerializeField] private CharacterController controller;
     private float speed = 6f;
     private float gravity = -9.81f;
     private Vector3 velocity;
     private float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
-    [SerializeField] Transform cam;
-    [SerializeField] Transform groundcheck;
+    [SerializeField] private Transform cam;
+    [SerializeField] private Transform groundcheck;
     private float groundDistance = 0.4f;
     private float jumpHeight = 3f;
-    [SerializeField] LayerMask groundmask;
-    [SerializeField] InputActionReference mouvement;
-    [SerializeField] InputActionReference jump;
+    [SerializeField] private LayerMask groundmask;
+    [SerializeField] private InputActionReference mouvement;
+    [SerializeField] private InputActionReference jump;
     bool isGrounded;
 
     // Update is called once per frame

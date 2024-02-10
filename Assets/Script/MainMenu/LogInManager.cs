@@ -11,17 +11,17 @@ using GetLocal;
 using TempTokenManager;
 public class LogInManager : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI _Username;
-    [SerializeField] GameObject PlayButton;
-    [SerializeField] GameObject ConnectionMenu;
-    [SerializeField] GameObject LogoutButton;
+    [SerializeField] private TextMeshProUGUI _Username;
+    [SerializeField] private GameObject PlayButton;
+    [SerializeField] private GameObject ConnectionMenu;
+    [SerializeField] private GameObject LogoutButton;
     [SerializeField] TempTokenManager.TokenManager _TempTokenManager;
     [SerializeField] UnityEngine.UI.Toggle StayLogIn;
-    [SerializeField] TextMeshProUGUI ErrorConnection;
+    [SerializeField] private TextMeshProUGUI ErrorConnection;
     [HideInInspector] public Tokens token;
     private string URL = @"https://5.48.12.31:7196/auth/log";
-    [SerializeField] TMP_InputField Username;
-    [SerializeField] TMP_InputField Password;
+    [SerializeField] private TMP_InputField Username;
+    [SerializeField] private TMP_InputField Password;
     // Start is called before the first frame update
     void Start()
     {

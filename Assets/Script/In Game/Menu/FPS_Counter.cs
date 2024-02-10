@@ -6,7 +6,7 @@ using UnityEngine;
 public class FPS_Counter : MonoBehaviour
 {
     private float fps;
-    [SerializeField] TextMeshProUGUI FPS;
+    [SerializeField] private TextMeshProUGUI FPS;
     private void Start()
     {
         InvokeRepeating("GetFps", 1, 0.5f);
