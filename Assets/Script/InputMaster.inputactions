@@ -6,7 +6,7 @@
             "id": "d8df879c-b141-4ca3-9870-545ba00d63a6",
             "actions": [
                 {
-                    "name": "Mouvement",
+                    "name": "movement",
                     "type": "PassThrough",
                     "id": "c5b69fa4-f096-472d-adcb-67393f408c49",
                     "expectedControlType": "Vector2",
@@ -19,6 +19,15 @@
                     "type": "Button",
                     "id": "ba821234-142a-4720-8d96-db286b40b4df",
                     "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Look",
+                    "type": "PassThrough",
+                    "id": "faf3f913-9732-439f-aea6-9147e1d775d5",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -37,13 +46,24 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "",
+                    "id": "136b79fe-6ace-4b88-aa0f-40e62bfbdc6e",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Phone",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "2D Vector",
                     "id": "245207a6-c25f-4776-a984-895e1f029e5b",
                     "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Mouvement",
+                    "action": "movement",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -54,7 +74,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
-                    "action": "Mouvement",
+                    "action": "movement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -65,7 +85,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
-                    "action": "Mouvement",
+                    "action": "movement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -76,7 +96,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
-                    "action": "Mouvement",
+                    "action": "movement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -87,9 +107,42 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard and Mouse",
-                    "action": "Mouvement",
+                    "action": "movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "4cf4c3e1-8f26-4d7a-b5e9-849ac586b95b",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Phone",
+                    "action": "movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1641e6a2-cadf-406a-a44b-0c5a732538a9",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8884d658-e5ea-40f0-a947-32ff59311e50",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Phone",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
@@ -106,6 +159,22 @@
                 },
                 {
                     "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Phone",
+            "bindingGroup": "Phone",
+            "devices": [
+                {
+                    "devicePath": "<AndroidGamepad>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<iOSGameController>",
                     "isOptional": false,
                     "isOR": false
                 }

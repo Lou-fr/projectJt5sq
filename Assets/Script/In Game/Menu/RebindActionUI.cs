@@ -343,7 +343,6 @@ namespace BleizEntertainment.RebindUI
             /// check for duplicate composite bindings
             if (allCompositeParts)
             {
-                Debug.Log("test");
                 for (int i = 1; i < bindingIndex; i++)
                 {
                     if (action.bindings[i].effectivePath == newBinding.effectivePath)
