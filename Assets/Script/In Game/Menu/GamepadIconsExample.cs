@@ -1,9 +1,11 @@
+using UnityEngine;
 using System;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
-////TODO: have updateBindingUIEvent receive a control path string, too (in addition to the device layout name)
+/// DISCLAIMER: this come from the UNITY RebindUI sample
 
-namespace UnityEngine.InputSystem.Samples.RebindUI
+namespace BleizEntertainment.RebindUI
 {
     /// <summary>
     /// This is an example for how to override the default display behavior of bindings. The component

@@ -11,15 +11,15 @@ namespace TempTokenManager
 
     public class TokenManager : MonoBehaviour
     {
-        [SerializeField] GameObject authmanager;
+        [SerializeField] private GameObject authmanager;
         [SerializeField] LogInManager LogInManager;
-        [SerializeField] TextMeshProUGUI _Username;
-        [SerializeField] GameObject ConnectionMenu;
-        [SerializeField] GameObject LogoutButton;
-        [SerializeField] GameObject PlayButton;
-        [SerializeField] GameObject ErrorTokenPopup;
-        [SerializeField] GameObject LogOutConfirm;
-        [SerializeField] GameObject ErrorServer;
+        [SerializeField] private TextMeshProUGUI _Username;
+        [SerializeField] private GameObject ConnectionMenu;
+        [SerializeField] private GameObject LogoutButton;
+        [SerializeField] private GameObject PlayButton;
+        [SerializeField] private GameObject ErrorTokenPopup;
+        [SerializeField] private GameObject LogOutConfirm;
+        [SerializeField] private GameObject ErrorServer;
         public Tokens token;
         void Start()
         {

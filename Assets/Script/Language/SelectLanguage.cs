@@ -7,7 +7,7 @@ using UnityEngine.Localization.Settings;
 public class SelectLanguage : MonoBehaviour
 {
     private bool active = false;
-    public TMP_Dropdown dropdown;
+    [SerializeField] private TMP_Dropdown dropdown;
     IEnumerator Start()
     {
         int selected = 0;

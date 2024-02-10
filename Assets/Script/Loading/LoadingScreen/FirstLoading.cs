@@ -7,13 +7,13 @@ using GetLocal;
 
 public class AsyncLoadinWorld : MonoBehaviour
 {
-    [SerializeField] GameObject LogOut;
-    [SerializeField] GameObject Welcome;
-    [SerializeField] GameObject SwitchLanguage;
-    [SerializeField] TextMeshProUGUI loadingtext;
-    [SerializeField] Button PlayButton;
-    [SerializeField] TokenManager tokenmanager;
-    [SerializeField] GameObject tokenObjectManager;
+    [SerializeField] private GameObject LogOut;
+    [SerializeField] private GameObject Welcome;
+    [SerializeField] private GameObject SwitchLanguage;
+    [SerializeField] private TextMeshProUGUI loadingtext;
+    [SerializeField] private Button PlayButton;
+    [SerializeField] private TokenManager tokenmanager;
+    [SerializeField] private GameObject tokenObjectManager;
     void Start()
     {
         Application.targetFrameRate = 60;

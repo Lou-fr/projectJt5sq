@@ -4,12 +4,12 @@ using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
-    [SerializeField] GameObject panel;
-    [SerializeField] GameObject LanguagePanel;
-    [SerializeField] GameObject CntrlPanel;
+    [SerializeField] private GameObject panel;
+    [SerializeField] private GameObject LanguagePanel;
+    [SerializeField] private GameObject CntrlPanel;
     private GameObject GraphicPanel;
-    [SerializeField] GameObject RTTMPopUp;
-    [SerializeField] GameObject QuitPopUp;
+    [SerializeField] private GameObject RTTMPopUp;
+    [SerializeField] private GameObject QuitPopUp;
     static bool GameIsPaused = false;
     static bool BtnSetPressed = false;
     public void Start()
@@ -43,7 +43,7 @@ public class Menu : MonoBehaviour
     public void LanguageMenu()
     {
         LanguagePanel.SetActive(true);
-        if (GraphicPanel.active|| CntrlPanel.active)
+        if (GraphicPanel.activeSelf|| CntrlPanel.activeSelf)
         {
             GraphicPanel.SetActive(false);
             CntrlPanel.SetActive(false);
@@ -52,7 +52,7 @@ public class Menu : MonoBehaviour
     public void GraphicMenu()
     {
         GraphicPanel.SetActive(true);
-        if (LanguagePanel.active|| CntrlPanel.active)
+        if (LanguagePanel.activeSelf || CntrlPanel.activeSelf)
         {
             LanguagePanel.SetActive(false);
             CntrlPanel.SetActive(false) ;
@@ -61,7 +61,7 @@ public class Menu : MonoBehaviour
     public void ControlMenu()
     {
         CntrlPanel.SetActive(true) ;
-        if(GraphicPanel.active || LanguagePanel.active)
+        if(GraphicPanel.activeSelf || LanguagePanel.activeSelf)
         {
             GraphicPanel.SetActive(false);
             LanguagePanel.SetActive(false);
@@ -69,14 +69,14 @@ public class Menu : MonoBehaviour
     }
     public void RTMM()
     {
-        if (RTTMPopUp.active == true)
+        if (RTTMPopUp.activeSelf== true)
         {
             RTTMPopUp.SetActive(false);
         }
         else
         {
             RTTMPopUp.SetActive(true);
-            if(QuitPopUp.active == true)
+            if(QuitPopUp.activeSelf == true)
             {
                 QuitPopUp.SetActive(false);
             }
@@ -91,14 +91,14 @@ public class Menu : MonoBehaviour
     }
     public void Quit()
     {
-        if (QuitPopUp.active == true)
+        if (QuitPopUp.activeSelf == true)
         {
             QuitPopUp.SetActive(false);
         }
         else
         {
             QuitPopUp.SetActive(true);
-            if (RTTMPopUp.active ==true)
+            if (RTTMPopUp.activeSelf ==true)
             {
                 RTTMPopUp.SetActive(false);
             }
@@ -114,7 +114,7 @@ public class Menu : MonoBehaviour
 
     void Resume()
     {
-        if (QuitPopUp.active == true || RTTMPopUp.active == true)
+        if (QuitPopUp.activeSelf == true || RTTMPopUp.activeSelf == true)
         {
             QuitPopUp.SetActive(false);
             RTTMPopUp.SetActive(false);
