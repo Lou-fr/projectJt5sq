@@ -4,29 +4,27 @@ using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
-    [SerializeField] private GameObject panel;
-    [SerializeField] private GameObject LanguagePanel;
+    [SerializeField] private GameObject panel, LanguagePanel, CntrlParentPanel, GraphicParentPanel, RTTMPopUp, QuitPopUp, PhoneController;
     private GameObject CntrlPanel;
     private GameObject GraphicPanel;
-    [SerializeField] private GameObject RTTMPopUp;
-    [SerializeField] private GameObject QuitPopUp;
-    [SerializeField] private GameObject PhoneController;
     static bool GameIsPaused = false;
     static bool BtnSetPressed = false;
     public void Start()
     {
 
 #if UNITY_STANDALONE
-        Destroy(GameObject.Find("Cntrl_phone"));
-        GraphicPanel = GameObject.Find("Gr_computer");
-        Destroy(PhoneController);
-        CntrlPanel = GameObject.Find("Cntrl_computer");CntrlPanel.SetActive(false);
-        Debug.Log(CntrlPanel.gameObject.name);
+        GraphicPanel = Instantiate(Resources.Load<GameObject>("Prefabs/Gr_computer"), GraphicParentPanel.transform);
+        CntrlPanel = Instantiate(Resources.Load<GameObject>("Prefabs/Cntrl_computer"), CntrlParentPanel.transform);
+        CntrlPanel.SetActive(false);
+
 #endif
 #if UNITY_ANDROID || UNITY_IOS
-        Destroy(GameObject.Find("Cntrl_computer"));
-        GraphicPanel = GameObject.Find("Gr_phone");
-        CntrlPanel = GameObject.Find("Cntrl_phone");CntrlPanel.SetActive(false);
+        GraphicPanel = Instantiate(Resources.Load<GameObject>("Prefabs/Gr_phone"), GraphicParentPanel.transform);
+        CntrlPanel = Instantiate(Resources.Load<GameObject>("Prefabs/Cntrl_phone"), CntrlParentPanel.transform);
+        PhoneController = Instantiate(Resources.Load<GameObject>("Prefabs/PhoneControll"));
+        Button button = GameObject.Find("ParameterOnPhone").GetComponentInChildren<Button>();
+        button.onClick.AddListener(SettingsMenuBtnPress);
+        CntrlPanel.SetActive(false);
 #endif
     }
     public void Update()
