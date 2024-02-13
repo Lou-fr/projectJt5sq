@@ -18,15 +18,16 @@ public class Graphics : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Destroy(GameObject.Find("Gr_phone"));
         Vsync = GameObject.Find("Gr_C_Vsync").GetComponentInChildren<Toggle>();
         F_S = GameObject.Find("Gr_C_FS").GetComponentInChildren<Toggle>();
         fps = GameObject.Find("Gr_C_See_FPS").GetComponentInChildren<Toggle>();
         Dresolution = GameObject.Find("Gr_C_Resolution").GetComponentInChildren<TMP_Dropdown>();
         D_FPS = GameObject.Find("Gr_C_FPS").GetComponentInChildren<TMP_Dropdown>();
         DAAMode = GameObject.Find("Gr_C_AA").GetComponentInChildren<TMP_Dropdown>();
-        GameObject.Find("Gr_computer").SetActive(false);
+        Button aplychange = GameObject.Find("Gr_C_ApChange").GetComponentInChildren<Button>();
+        GameObject.Find("Gr_computer(Clone)").SetActive(false);
         GameObject.Find("Main_Menu_Panel").SetActive(false);
+        aplychange.onClick.AddListener(ApplyChange);
         F_S.isOn = Screen.fullScreen;
         if (QualitySettings.vSyncCount == 0)
         {
@@ -106,11 +107,11 @@ public class Graphics : MonoBehaviour
     private TMP_Dropdown D_FPS, DAAMode;
     void Start()
     {
-        Destroy(GameObject.Find("Gr_computer"));
         fps = GameObject.Find("Gr_P_See_FPS").GetComponentInChildren<Toggle>();
         D_FPS = GameObject.Find("Gr_P_FPS").GetComponentInChildren<TMP_Dropdown>();
         DAAMode = GameObject.Find("Gr_P_AA").GetComponentInChildren<TMP_Dropdown>();
-        GameObject.Find("Gr_phone").SetActive(false);
+        Button aplychange = GameObject.Find("Gr_P_ApChange").GetComponentInChildren<Button>();
+        GameObject.Find("Gr_phone(Clone)").SetActive(false);
         GameObject.Find("Main_Menu_Panel").SetActive(false);
         int CurrentIndex = 0;
         for (AntialiasingMode i = 0; i < AntialiasingMode.TemporalAntiAliasing; i++)
@@ -121,6 +122,8 @@ public class Graphics : MonoBehaviour
             }
         }
         DAAMode.value = CurrentIndex;
+        aplychange.onClick.AddListener(ApplyPhoneChange);
+
         if (Application.targetFrameRate == 60) D_FPS.value = 1;
     }
     public void ApplyPhoneChange()
