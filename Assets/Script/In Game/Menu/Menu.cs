@@ -16,7 +16,6 @@ public class Menu : MonoBehaviour
         GraphicPanel = Instantiate(Resources.Load<GameObject>("Prefabs/Gr_computer"), GraphicParentPanel.transform);
         CntrlPanel = Instantiate(Resources.Load<GameObject>("Prefabs/Cntrl_computer"), CntrlParentPanel.transform);
         CntrlPanel.SetActive(false);
-
 #endif
 #if UNITY_ANDROID || UNITY_IOS
         GraphicPanel = Instantiate(Resources.Load<GameObject>("Prefabs/Gr_phone"), GraphicParentPanel.transform);

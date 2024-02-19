@@ -12,8 +12,7 @@ public class AsyncLoadinWorld : MonoBehaviour
     [SerializeField] private GameObject SwitchLanguage;
     [SerializeField] private TextMeshProUGUI loadingtext;
     [SerializeField] private Button PlayButton;
-    [SerializeField] private TokenManager tokenmanager;
-    [SerializeField] private GameObject tokenObjectManager;
+    [SerializeField] private GameObject sessionObject;
     void Start()
     {
         Application.targetFrameRate = 60;
@@ -28,7 +27,7 @@ public class AsyncLoadinWorld : MonoBehaviour
     IEnumerator LoadScene()
     {
         yield return null;
-        tokenmanager.enabled = true;tokenObjectManager.SetActive(true);
+        sessionObject.SetActive(true);
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(1);
         asyncOperation.allowSceneActivation = false;
         Debug.Log("Progression " + asyncOperation.progress);
