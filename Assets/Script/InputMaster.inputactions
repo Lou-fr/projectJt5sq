@@ -40,6 +40,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Player Zoom",
+                    "type": "Value",
+                    "id": "ab3af3a1-e6ab-4117-a551-d1ee0bee5d08",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -161,6 +170,17 @@
                     "processors": "",
                     "groups": "Keyboard and Mouse",
                     "action": "LookPress",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5a1a3d09-6455-45e9-ab29-0bc9a6af6b8a",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "Player Zoom",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
