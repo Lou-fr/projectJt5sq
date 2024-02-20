@@ -31,6 +31,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "LookPress",
+                    "type": "Button",
+                    "id": "5c4e2c04-ba87-4915-b55a-0dad04de8227",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -117,7 +126,7 @@
                     "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Phone",
+                    "groups": "Phone;Gamepad",
                     "action": "movement",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -139,8 +148,19 @@
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Phone",
+                    "groups": "Phone;Gamepad",
                     "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1a760ca8-3115-4bb3-8e9f-eb416a53f58c",
+                    "path": "<Mouse>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "LookPress",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -175,6 +195,17 @@
                 },
                 {
                     "devicePath": "<iOSGameController>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Gamepad",
+            "bindingGroup": "Gamepad",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
                     "isOptional": false,
                     "isOR": false
                 }

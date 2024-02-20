@@ -53,6 +53,15 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LookPress"",
+                    ""type"": ""Button"",
+                    ""id"": ""5c4e2c04-ba87-4915-b55a-0dad04de8227"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -139,7 +148,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Phone"",
+                    ""groups"": ""Phone;Gamepad"",
                     ""action"": ""movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -161,8 +170,19 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Phone"",
+                    ""groups"": ""Phone;Gamepad"",
                     ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1a760ca8-3115-4bb3-8e9f-eb416a53f58c"",
+                    ""path"": ""<Mouse>/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""LookPress"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -201,6 +221,17 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""isOR"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Gamepad"",
+            ""bindingGroup"": ""Gamepad"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
         }
     ]
 }");
@@ -209,6 +240,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         m_player_movement = m_player.FindAction("movement", throwIfNotFound: true);
         m_player_Jump = m_player.FindAction("Jump", throwIfNotFound: true);
         m_player_Look = m_player.FindAction("Look", throwIfNotFound: true);
+        m_player_LookPress = m_player.FindAction("LookPress", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -273,6 +305,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     private readonly InputAction m_player_movement;
     private readonly InputAction m_player_Jump;
     private readonly InputAction m_player_Look;
+    private readonly InputAction m_player_LookPress;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -280,6 +313,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         public InputAction @movement => m_Wrapper.m_player_movement;
         public InputAction @Jump => m_Wrapper.m_player_Jump;
         public InputAction @Look => m_Wrapper.m_player_Look;
+        public InputAction @LookPress => m_Wrapper.m_player_LookPress;
         public InputActionMap Get() { return m_Wrapper.m_player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -298,6 +332,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
+            @LookPress.started += instance.OnLookPress;
+            @LookPress.performed += instance.OnLookPress;
+            @LookPress.canceled += instance.OnLookPress;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -311,6 +348,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
+            @LookPress.started -= instance.OnLookPress;
+            @LookPress.performed -= instance.OnLookPress;
+            @LookPress.canceled -= instance.OnLookPress;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -346,10 +386,20 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_PhoneSchemeIndex];
         }
     }
+    private int m_GamepadSchemeIndex = -1;
+    public InputControlScheme GamepadScheme
+    {
+        get
+        {
+            if (m_GamepadSchemeIndex == -1) m_GamepadSchemeIndex = asset.FindControlSchemeIndex("Gamepad");
+            return asset.controlSchemes[m_GamepadSchemeIndex];
+        }
+    }
     public interface IPlayerActions
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
+        void OnLookPress(InputAction.CallbackContext context);
     }
 }
