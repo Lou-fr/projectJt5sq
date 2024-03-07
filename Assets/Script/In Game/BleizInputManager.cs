@@ -5,7 +5,7 @@ public class BleizInputManager : MonoBehaviour
 {
     public Vector2 MoveInput { get; private set; } = Vector2.zero;
     
-    public float LookInput { get; private set; } = 0.0f;
+    public Vector2 LookInput { get; private set; } = Vector2.zero;
 
     public float SpaceIsPressed {  get; private set; } =0.0f;
 
@@ -26,6 +26,9 @@ public class BleizInputManager : MonoBehaviour
         _input.player.Jump.performed += SetSpace;
         _input.player.Jump.canceled += SetSpace;
 
+        _input.player.Look.performed += SetLook;
+        _input.player.Look.canceled += SetLook;
+
     }
     private void OnDisable()
     {
@@ -34,6 +37,9 @@ public class BleizInputManager : MonoBehaviour
 
         _input.player.PlayerZoom.performed -= SetZoom;
         _input.player.PlayerZoom.canceled -= SetZoom;
+
+        _input.player.Look.performed -= SetLook;
+        _input.player.Look.canceled -= SetLook;
 
         _input.player.Jump.performed -= SetSpace;
         _input.player.Jump.canceled -= SetSpace;
@@ -50,5 +56,9 @@ public class BleizInputManager : MonoBehaviour
     private void SetSpace(InputAction.CallbackContext ctx)
     {
         SpaceIsPressed = ctx.ReadValue<float>();
+    }
+    private void SetLook(InputAction.CallbackContext ctx)
+    {
+        LookInput = ctx.ReadValue<Vector2>();
     }
 }
