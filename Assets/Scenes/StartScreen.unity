@@ -3521,7 +3521,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdf6c7cdbc0c8fd40b1dbae4fca6287d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playfabLogin: {fileID: 1842126366}
 --- !u!1 &767184713
 GameObject:
   m_ObjectHideFlags: 0
@@ -4232,7 +4231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.24927507, g: 0.3018868, b: 0.20647918, a: 1}
+  m_Color: {r: 0, g: 0.18039216, b: 0.3882353, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7592,6 +7591,7 @@ MonoBehaviour:
   loadingtext: {fileID: 585262500}
   PlayButton: {fileID: 2111095303}
   sessionObject: {fileID: 766143662}
+  error: {fileID: 1871178455}
 --- !u!4 &2146595762
 Transform:
   m_ObjectHideFlags: 0
