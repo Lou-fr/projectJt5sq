@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using GetLocal;
+using BleizEntertainment.Multiplayer;
+using System.Threading.Tasks;
 
 public class AsyncLoadinWorld : MonoBehaviour
 {
@@ -13,14 +15,18 @@ public class AsyncLoadinWorld : MonoBehaviour
     [SerializeField] private TextMeshProUGUI loadingtext;
     [SerializeField] private Button PlayButton;
     [SerializeField] private GameObject sessionObject;
+    [SerializeField] private GameObject error;
     void Start()
     {
         Application.targetFrameRate = 60;
         PlayButton.onClick.AddListener(OnButtonPress);
     }
-    void OnButtonPress()
+    async void OnButtonPress()
     {
         SwitchLanguage.SetActive(false); LogOut.SetActive(false); loadingtext.gameObject.SetActive(true); PlayButton.gameObject.SetActive(false); Welcome.SetActive(false);
+        PlayerMultiplayerRequester.RequestMultiplayerServer();
+        while (PlayerMultiplayerRequester.Done is false) await Waiter();
+        if (PlayerMultiplayerRequester.Ip is null) { error.SetActive(true); loadingtext.gameObject.SetActive(false); return; }
         StartCoroutine(LoadScene());
 
     }
@@ -34,8 +40,8 @@ public class AsyncLoadinWorld : MonoBehaviour
         string loadingtextLen = GetLocalal.GetString("StartScreen", "Loading");
         while (!asyncOperation.isDone)
         {
-            loadingtext.text = loadingtextLen + (asyncOperation.progress * 100 +10) + " %";
-            if (asyncOperation.progress >=   0.9f)
+            loadingtext.text = loadingtextLen + (asyncOperation.progress * 100 + 10) + " %";
+            if (asyncOperation.progress >= 0.9f)
             {
 #if UNITY_STANDALONE
                 string startText = GetLocalal.GetString("StartScreen", "Start");
@@ -56,5 +62,11 @@ public class AsyncLoadinWorld : MonoBehaviour
             }
             yield return null;
         }
+
+    }
+    async Task Waiter()
+    {
+        await Task.Delay(10);
     }
 }
+

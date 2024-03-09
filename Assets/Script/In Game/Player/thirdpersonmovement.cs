@@ -68,9 +68,9 @@ public class thirdpersonmovement : NetworkBehaviour
     private void CameraRotation()
     {
         // if there is an input and camera position is not fixed
-        if (_input.LookInput.sqrMagnitude >= _threshold && !LockCameraPosition &&
+        if (_input.LookInput.sqrMagnitude >= _threshold && !LockCameraPosition
 #if UNITY_STANDALONE 
-            _press.action.IsPressed() 
+             && _press.action.IsPressed() 
 #endif
             )
         {
