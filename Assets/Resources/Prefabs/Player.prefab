@@ -95,8 +95,8 @@ MonoBehaviour:
   jump: {fileID: -6718167683042370302, guid: b5e146c68a329674e95a8e0d82278f5e, type: 3}
   _press: {fileID: 4702732597282398645, guid: b5e146c68a329674e95a8e0d82278f5e, type: 3}
   LockCameraPosition: 0
-  TopClamp: 70
-  BottomClamp: -30
+  TopClamp: 40
+  BottomClamp: -15
   CameraAngleOverride: 0
 --- !u!114 &2418880680328476446
 MonoBehaviour:

@@ -142,6 +142,22 @@ MonoBehaviour:
     m_Localized: Sory there is no option for controller on this device
     m_Metadata:
       m_Items: []
+  - m_Id: 13840469127331840
+    m_Localized: Enter your username friend
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13843946410868736
+    m_Localized: Add
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13846590256840704
+    m_Localized: Remove
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13846716400533504
+    m_Localized: Invite
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

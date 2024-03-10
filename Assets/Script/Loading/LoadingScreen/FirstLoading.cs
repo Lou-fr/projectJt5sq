@@ -24,7 +24,8 @@ public class AsyncLoadinWorld : MonoBehaviour
     async void OnButtonPress()
     {
         SwitchLanguage.SetActive(false); LogOut.SetActive(false); loadingtext.gameObject.SetActive(true); PlayButton.gameObject.SetActive(false); Welcome.SetActive(false);
-        PlayerMultiplayerRequester.RequestMultiplayerServer();
+        PlayerMultiplayerRequester request = new PlayerMultiplayerRequester();
+        request.RequestMultiplayerServer();
         while (PlayerMultiplayerRequester.Done is false) await Waiter();
         if (PlayerMultiplayerRequester.Ip is null) { error.SetActive(true); loadingtext.gameObject.SetActive(false); return; }
         StartCoroutine(LoadScene());

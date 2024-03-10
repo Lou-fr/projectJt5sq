@@ -141,6 +141,24 @@ MonoBehaviour:
     m_Key: NoCntrlPhone
     m_Metadata:
       m_Items: []
+  - m_Id: 13840469127331840
+    m_Key: Add_Friend
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13843946410868736
+    m_Key: 'Add_Friend_btn
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13846590256840704
+    m_Key: Remove_Friend
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13846716400533504
+    m_Key: Invite_Friend
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
