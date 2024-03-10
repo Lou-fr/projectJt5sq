@@ -143,6 +143,22 @@ MonoBehaviour:
       cette appareille"
     m_Metadata:
       m_Items: []
+  - m_Id: 13840469127331840
+    m_Localized: Entrer le nom d'utilisateur de votre amis
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13843946410868736
+    m_Localized: Ajouter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13846590256840704
+    m_Localized: Retirer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13846716400533504
+    m_Localized: Inviter
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
