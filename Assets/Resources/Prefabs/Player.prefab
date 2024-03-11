@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 2418880680328476446}
   - component: {fileID: 62446383070627593}
   - component: {fileID: 8617027851826618482}
-  - component: {fileID: 3990690176541238255}
   - component: {fileID: 2308115292407599986}
   m_Layer: 0
   m_Name: Player
@@ -158,20 +157,6 @@ MonoBehaviour:
   serverOnly: 0
   visibility: 0
   hasSpawned: 0
---- !u!114 &3990690176541238255
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 870096254199116443}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bfa8a5ecfa50e4439e285d4c0212792, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _look: {fileID: 4485540969121359642, guid: 7dead05c54ca85b4681351aafd8bd03a, type: 3}
-  _press: {fileID: 4702732597282398645, guid: b5e146c68a329674e95a8e0d82278f5e, type: 3}
 --- !u!114 &2308115292407599986
 MonoBehaviour:
   m_ObjectHideFlags: 0
