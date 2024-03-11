@@ -4,6 +4,7 @@ using PlayFab.ClientModels;
 using TMPro;
 using UnityEngine.UI;
 using GetLocal;
+using System;
 
 public class PlayfabLogin : MonoBehaviour
 {
@@ -11,12 +12,31 @@ public class PlayfabLogin : MonoBehaviour
     [SerializeField] private TMP_InputField username,password =default;
     [SerializeField] private TextMeshProUGUI _error,_welcome;
     [SerializeField] private Toggle ConPersistent;
+    private string str_username;
     public string SessionTicket;
+    private void Awake()
+    {
+        SelectLanguage.changedlocal += handleChangeWelcome;
+    }
+
+    private void handleChangeWelcome(int obj)
+    {
+        _welcome.text = GetLocalal.GetString("StartScreen", "Welcome") + str_username;
+    }
+    
+
+    private void OnDestroy()
+    {
+        SelectLanguage.changedlocal -=handleChangeWelcome;
+    }
     private void Start()
     {
         if (Application.internetReachability == NetworkReachability.NotReachable)
         {
             ConError.SetActive(true);
+            Button btn1 = GameObject.Find("Ack_sever").GetComponent<Button>();
+            btn1.onClick.RemoveAllListeners();
+            btn1.onClick.AddListener(OnAcknowledgeButtonConServ);
             LoginMenu.SetActive(false);
         }
         else
@@ -47,17 +67,17 @@ public class PlayfabLogin : MonoBehaviour
             PlayerPrefs.SetString("Username", username.text);
             PlayerPrefs.SetString("Password", password.text);
         }
-        string temp = GetLocalal.GetString("StartScreen", "Welcome");
-        _welcome.text = temp + username.text;
+        str_username = username.text;
+        handleChangeWelcome(1);
         SessionTicket = result.SessionTicket;
         LoginMenu.SetActive(false);
         PlayMenu.SetActive(true);
     }
     private void _OnLoginSucess(LoginResult result)
     {
-        string temp = GetLocalal.GetString("StartScreen", "Welcome");
-        _welcome.text = temp + PlayerPrefs.GetString("Username");
         SessionTicket = result.SessionTicket;
+        str_username = PlayerPrefs.GetString("Username");
+        handleChangeWelcome(1);
         LoginMenu.SetActive(false);
         PlayMenu.SetActive(true);
     }

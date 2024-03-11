@@ -1134,7 +1134,7 @@ GameObject:
   - component: {fileID: 380965341}
   - component: {fileID: 380965340}
   m_Layer: 5
-  m_Name: Ack
+  m_Name: Ack_sever
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1203,19 +1203,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 380965341}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1842126366}
-        m_TargetAssemblyTypeName: PlayfabLogin, Assembly-CSharp
-        m_MethodName: OnAcknowledgeButtonConServ
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &380965341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3878,7 +3866,7 @@ GameObject:
   - component: {fileID: 938438234}
   - component: {fileID: 938438233}
   m_Layer: 5
-  m_Name: Dropdown
+  m_Name: lng_dropdown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5874,7 +5862,7 @@ GameObject:
   - component: {fileID: 1606618540}
   m_Layer: 5
   m_Name: Welcome
-  m_TagString: Untagged
+  m_TagString: Welcome
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7182,7 +7170,7 @@ GameObject:
   - component: {fileID: 2114125633}
   - component: {fileID: 2114125635}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Error_server
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7566,6 +7554,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2146595762}
   - component: {fileID: 2146595761}
+  - component: {fileID: 2146595763}
   m_Layer: 0
   m_Name: LoaderManager
   m_TagString: Untagged
@@ -7607,6 +7596,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2146595763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146595760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 651f2245fec71054689f15cccfae65ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  btn: {fileID: 2111095303}
+  welcome: {fileID: 1606618538}
+  lng: {fileID: 938438231}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

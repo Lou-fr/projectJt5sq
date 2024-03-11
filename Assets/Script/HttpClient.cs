@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.Networking;
 
 public class BypassCertificate : CertificateHandler

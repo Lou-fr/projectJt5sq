@@ -31,7 +31,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1368326717440
-    m_Localized: Restez connectez
+    m_Localized: Rester connecter
     m_Metadata:
       m_Items: []
   - m_Id: 2047233540096
@@ -71,7 +71,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1390799436693504
-    m_Localized: Appuiez sur la barre espace pour continuez
+    m_Localized: Appuier sur la barre espace pour continuez
     m_Metadata:
       m_Items: []
   - m_Id: 1410644677017600
@@ -84,11 +84,20 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 10394297125879808
-    m_Localized: Appuiez n'importe ou pour continuez
+    m_Localized: Appuiez n'importe ou pour continuer
     m_Metadata:
       m_Items: []
   - m_Id: 10400539164590080
     m_Localized: Quitter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25267323667218432
+    m_Localized: Connexion au serveur ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25268453721767936
+    m_Localized: "Pas de session disponible pour votre r\xE9gion, merci de ressayer
+      plus tard"
     m_Metadata:
       m_Items: []
   references:
