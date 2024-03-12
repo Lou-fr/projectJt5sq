@@ -1,5 +1,9 @@
+using BleizEntertainment.Multiplayer;
 using Mirror;
+using PlayFab;
+using PlayFab.MultiplayerModels;
 using PlayFab.Networking;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,11 +13,13 @@ public class Menu : MonoBehaviour
     [SerializeField] private GameObject panel, LanguagePanel, CntrlParentPanel, GraphicParentPanel, RTTMPopUp, QuitPopUp, PhoneController;
     private GameObject CntrlPanel;
     private GameObject GraphicPanel;
+    BleizInputManager _input;
     static bool GameIsPaused = false;
     static bool BtnSetPressed = false;
+#if !UNITY_SERVER
+
     public void Start()
     {
-
 #if UNITY_STANDALONE
         GraphicPanel = Instantiate(Resources.Load<GameObject>("Prefabs/Gr_computer"), GraphicParentPanel.transform);
         CntrlPanel = Instantiate(Resources.Load<GameObject>("Prefabs/Cntrl_computer"), CntrlParentPanel.transform);
@@ -27,6 +33,7 @@ public class Menu : MonoBehaviour
         button.onClick.AddListener(SettingsMenuBtnPress);
         CntrlPanel.SetActive(false);
 #endif
+        _input = FindAnyObjectByType<BleizInputManager>().GetComponent<BleizInputManager>();
     }
     public void Update()
     {
@@ -41,6 +48,10 @@ public class Menu : MonoBehaviour
                 Pause();
             }
             BtnSetPressed = false;
+        }
+        if(_input is null)
+        {
+            _input = FindAnyObjectByType<BleizInputManager>().GetComponent<BleizInputManager>();
         }
     }
     public void SettingsMenuBtnPress()
@@ -131,17 +142,25 @@ public class Menu : MonoBehaviour
         PhoneController.SetActive(true );
 #endif
         panel.SetActive(false);
-        Time.timeScale = 1f;
+        _input.enabled = true;
         GameIsPaused = false;
     }
 
     void Pause()
     {
         panel.SetActive(true);
-        Time.timeScale = 0;
+        _input.enabled = false;
         GameIsPaused = true;
+
 #if UNITY_ANDROID || UNITY_IOS
         PhoneController.SetActive(false);
 #endif
     }
+#endif
+#if UNITY_SERVER
+    private void Start()
+    {
+        Destroy(GameObject.Find("Primary_Canva"));        
+    }
+#endif
 }

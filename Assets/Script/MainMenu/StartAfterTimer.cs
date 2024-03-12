@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class StartAfterTimer : MonoBehaviour
 {
+#if !UNITY_SERVER
     [SerializeField]private Button btn;
     [SerializeField] GameObject welcome;
     [SerializeField] GameObject lng;
@@ -62,4 +63,5 @@ public class StartAfterTimer : MonoBehaviour
             }
         }
     }
+#endif
 }

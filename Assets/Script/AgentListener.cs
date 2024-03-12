@@ -23,8 +23,8 @@ public class AgentListener : MonoBehaviour
         PlayFabMultiplayerAgentAPI.OnServerActiveCallback += OnServerActive;
         PlayFabMultiplayerAgentAPI.OnAgentErrorCallback += OnAgentError;
 
-        UnityNetworkServer.Instance.OnPlayerAdded.AddListener(OnPlayerAdded);
-        UnityNetworkServer.Instance.OnPlayerRemoved.AddListener(OnPlayerRemoved);
+        BleizNetworkManager.Instance.OnPlayerAdded.AddListener(OnPlayerAdded);
+        BleizNetworkManager.Instance.OnPlayerRemoved.AddListener(OnPlayerRemoved);
 
         // get the port that the server will listen to
         // We *have to* do it on process mode, since there might be more than one game server instances on the same VM and we want to avoid port collision
@@ -37,7 +37,7 @@ public class AgentListener : MonoBehaviour
         if (portInfo.Count() > 0)
         {
             Debug.Log(string.Format("port with name {0} was found in GSDK Config Settings.", ListeningPortKey));
-            UnityNetworkServer.Instance.Port = portInfo.Single().ServerListeningPort;
+            BleizNetworkManager.Instance.Port = portInfo.Single().ServerListeningPort;
         }
         else
         {
@@ -57,7 +57,7 @@ public class AgentListener : MonoBehaviour
 
     private void OnServerActive()
     {
-        UnityNetworkServer.Instance.StartListen();
+        BleizNetworkManager.Instance.StartListen();
         Debug.Log("Server Started From Agent Activation");
         if (PlayFabMultiplayerAgentAPI.IsDebugging)
         {
@@ -73,6 +73,7 @@ public class AgentListener : MonoBehaviour
 
     private void OnPlayerRemoved(string playfabId)
     {
+        Debug.Log("Player as desconnected as " + playfabId);
         ConnectedPlayer player = _connectedPlayers.Find(x => x.PlayerId.Equals(playfabId, StringComparison.OrdinalIgnoreCase));
         _connectedPlayers.Remove(player);
         PlayFabMultiplayerAgentAPI.UpdateConnectedPlayers(_connectedPlayers);
@@ -80,6 +81,7 @@ public class AgentListener : MonoBehaviour
 
     private void OnPlayerAdded(string playfabId)
     {
+        Debug.Log("Player as connected as " + playfabId);
         _connectedPlayers.Add(new ConnectedPlayer(playfabId));
         PlayFabMultiplayerAgentAPI.UpdateConnectedPlayers(_connectedPlayers);
     }
@@ -92,7 +94,7 @@ public class AgentListener : MonoBehaviour
     private void OnShutdown()
     {
         Debug.Log("Server is shutting down");
-        foreach (var conn in UnityNetworkServer.Instance.Connections)
+        foreach (var conn in BleizNetworkManager.Instance.Connections)
         {
             conn.Connection.Send<ShutdownMessage>(new ShutdownMessage());
         }
@@ -108,7 +110,7 @@ public class AgentListener : MonoBehaviour
     private void OnMaintenance(DateTime? NextScheduledMaintenanceUtc)
     {
         Debug.LogFormat("Maintenance scheduled for: {0}", NextScheduledMaintenanceUtc.Value.ToLongDateString());
-        foreach (var conn in UnityNetworkServer.Instance.Connections)
+        foreach (var conn in BleizNetworkManager.Instance.Connections)
         {
             conn.Connection.Send<MaintenanceMessage>(new MaintenanceMessage()
             {
