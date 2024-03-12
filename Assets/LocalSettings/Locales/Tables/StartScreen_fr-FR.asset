@@ -16,7 +16,8 @@ MonoBehaviour:
     m_Code: fr-FR
   m_SharedData: {fileID: 11400000, guid: 454cbbf8432f8cd48b37197d5a4b850a, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - rid: 3212147640801951746
   m_TableData:
   - m_Id: 15470739456
     m_Localized: Nom d'utilisateur
@@ -37,7 +38,8 @@ MonoBehaviour:
   - m_Id: 2047233540096
     m_Localized: Jouer
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 3212147640801951746
   - m_Id: 2147112501248
     m_Localized: "D\xE9connexion"
     m_Metadata:
@@ -102,4 +104,8 @@ MonoBehaviour:
       m_Items: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 3212147640801951746
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 00c0a0a8dc010000

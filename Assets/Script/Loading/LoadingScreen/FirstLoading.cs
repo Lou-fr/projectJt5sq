@@ -10,6 +10,7 @@ using System;
 
 public class FirstLoading : MonoBehaviour
 {
+#if !UNITY_SERVER
     [SerializeField] private GameObject LogOut;
     [SerializeField] private GameObject Welcome;
     [SerializeField] private GameObject SwitchLanguage;
@@ -86,5 +87,6 @@ public class FirstLoading : MonoBehaviour
     {
         await Task.Delay(10);
     }
+#endif
 }
 

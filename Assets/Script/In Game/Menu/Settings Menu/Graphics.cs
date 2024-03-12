@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class Graphics : MonoBehaviour
 {
+#if !UNITY_SERVER
     [SerializeField] private GameObject fps_counter;
     [SerializeField] private UniversalAdditionalCameraData CameraData;
 
@@ -153,5 +154,6 @@ public class Graphics : MonoBehaviour
             Application.targetFrameRate = 30;
         }
     }
+#endif
 #endif
 }

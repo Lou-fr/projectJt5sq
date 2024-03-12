@@ -9,6 +9,7 @@ public class FriendUI : MonoBehaviour
 {
     [SerializeField] private GameObject Friend_panel;
     [SerializeField] private string displayname;
+    BleizInputManager _input;
     public static Action<string> OnAddFriend = delegate { };
 
     public void SetAddFriendName(string name)
@@ -23,8 +24,9 @@ public class FriendUI : MonoBehaviour
 
     public void friend()
     {
-        if (Friend_panel.activeSelf is true) Friend_panel.SetActive(false);
-        else Friend_panel.SetActive(true);
+        if (_input is null) _input = FindAnyObjectByType<BleizInputManager>().GetComponent<BleizInputManager>();
+        if (Friend_panel.activeSelf is true) { Friend_panel.SetActive(false); _input.enabled = true; }
+        else { Friend_panel.SetActive(true); _input.enabled = false; };
     }
 
     [SerializeField] private Transform friendContainer;

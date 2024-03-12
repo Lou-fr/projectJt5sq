@@ -48,8 +48,7 @@ namespace BleizEntertainment.Multiplayer
 
         void GetGUIDOnline()
         {
-            PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnDataReceive, OnError);
-            
+            PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnDataReceive, OnError);   
         }
 
         void OnDataReceive(GetUserDataResult result)

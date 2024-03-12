@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace BleizEntertainment.Multiplayer
 {
+#if !UNITY_SERVER
     public class Session : MonoBehaviour
     {
         public static string Ip;
@@ -15,4 +16,5 @@ namespace BleizEntertainment.Multiplayer
             DontDestroyOnLoad(this.gameObject);
         }
     }
+#endif
 }

@@ -12,7 +12,6 @@ namespace PlayFab.Networking
     {
 #if !UNITY_SERVER
 
-
         public static BleizNetworkManager Instance { get; private set; }
 
         public ConnectedEvent OnConnected = new ConnectedEvent();
@@ -118,6 +117,7 @@ namespace PlayFab.Networking
     {
         public DateTime ScheduledMaintenanceUTC;
     }
+#endif
 #if UNITY_SERVER
         public static BleizNetworkManager Instance { get; private set; }
 
@@ -236,6 +236,5 @@ namespace PlayFab.Networking
     {
         public DateTime ScheduledMaintenanceUTC;
     }
-#endif
 #endif
 }
