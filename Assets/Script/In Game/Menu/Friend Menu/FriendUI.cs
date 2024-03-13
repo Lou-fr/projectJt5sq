@@ -1,8 +1,6 @@
 using PlayFab.ClientModels;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class FriendUI : MonoBehaviour
@@ -31,29 +29,52 @@ public class FriendUI : MonoBehaviour
 
     [SerializeField] private Transform friendContainer;
     [SerializeField] private PrefabFriendUi prefabfriendUI;
+    [SerializeField] private PrefabPendingFriendUi prefabpendingfriendUI;
+    [SerializeField] private PrefabIncomeFriendReqUi prefabincomefriendUI;
 
     private void Awake()
     {
         FriendNetwork.OnDisplayFriends += HandleDissplayFriend;
+        FriendNetwork.OnDisplayPendingFriends += HandleDislpayPendingFriend;
+        FriendNetwork.OnDisplayIncomingFriendsReq += HandleDislpayIncomingFriendReq;
+        FriendNetwork.DeleteAllChild += HandleRemoveAll;
     }
 
     private void OnDestroy()
     {
         FriendNetwork.OnDisplayFriends -= HandleDissplayFriend;
+        FriendNetwork.OnDisplayPendingFriends -= HandleDislpayPendingFriend;
+        FriendNetwork.OnDisplayIncomingFriendsReq -= HandleDislpayIncomingFriendReq;
+        FriendNetwork.DeleteAllChild -= HandleRemoveAll;
+
 
     }
 
-    private void HandleDissplayFriend(List<FriendInfo> list)
+    private void HandleRemoveAll()
     {
         foreach (Transform child in friendContainer)
         {
             Destroy(child.gameObject);
         }
-        foreach (FriendInfo friend in list)
-        {
-            PrefabFriendUi friendUI = Instantiate(prefabfriendUI, friendContainer);
-            friendUI.Initialize(friend);
-        }
+    }
+
+    private void HandleDislpayIncomingFriendReq(FriendInfo friend)
+    {
+        PrefabIncomeFriendReqUi friendUI = Instantiate(prefabincomefriendUI, friendContainer);
+        friendUI.Initialize(friend);
+    }
+
+    private void HandleDislpayPendingFriend(FriendInfo friend)
+    {
+
+        PrefabPendingFriendUi friendUI = Instantiate(prefabpendingfriendUI, friendContainer);
+        friendUI.Initialize(friend);
+    }
+
+    private void HandleDissplayFriend(FriendInfo friend)
+    {
+        PrefabFriendUi friendUI = Instantiate(prefabfriendUI, friendContainer);
+        friendUI.Initialize(friend);
     }
 
 }

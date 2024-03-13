@@ -18,7 +18,7 @@ MonoBehaviour:
   SelectedStudio: Bleiz Entertainement
   SdkPath: Assets/PlayFabSDK
   EdExPath: 
-  LocalCloudScriptPath: 
+  LocalCloudScriptPath: D:/Dev/Unity/ProjectJt5sq/Assets/PlayFabEditorExtensions/Editor/Resources/.CloudScript.js
   PanelIsShown: 0
-  curMainMenuIdx: 1
+  curMainMenuIdx: 3
   curSubMenuIdx: 0

@@ -4266,6 +4266,10 @@ MonoBehaviour:
   friendContainer: {fileID: 1248802842}
   prefabfriendUI: {fileID: 8602291040815616990, guid: b9a6e2f6d60e1494aa92e8a921665b0d,
     type: 3}
+  prefabpendingfriendUI: {fileID: 2908344002005012978, guid: 9a22d9463d8586d4391e11970eebd1bf,
+    type: 3}
+  prefabincomefriendUI: {fileID: 5888344979349805513, guid: cba36749e55b50b43b42d6807042b649,
+    type: 3}
 --- !u!114 &1227610661
 MonoBehaviour:
   m_ObjectHideFlags: 0
