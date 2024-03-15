@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Mirror;
 using Cinemachine;
-using Unity.VisualScripting;
+using Unity.Netcode;
 
 
 public class thirdpersonmovement : NetworkBehaviour
@@ -41,7 +40,7 @@ public class thirdpersonmovement : NetworkBehaviour
     private const float _threshold = 0.01f;
     public float CameraAngleOverride = 0.0f;
 
-    public override void OnStartLocalPlayer()
+    /**public override void OnStartLocalPlayer()
     {
         cam = GameObject.FindAnyObjectByType<Camera>().GetComponent<Transform>();
         GameObject.FindGameObjectWithTag("PlayerFollowCamera").GetComponent<CinemachineVirtualCamera>().Follow = transform.GetChild(0).transform;
@@ -52,18 +51,19 @@ public class thirdpersonmovement : NetworkBehaviour
 
         _playerInput = GetComponent<PlayerInput>();
         _playerInput.enabled = true;
-    }
+    }**/
 
     // Update is called once per frame
     void Update()
     {
-        if(!isLocalPlayer) return;
+        //if(!isLocalPlayer) return;
         Grounded();
         Move();
     }
     private void LateUpdate()
     {
         CameraRotation();
+        FallUnderGround();
     }
     private void CameraRotation()
     {
@@ -124,5 +124,13 @@ public class thirdpersonmovement : NetworkBehaviour
         if (lfAngle < -360f) lfAngle += 360f;
         if (lfAngle > 360f) lfAngle -= 360f;
         return Mathf.Clamp(lfAngle, lfMin, lfMax);
+    }
+
+    private void FallUnderGround()
+    {
+        if (controller.transform.position.y < -20)
+        {
+            controller.transform.position = new Vector3(0, 10, 0);
+        }
     }
 }
