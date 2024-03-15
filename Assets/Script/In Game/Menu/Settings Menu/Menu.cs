@@ -1,8 +1,3 @@
-using BleizEntertainment.Multiplayer;
-using Mirror;
-using PlayFab;
-using PlayFab.MultiplayerModels;
-using PlayFab.Networking;
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -105,7 +100,6 @@ public class Menu : MonoBehaviour
     {
         GameIsPaused = false;
         Time.timeScale = 1f;
-        BleizNetworkManager.Instance.StopClient();
         SceneManager.LoadScene(0);
     }
     public void Quit()

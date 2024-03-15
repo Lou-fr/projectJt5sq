@@ -8,7 +8,7 @@ using UnityEngine.Localization.Settings;
 
 public class SelectLanguage : MonoBehaviour
 {
-    public static Action<int> changedlocal= delegate { };
+    public static Action changedlocal= delegate { };
     private bool active = false;
     [SerializeField] private TMP_Dropdown dropdown;
     IEnumerator Start()
@@ -40,6 +40,6 @@ public class SelectLanguage : MonoBehaviour
         yield return LocalizationSettings.InitializationOperation;
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[_LocaleID];
         active = false;
-        changedlocal?.Invoke(_LocaleID);
+        changedlocal?.Invoke();
     }
 }

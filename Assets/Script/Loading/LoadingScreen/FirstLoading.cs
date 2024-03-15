@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using GetLocal;
-using BleizEntertainment.Multiplayer;
 using System.Threading.Tasks;
 using System;
 
@@ -27,11 +26,9 @@ public class FirstLoading : MonoBehaviour
     }
     private void Awake()
     {
-        PlayerMultiplayerRequester.OnFinishrequest += HandleLoadingScene;
     }
     private void OnDestroy()
     {
-        PlayerMultiplayerRequester.OnFinishrequest -= HandleLoadingScene;
     }
 
     private void HandleLoadingScene(string response)
@@ -46,8 +43,6 @@ public class FirstLoading : MonoBehaviour
     {
         SwitchLanguage.SetActive(false); LogOut.SetActive(false); loadingtext.gameObject.SetActive(true); PlayButton.gameObject.SetActive(false); Welcome.SetActive(false);
         loadingtext.text = GetLocalal.GetString("StartScreen", "Con");
-        PlayerMultiplayerRequester request = new PlayerMultiplayerRequester();
-        request.RequestMultiplayer();
     }
     IEnumerator LoadScene()
     {
