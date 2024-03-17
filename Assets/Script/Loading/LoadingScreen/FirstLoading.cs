@@ -24,30 +24,23 @@ public class FirstLoading : MonoBehaviour
         Application.targetFrameRate = 60;
         PlayButton.onClick.AddListener(OnButtonPress);
     }
-    private void Awake()
+    public void HandleLoadingScene()
     {
-    }
-    private void OnDestroy()
-    {
-    }
-
-    private void HandleLoadingScene(string response)
-    {
-        timesTry++;
+        /**timesTry++;
         if (response is "con_serv") { error.SetActive(true); GameObject t = GameObject.Find("Error_server");t.GetComponent<TextMeshProUGUI>().text = GetLocalal.GetString("StartScreen", "No_Session"); loadingtext.gameObject.SetActive(false); ServerNotAvailaible?.Invoke(timesTry); LogOut.SetActive(true); return; }
         timesTry = 0;
-        StartCoroutine(LoadScene());
+        StartCoroutine(LoadScene());*/
     }
 
     void OnButtonPress()
     {
         SwitchLanguage.SetActive(false); LogOut.SetActive(false); loadingtext.gameObject.SetActive(true); PlayButton.gameObject.SetActive(false); Welcome.SetActive(false);
         loadingtext.text = GetLocalal.GetString("StartScreen", "Con");
+        StartCoroutine(LoadScene());
     }
     IEnumerator LoadScene()
     {
         yield return null;
-        sessionObject.SetActive(true);
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(1);
         asyncOperation.allowSceneActivation = false;
         Debug.Log("Progression " + asyncOperation.progress);

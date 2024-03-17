@@ -34,6 +34,10 @@ public class Menu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape) || BtnSetPressed == true)
         {
+            if(_input is null)
+            {
+            _input = FindAnyObjectByType<BleizInputManager>().GetComponent<BleizInputManager>();
+            }
             if (GameIsPaused)
             {
                 Resume();
@@ -43,10 +47,6 @@ public class Menu : MonoBehaviour
                 Pause();
             }
             BtnSetPressed = false;
-        }
-        if(_input is null)
-        {
-            _input = FindAnyObjectByType<BleizInputManager>().GetComponent<BleizInputManager>();
         }
     }
     public void SettingsMenuBtnPress()

@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
-using Unity.Netcode;
-
+using FishNet.Object;
+using FishNet.Connection;
 
 public class thirdpersonmovement : NetworkBehaviour
 {
@@ -40,23 +40,24 @@ public class thirdpersonmovement : NetworkBehaviour
     private const float _threshold = 0.01f;
     public float CameraAngleOverride = 0.0f;
 
-    /**public override void OnStartLocalPlayer()
+    public override void OnStartNetwork()
     {
+        if(!base.Owner.IsLocalClient) return;
         cam = GameObject.FindAnyObjectByType<Camera>().GetComponent<Transform>();
         GameObject.FindGameObjectWithTag("PlayerFollowCamera").GetComponent<CinemachineVirtualCamera>().Follow = transform.GetChild(0).transform;
     }
-    public override void OnStartAuthority()
+    public override void OnOwnershipClient(NetworkConnection prevOwner)
     {
-        base.OnStartAuthority();
+        base.OnOwnershipClient(prevOwner);
 
         _playerInput = GetComponent<PlayerInput>();
         _playerInput.enabled = true;
-    }**/
+    }
 
     // Update is called once per frame
     void Update()
     {
-        //if(!isLocalPlayer) return;
+        if(!IsOwner) return;
         Grounded();
         Move();
     }
