@@ -1,26 +1,20 @@
 #if UNITY_EDITOR
+using System;
 using FishNet.Transporting.UTP;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ConnectionStarter : MonoBehaviour
+public class ConnectionKiller : MonoBehaviour
 {
     private FishyUnityTransport _transport;
-    private void Start()
+    void Awake()
     {
-        if(TryGetComponent(out FishyUnityTransport _t))
-        {
-            _transport = _t;
-        }else Debug.LogError("Cant get the request comoponent" ,this);
+        LobbyManager.ReadyForDeletetion += Handle;
+    }
 
-        if (ParrelSync.ClonesManager.IsClone())
-        {
-            _transport.StartConnection(false);
-        }else
-        {
-            _transport.StartConnection(true);
-            _transport.StartConnection(false);
-        }
+    private void Handle()
+    {
+        Destroy(this.gameObject);
     }
 }
 #endif

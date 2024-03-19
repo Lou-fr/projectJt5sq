@@ -18,7 +18,8 @@ public class Unity_Auth : MonoBehaviour
 			Debug.LogException(e);
 		}
         if (PlayerPrefs.HasKey("StayLogin")){ i = PlayerPrefs.GetInt("StayLogin");}
-        if(AuthenticationService.Instance.SessionTokenExists && i == 1)
+        if (AuthenticationService.Instance.IsSignedIn){OnSucess?.Invoke();return;}
+        if(AuthenticationService.Instance.SessionTokenExists && i == 1 )
         {
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
             OnSucess?.Invoke();
