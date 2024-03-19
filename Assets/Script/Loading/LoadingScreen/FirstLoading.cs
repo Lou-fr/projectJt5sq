@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using GetLocal;
 using System.Threading.Tasks;
 using System;
@@ -53,7 +54,7 @@ public class FirstLoading : MonoBehaviour
 #if UNITY_STANDALONE
                 string startText = GetLocalal.GetString("StartScreen", "Start");
                 loadingtext.text = startText;
-                if (Input.GetKeyUp(KeyCode.Space))
+                if (Keyboard.current.anyKey.wasPressedThisFrame)
                 {
                     asyncOperation.allowSceneActivation = true;
                 }

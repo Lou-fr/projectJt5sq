@@ -14,6 +14,7 @@ namespace BleizEntertainment.RebindUI
         /// <summary>
         /// Reference to the action that is to be rebound.
         /// </summary>
+        public static Action UpdateBindings = delegate {};
         public InputActionReference actionReference
         {
             get => m_Action;
@@ -282,6 +283,7 @@ namespace BleizEntertainment.RebindUI
                         }
 
                         UpdateBindingDisplay();
+                        UpdateBindings?.Invoke();
                         CleanUp();
 
                         // If there's more composite parts we should bind, initiate a rebind
