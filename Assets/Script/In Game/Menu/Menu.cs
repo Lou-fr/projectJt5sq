@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -33,7 +34,7 @@ public class Menu : MonoBehaviour
     }
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) || BtnSetPressed == true)
+        if (Keyboard.current.escapeKey.wasPressedThisFrame || BtnSetPressed == true)
         {
             if(_input is null)
             {
@@ -101,6 +102,7 @@ public class Menu : MonoBehaviour
     {
         GameIsPaused = false;
         Time.timeScale = 1f;
+        _input = null;
         SceneManager.LoadScene(0);
         OnRTMM?.Invoke();
     }

@@ -1,3 +1,7 @@
+using System;
+using System.Linq.Expressions;
+using BleizEntertainment.RebindUI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,10 +16,29 @@ public class BleizInputManager : MonoBehaviour
     public float ZoomCameraInput { get; private set; } = 0.0f;
 
     InputMaster _input = null;
+    void Awake()
+    {
+        RebindSaveLoad.uppdateBinding += handleLoadbidings;
+    }
+    void OnDestroy()
+    {
+        RebindSaveLoad.uppdateBinding -= handleLoadbidings;
+    }
+
+    private void handleLoadbidings()
+    {
+        var rebinds = PlayerPrefs.GetString("rebinds");
+        if (!string.IsNullOrEmpty(rebinds))
+            _input.LoadBindingOverridesFromJson(rebinds);
+    }
+
     private void OnEnable()
     {
         _input = new InputMaster();
         _input.player.Enable();
+        var rebinds = PlayerPrefs.GetString("rebinds");
+        if (!string.IsNullOrEmpty(rebinds))
+            _input.LoadBindingOverridesFromJson(rebinds);
 
         _input.player.movement.performed += SetMove;
         _input.player.movement.canceled += SetMove;
@@ -34,12 +57,14 @@ public class BleizInputManager : MonoBehaviour
     {
         _input.player.movement.performed -= SetMove;
         _input.player.movement.canceled -= SetMove;
+        MoveInput = Vector2.zero;
 
         _input.player.PlayerZoom.performed -= SetZoom;
         _input.player.PlayerZoom.canceled -= SetZoom;
 
         _input.player.Look.performed -= SetLook;
         _input.player.Look.canceled -= SetLook;
+        LookInput = Vector2.zero;
 
         _input.player.Jump.performed -= SetSpace;
         _input.player.Jump.canceled -= SetSpace;
