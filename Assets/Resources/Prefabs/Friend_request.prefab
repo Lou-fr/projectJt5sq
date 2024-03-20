@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1444447648294413402}
   - component: {fileID: 8893425328272182115}
-  - component: {fileID: 5888344979349805513}
+  - component: {fileID: 5976528571976190682}
   m_Layer: 5
   m_Name: Friend_request
   m_TagString: Untagged
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &5888344979349805513
+--- !u!114 &5976528571976190682
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -75,46 +75,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 485835510363263283}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f5d865024d4b73449fd7040e72985fd, type: 3}
+  m_Script: {fileID: 11500000, guid: 1772da4fe9b200c448857cbef970f489, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FriendName: {fileID: 5679644859318049441}
-  friend:
-    FacebookInfo:
-      FacebookId: 
-      FullName: 
-    FriendPlayFabId: 
-    GameCenterInfo:
-      GameCenterId: 
-    Profile:
-      AdCampaignAttributions: []
-      AvatarUrl: 
-      ContactEmailAddresses: []
-      DisplayName: 
-      ExperimentVariants: []
-      LinkedAccounts: []
-      Locations: []
-      Memberships: []
-      PlayerId: 
-      PublisherId: 
-      PushNotificationRegistrations: []
-      Statistics: []
-      Tags: []
-      TitleId: 
-      ValuesToDate: []
-    PSNInfo:
-      PsnAccountId: 
-      PsnOnlineId: 
-    SteamInfo:
-      SteamCountry: 
-      SteamId: 
-      SteamName: 
-    Tags: []
-    TitleDisplayName: 
-    Username: 
-    XboxInfo:
-      XboxUserId: 
-      XboxUserSandbox: 
+  requestedName: {fileID: 5679644859318049441}
+  profile:
+    <Name>k__BackingField: 
+    <Id>k__BackingField: 
 --- !u!1 &1246761721290783047
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,9 +203,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5888344979349805513}
-        m_TargetAssemblyTypeName: PrefabIncomeFriendReqUi, Assembly-CSharp
-        m_MethodName: accept
+      - m_Target: {fileID: 5976528571976190682}
+        m_TargetAssemblyTypeName: RequestPrefab, Assembly-CSharp
+        m_MethodName: acceptfriend
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -544,9 +511,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5888344979349805513}
-        m_TargetAssemblyTypeName: PrefabIncomeFriendReqUi, Assembly-CSharp
-        m_MethodName: Deny
+      - m_Target: {fileID: 5976528571976190682}
+        m_TargetAssemblyTypeName: RequestPrefab, Assembly-CSharp
+        m_MethodName: denyfriend
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

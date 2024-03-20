@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1444447648294413402}
   - component: {fileID: 8893425328272182115}
-  - component: {fileID: 2908344002005012978}
+  - component: {fileID: 3709864507961963709}
   m_Layer: 5
   m_Name: Friend_Pending
   m_TagString: Untagged
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &2908344002005012978
+--- !u!114 &3709864507961963709
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -75,46 +75,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 485835510363263283}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b45c66c1003b5b4bbb23dbfe4527eeb, type: 3}
+  m_Script: {fileID: 11500000, guid: d97c4f5491c99664e98afc0873893d02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FriendName: {fileID: 5679644859318049441}
-  friend:
-    FacebookInfo:
-      FacebookId: 
-      FullName: 
-    FriendPlayFabId: 
-    GameCenterInfo:
-      GameCenterId: 
-    Profile:
-      AdCampaignAttributions: []
-      AvatarUrl: 
-      ContactEmailAddresses: []
-      DisplayName: 
-      ExperimentVariants: []
-      LinkedAccounts: []
-      Locations: []
-      Memberships: []
-      PlayerId: 
-      PublisherId: 
-      PushNotificationRegistrations: []
-      Statistics: []
-      Tags: []
-      TitleId: 
-      ValuesToDate: []
-    PSNInfo:
-      PsnAccountId: 
-      PsnOnlineId: 
-    SteamInfo:
-      SteamCountry: 
-      SteamId: 
-      SteamName: 
-    Tags: []
-    TitleDisplayName: 
-    Username: 
-    XboxInfo:
-      XboxUserId: 
-      XboxUserSandbox: 
+  username: {fileID: 5679644859318049441}
+  pending:
+    <Name>k__BackingField: 
+    <Id>k__BackingField: 
 --- !u!1 &4075222872225470824
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,9 +378,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2908344002005012978}
-        m_TargetAssemblyTypeName: PrefabPendingFriendUi, Assembly-CSharp
-        m_MethodName: CancelFriendRequest
+      - m_Target: {fileID: 3709864507961963709}
+        m_TargetAssemblyTypeName: PendingPrefab, Assembly-CSharp
+        m_MethodName: canceloutgoingRequest
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

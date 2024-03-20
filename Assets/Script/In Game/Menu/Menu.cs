@@ -32,6 +32,22 @@ public class Menu : MonoBehaviour
 #endif
         _input = FindAnyObjectByType<BleizInputManager>().GetComponent<BleizInputManager>();
     }
+    void Awake()
+    {
+        ClientRelayManager.ServerChange += handleServerChange;
+        LobbyManager.KickFromLobby += handleServerChange;
+    }
+    void OnDestroy()
+    {
+        ClientRelayManager.ServerChange -= handleServerChange;
+        LobbyManager.KickFromLobby -= handleServerChange;
+    }
+
+    private void handleServerChange()
+    {
+        _input = null;
+    }
+
     public void Update()
     {
         if (Keyboard.current.escapeKey.wasPressedThisFrame || BtnSetPressed == true)
@@ -132,8 +148,24 @@ public class Menu : MonoBehaviour
     {
         if(panel.activeSelf is true)panel.SetActive(false);
         if(FriendUi.activeSelf is true)FriendUi.SetActive(false);
-        if(LobbyUi.activeSelf is false){LobbyUi.SetActive(true); _input.enabled = false;}
-        else{LobbyUi.SetActive(false); _input.enabled = true;}
+        if(_input is null)_input = FindAnyObjectByType<BleizInputManager>().GetComponent<BleizInputManager>();
+        if(LobbyUi.activeSelf is false){LobbyUi.SetActive(true); _input.enabled = false;if(PhoneController is not null)PhoneController.SetActive(false);}
+        else{LobbyUi.SetActive(false); _input.enabled = true;if(PhoneController is not null)PhoneController.SetActive(true);}
+        
+#if UNITY_ANDROID || UNITY_IOS
+
+#endif
+    }
+    public void FriendUI()
+    {
+        if(panel.activeSelf is true)panel.SetActive(false);
+        if(LobbyUi.activeSelf is true)LobbyUi.SetActive(false);
+        if(_input is null)_input = FindAnyObjectByType<BleizInputManager>().GetComponent<BleizInputManager>();
+        if(FriendUi.activeSelf is false){FriendUi.SetActive(true); _input.enabled = false;if(PhoneController is not null)PhoneController.SetActive(false);}
+        else{FriendUi.SetActive(false); _input.enabled = true;if(PhoneController is not null)PhoneController.SetActive(true);}
+#if UNITY_ANDROID || UNITY_IOS
+
+#endif
     }
 
     void Resume()
@@ -153,6 +185,8 @@ public class Menu : MonoBehaviour
 
     void Pause()
     {
+        if(FriendUi.activeSelf is true)FriendUi.SetActive(false);
+        if(LobbyUi.activeSelf is true)LobbyUi.SetActive(false);
         panel.SetActive(true);
         _input.enabled = false;
         GameIsPaused = true;

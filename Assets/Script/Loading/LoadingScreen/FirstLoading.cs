@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 using GetLocal;
 using System.Threading.Tasks;
 using System;
+using UnityEngine.InputSystem.Controls;
 
 public class FirstLoading : MonoBehaviour
 {
@@ -62,7 +63,7 @@ public class FirstLoading : MonoBehaviour
 #if UNITY_ANDROID || UNITY_IOS
                 string startText = GetLocalal.GetString("StartScreen", "StartPhone");
                 loadingtext.text = startText;
-                if (Input.touchCount > 0)
+                if (Touchscreen.current.press.wasPressedThisFrame)
                 {
                     asyncOperation.allowSceneActivation = true;
                 }

@@ -48,7 +48,7 @@ public class MainMenuUI : MonoBehaviour
 
     private void GetPlayerInfo(PlayerInfo info)
     {
-        _username = info.Username;
+        _username = AuthenticationService.Instance.PlayerName;
         ChangeWelcomeText();
     }
 
