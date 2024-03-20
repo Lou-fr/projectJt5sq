@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TMPro;
 using Unity.Services.Friends;
 using Unity.Services.Friends.Exceptions;
 using Unity.Services.Friends.Models;
@@ -12,7 +13,8 @@ public class FriendsManager : MonoBehaviour
     public static Action ClearList = delegate{};
     public static Action<List<Member>> refreshRequest = delegate {};
     public static Action<List<Member>> refreshFriends = delegate {};
-    public static Action<List<Member>> refreshPending = delegate {};
+    public static Action<List<Member>,List<Member>> RefreshPendingRequest = delegate {};
+    public static Action<IReadOnlyList<Relationship>> refreshBlocked = delegate{};
     public static List<FriendsEntryData> friends = new List<FriendsEntryData>();
     public static List<PlayerProfile> request = new List<PlayerProfile>();
     public static List<PlayerProfile> pending = new List<PlayerProfile>();
@@ -26,7 +28,10 @@ public class FriendsManager : MonoBehaviour
         FriendsUI.OnAddFriend += HandleFriendsRequest;
         RequestPrefab.AcceptFriend += AcceptFriend;
         RequestPrefab.DenyFriend += Denyfriend;
-        FriendsUI.refresh += RefreshAll;
+        BlockledPrefab.UnBlock += UnBlockFriend;
+        FriendsUI.RefreshFriend += RefreshFriends;
+        FriendsUI.BlockedFriend += RefreshBlock;
+        FriendsUI.PendingIncomingFriend += RefreshPendingRequestRequest;
         await SetPresence();
     }
      void OnDestroy()
@@ -36,8 +41,21 @@ public class FriendsManager : MonoBehaviour
         PendingPrefab.CancelOutgoingRequest -= CancelOutgoingRequest;
         FriendsUI.OnAddFriend -= HandleFriendsRequest;
         RequestPrefab.AcceptFriend -= AcceptFriend;
-        RequestPrefab.DenyFriend += Denyfriend;
-        FriendsUI.refresh -= RefreshAll;
+        RequestPrefab.DenyFriend -= Denyfriend;
+        BlockledPrefab.UnBlock -= UnBlockFriend;
+        FriendsUI.RefreshFriend -= RefreshFriends;
+        FriendsUI.BlockedFriend -= RefreshBlock;
+        FriendsUI.PendingIncomingFriend -= RefreshPendingRequestRequest;
+    }
+
+    private async void UnBlockFriend(string obj)
+    {
+        try
+        {
+            await FriendsService.Instance.DeleteBlockAsync(obj);
+            Debug.Log("Unblock "+ obj);
+            RefreshBlock();
+        }catch(FriendsServiceException e){Debug.LogError(e);}
     }
 
     private async void Denyfriend(string obj)
@@ -46,7 +64,7 @@ public class FriendsManager : MonoBehaviour
         {
             await FriendsService.Instance.DeleteIncomingFriendRequestAsync(obj);
             Debug.Log("Friend request deny");
-            RefreshAll();
+            RefreshPendingRequestRequest();
         }catch(FriendsServiceException e){Debug.LogError(e);}
     }
 
@@ -56,7 +74,7 @@ public class FriendsManager : MonoBehaviour
         {
             await SendFriendRequest(obj);
             Debug.Log("Friend request accepted");
-            RefreshAll();
+            RefreshPendingRequestRequest();
         }catch(FriendsServiceException e){Debug.LogError(e);}
     }
 
@@ -65,7 +83,7 @@ public class FriendsManager : MonoBehaviour
         try{
             await FriendsService.Instance.DeleteOutgoingFriendRequestAsync(obj);
             Debug.Log("Friend request cancel");
-            RefreshAll();
+            RefreshPendingRequestRequest();
         }catch(FriendsServiceException e){Debug.LogError("Friend request cancel error "+e,this);}
     }
 
@@ -75,7 +93,7 @@ public class FriendsManager : MonoBehaviour
         {
             await FriendsService.Instance.AddBlockAsync(obj);
             Debug.Log("Player id "+obj+" is now blocked on this account");
-            RefreshAll();
+            RefreshFriends();
         }catch(FriendsServiceException e){Debug.LogError("Failed to block "+obj + " reason "+e,this);}
     }
 
@@ -85,7 +103,7 @@ public class FriendsManager : MonoBehaviour
             {
                 await FriendsService.Instance.DeleteFriendAsync(id);
                 Debug.Log($"{id} was removed from the friends list.");
-                RefreshAll();
+                RefreshFriends();
             }
             catch (FriendsServiceException e){Debug.Log($"Failed to remove {id}. - {e}");}
     }
@@ -108,17 +126,16 @@ public class FriendsManager : MonoBehaviour
         Debug.Log("Refreshing...");
         ClearList?.Invoke();
         RefreshFriends();
-        RefreshRequest();
-        RefreshPending();
+        RefreshBlock();
+        RefreshPendingRequestRequest();
     }
 
-    private void RefreshRequest()
+    private void RefreshBlock()
     {
-        request.Clear();
-        Debug.Log("Refreshing incoming request...");
-        List<Member> Request = GetNonBlockedMembers(FriendsService.Instance.IncomingFriendRequests);
-        refreshRequest?.Invoke(Request);
-        Debug.Log("Found "+Request.Count+" incoming request");
+        Debug.Log("Refreshing Blocked ...");
+        var request = FriendsService.Instance.Blocks;
+        refreshBlocked?.Invoke(request);
+        Debug.Log("Found "+request.Count+" blocked");
     }
 
     private void RefreshFriends()
@@ -129,13 +146,17 @@ public class FriendsManager : MonoBehaviour
         refreshFriends?.Invoke(Friends);
         Debug.Log("Found "+Friends.Count+" friends");
     }
-    void RefreshPending()
+    void RefreshPendingRequestRequest()
     {
         pending.Clear();
         Debug.Log("Refreshin pending request...");
         var pendings = GetNonBlockedMembers(FriendsService.Instance.OutgoingFriendRequests);
         Debug.Log("Found "+pendings.Count+" outgoing request");
-        refreshPending?.Invoke(pendings);
+        request.Clear();
+        Debug.Log("Refreshing incoming request...");
+        List<Member> Request = GetNonBlockedMembers(FriendsService.Instance.IncomingFriendRequests);
+        RefreshPendingRequest?.Invoke(Request,pendings);
+        Debug.Log("Found "+Request.Count+" incoming request");
     }
 
     private void susbscribeToFriendsCallback()
@@ -143,16 +164,19 @@ public class FriendsManager : MonoBehaviour
         try
         {
             FriendsService.Instance.RelationshipAdded += e =>
-
             {
+                RefreshFriends();
+                RefreshPendingRequestRequest();
                 Debug.Log("Create relation ship "+e.Relationship);
             };
             FriendsService.Instance.PresenceUpdated += e =>
             {
+                RefreshFriends();
                 Debug.Log("Presence updated");
             };
             FriendsService.Instance.RelationshipDeleted +=e =>
             {
+                RefreshFriends();
                 Debug.Log("Relation ship deleted "+e.Relationship);
             };
         }catch(FriendsServiceException e){Debug.LogError(e,this);}
