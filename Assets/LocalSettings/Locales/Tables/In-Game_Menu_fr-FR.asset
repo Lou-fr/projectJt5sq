@@ -179,6 +179,10 @@ MonoBehaviour:
     m_Localized: Bloquer
     m_Metadata:
       m_Items: []
+  - m_Id: 17814107244875776
+    m_Localized: Debloquer
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
