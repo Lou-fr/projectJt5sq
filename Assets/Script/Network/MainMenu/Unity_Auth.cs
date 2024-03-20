@@ -22,6 +22,7 @@ public class Unity_Auth : MonoBehaviour
         if(AuthenticationService.Instance.SessionTokenExists && i == 1 )
         {
             await AuthenticationService.Instance.SignInAnonymouslyAsync();
+            await AuthenticationService.Instance.GetPlayerNameAsync();
             OnSucess?.Invoke();
         }
 	}
@@ -33,6 +34,7 @@ public class Unity_Auth : MonoBehaviour
         try
         {
             await AuthenticationService.Instance.SignInWithUsernamePasswordAsync(username,password);
+            await AuthenticationService.Instance.UpdatePlayerNameAsync(username);
             OnSucess?.Invoke();
             Debug.Log("Sign In Succes");
         }

@@ -12,6 +12,7 @@ public class LobbyUI : MonoBehaviour
     void Awake()
     {
         LobbyManager.LobbyRefreshResult += handleDisplayLobby;
+        OnRefreshlobby?.Invoke();
         Refresh.onClick.AddListener(OnRefresh);
     }
     

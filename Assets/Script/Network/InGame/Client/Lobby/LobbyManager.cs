@@ -21,6 +21,7 @@ public class LobbyManager : MonoBehaviour
     public static Action<string> JoinRelayServer = delegate{};
     public static Action StopRelayServer = delegate{};
     public static Action ReadyForDeletetion = delegate{};
+    public static Action KickFromLobby = delegate {};
     LobbyEventCallbacks callbacks;
     CreateLobbyOptions lobbyOptions = new CreateLobbyOptions()
     {
@@ -120,6 +121,7 @@ public class LobbyManager : MonoBehaviour
     private void HandleKickFromLobby()
     {
         Debug.Log("Has been kick/host as quit the lobby "+Curentlobby.Id);
+        KickFromLobby?.Invoke();
         HandleCreateLobby();
     }
 

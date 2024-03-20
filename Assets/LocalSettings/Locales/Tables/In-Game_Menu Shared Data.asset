@@ -175,6 +175,10 @@ MonoBehaviour:
     m_Key: Friend_request_incoming_accept
     m_Metadata:
       m_Items: []
+  - m_Id: 17642034497847296
+    m_Key: Friend_Block
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

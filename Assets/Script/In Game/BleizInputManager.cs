@@ -68,6 +68,7 @@ public class BleizInputManager : MonoBehaviour
 
         _input.player.Jump.performed -= SetSpace;
         _input.player.Jump.canceled -= SetSpace;
+        SpaceIsPressed = 0f;
         _input.player.Disable();
     }
     private void SetMove(InputAction.CallbackContext ctx)
