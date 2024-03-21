@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Unity.Services.Authentication;
 using Unity.Services.Lobbies;
 using Unity.Services.Lobbies.Models;
@@ -11,8 +10,8 @@ public class LobbyManager : MonoBehaviour
 {
     string lobbyName;
     int maxPlayer = 4;
-    Lobby Curentlobby;
-    PlayerInfo playerInfo;
+    static Lobby Curentlobby;
+    static PlayerInfo playerInfo;
     bool RelayIsStarted = true;
     public static Action<QueryResponse, string> LobbyRefreshResult = delegate {};
     public static Action CreateRelayServer = delegate{};
@@ -38,6 +37,7 @@ public class LobbyManager : MonoBehaviour
         LobbyUI.OnRefreshlobby += handleRefreshLobby;
         LobbyUIPrefab.joinLobby += handleJoinLobby;
         RelayHostManager.OnJoinCode += HandleJoinCode;
+        FriendsManager.OnJoinRequestAccepted += joinVialobbyCode;
         Menu.OnRTMM += handleDeleteLobby;
         HandleCreateLobby();
     }
@@ -46,7 +46,6 @@ public class LobbyManager : MonoBehaviour
     {
         callbacks = new LobbyEventCallbacks();
         callbacks.PlayerJoined += Relaystart;
-        callbacks.PlayerLeft += RelayStop;
         lobbyName = playerInfo.Username + "_lobby";
         Curentlobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName,maxPlayer,lobbyOptions);
         Relaystart(null);
@@ -61,6 +60,8 @@ public class LobbyManager : MonoBehaviour
         LobbyUI.OnRefreshlobby -= handleRefreshLobby;
         LobbyUIPrefab.joinLobby -= handleJoinLobby;
         RelayHostManager.OnJoinCode -= HandleJoinCode;
+        FriendsManager.OnJoinRequestAccepted -= joinVialobbyCode;
+
     }
 
     private async void handleDeleteLobby()
@@ -175,20 +176,6 @@ public class LobbyManager : MonoBehaviour
             yield return delay;
         }
     }
-    private async void RelayStop(List<int> list)
-    {
-        if(list.Count  != 1)return;
-        await WaitForSomeTimeAsync();
-        Curentlobby = await LobbyService.Instance.GetLobbyAsync(Curentlobby.Id);
-        if(Curentlobby.Players.Count != 1) return;
-        StopRelayServer?.Invoke();
-    }
-
-    private async Task WaitForSomeTimeAsync()
-    {
-        await Task.Delay(10000);
-        Debug.Log("Server will not be disable if no one has joined");
-    }
 
     async void OnApplicationQuit()
     {
@@ -207,5 +194,24 @@ public class LobbyManager : MonoBehaviour
         {
             Debug.Log(e);
         }   
+    }
+    public static string GetLobbyCode()
+    {
+        if(Curentlobby.HostId != playerInfo.Id)return null;
+        Debug.Log(Curentlobby.LobbyCode);
+        return Curentlobby.LobbyCode;
+    }
+    private async void joinVialobbyCode(string lobbyCode)
+    {
+        var lobby = await LobbyService.Instance.JoinLobbyByCodeAsync(lobbyCode);
+        await LobbyService.Instance.DeleteLobbyAsync(Curentlobby.Id);
+        if(RelayIsStarted is true){StopRelayServer?.Invoke(); RelayIsStarted = false;}
+        StopAllCoroutines();
+        Curentlobby = lobby;
+        callbacks = new LobbyEventCallbacks();
+        callbacks.KickedFromLobby += HandleKickFromLobby;
+        callbacks.DataChanged += handleJoinRelay;
+        await Lobbies.Instance.SubscribeToLobbyEventsAsync(lobby.Id, callbacks);
+        handleJoinRelay(null);
     }
 }

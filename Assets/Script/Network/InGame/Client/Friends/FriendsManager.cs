@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TMPro;
+using Newtonsoft.Json;
 using Unity.Services.Friends;
 using Unity.Services.Friends.Exceptions;
 using Unity.Services.Friends.Models;
+using Unity.Services.Friends.Notifications;
 using UnityEngine;
 
 public class FriendsManager : MonoBehaviour
@@ -18,6 +19,8 @@ public class FriendsManager : MonoBehaviour
     public static List<FriendsEntryData> friends = new List<FriendsEntryData>();
     public static List<PlayerProfile> request = new List<PlayerProfile>();
     public static List<PlayerProfile> pending = new List<PlayerProfile>();
+    public static Action<PlayerProfile> joinRequestA = delegate{};
+    public static Action<string> OnJoinRequestAccepted = delegate{};
     async void Awake()
     {
         await FriendsService.Instance.InitializeAsync();
@@ -32,6 +35,7 @@ public class FriendsManager : MonoBehaviour
         FriendsUI.RefreshFriend += RefreshFriends;
         FriendsUI.BlockedFriend += RefreshBlock;
         FriendsUI.PendingIncomingFriend += RefreshPendingRequestRequest;
+        InvitePrefabUI.AcceptJoinReq += SendAcceptJoinRequest;
         await SetPresence();
     }
      void OnDestroy()
@@ -46,6 +50,7 @@ public class FriendsManager : MonoBehaviour
         FriendsUI.RefreshFriend -= RefreshFriends;
         FriendsUI.BlockedFriend -= RefreshBlock;
         FriendsUI.PendingIncomingFriend -= RefreshPendingRequestRequest;
+        InvitePrefabUI.AcceptJoinReq -= SendAcceptJoinRequest;
     }
 
     private async void UnBlockFriend(string obj)
@@ -179,7 +184,59 @@ public class FriendsManager : MonoBehaviour
                 RefreshFriends();
                 Debug.Log("Relation ship deleted "+e.Relationship);
             };
+            FriendsService.Instance.MessageReceived += e =>
+            {
+                StandaloneFriendsRefresh();
+                HandleMessage(e);
+                Debug.Log("Message received");
+            };
         }catch(FriendsServiceException e){Debug.LogError(e,this);}
+    }
+
+    void HandleMessage(IMessageReceivedEvent message)
+    {
+       var t =message.GetAs<object>();
+       string _t = t.ToString();
+       try
+       {
+            Debug.Log("Try to read it as JoinRequest");
+            JoinRequest request = JsonConvert.DeserializeObject<JoinRequest>(_t);
+            if (request.RequestToJoin == true)
+            {
+                foreach(FriendsEntryData entryData in friends)
+                {
+                    if(entryData.Id == message.UserId){var sending = new PlayerProfile(entryData.Name,entryData.Id);joinRequestA?.Invoke(sending);return;}
+                }
+            }
+       }catch(JsonException e){Debug.LogWarning(e);}
+       try
+       {
+            Debug.Log("Try to read it as JoinResponse");
+            JoinResponse response = JsonConvert.DeserializeObject<JoinResponse>(_t);
+            if(response.yesOrno is false){return;}
+            if(response.yesOrno is true){OnJoinRequestAccepted?.Invoke(response.lobbyCode);return;}
+            
+       }catch(JsonException e){Debug.LogWarning(e);}
+       
+    }
+    public static void SendjoinRequest(string TargetId)
+    {
+        var e = new JoinRequest {RequestToJoin = true};
+        JsonConvert.SerializeObject(e);
+        SendMessageAsync(TargetId,e);
+    }
+    public static void SendAcceptJoinRequest(string TargetId)
+    {
+        string lobbyCode = LobbyManager.GetLobbyCode();
+        bool isAuthorized = true;
+        if(lobbyCode == null) isAuthorized = false;
+        var toJson = new JoinResponse{yesOrno = isAuthorized,lobbyCode=lobbyCode};
+        JsonConvert.SerializeObject(toJson);
+        SendMessageAsync(TargetId,toJson);
+    }
+    static async void SendMessageAsync(String TargetUserId, object content) 
+    {
+        await FriendsService.Instance.MessageAsync(TargetUserId,content);
     }
     async Task<bool> SendFriendRequest(string playerName)
     {
@@ -210,5 +267,37 @@ public class FriendsManager : MonoBehaviour
                    .Where(relationship =>!blocks.Any(blockedRelationship => blockedRelationship.Member.Id == relationship.Member.Id))
                    .Select(relationship => relationship.Member)
                    .ToList();
+    }
+    class JoinRequest
+    {
+        public bool RequestToJoin {get;set;}
+    }
+    class JoinResponse
+    {
+        public bool yesOrno {get;set;}
+        public string lobbyCode {get;set;}
+    }
+    private void StandaloneFriendsRefresh()
+    {
+        var Friends = GetNonBlockedMembers(FriendsService.Instance.Friends);
+        foreach(var friend in Friends)
+        {
+            string activityText;
+            if (friend.Presence.Availability == Availability.Offline ||friend.Presence.Availability == Availability.Invisible)
+            {
+                activityText = ""+friend.Presence.LastSeen.ToLocalTime();
+            }else
+            {
+                activityText = friend.Presence.Availability.ToString();
+            }
+            var info = new FriendsEntryData
+            {
+                Name = friend.Profile.Name,
+                Id = friend.Id,
+                Availability = friend.Presence.Availability,
+                Activity = activityText
+            };
+            friends.Add(info);
+        }
     }
 }

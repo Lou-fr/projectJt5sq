@@ -185,6 +185,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Debug",
+            "id": "aff778b1-4af6-478e-95e4-d1dbf9c60c49",
+            "actions": [
+                {
+                    "name": "ToggleDebug",
+                    "type": "Button",
+                    "id": "30df3584-c967-466a-9b71-8cc02e58b71b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Return",
+                    "type": "Button",
+                    "id": "b20bb37b-c416-4b99-9528-1ca0973013f0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "9dfd9b25-847d-4121-a030-3ae380e04e44",
+                    "path": "<Keyboard>/#(')",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse;Phone;Gamepad",
+                    "action": "ToggleDebug",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9e27c22a-1501-41a6-83f4-3687d56d3012",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Return",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
