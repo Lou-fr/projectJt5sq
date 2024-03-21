@@ -156,7 +156,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 13846716400533504
-    m_Key: Invite_Friend
+    m_Key: Join_Friend
     m_Metadata:
       m_Items: []
   - m_Id: 15211023331753984
@@ -181,6 +181,14 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 17814107244875776
     m_Key: Friend_Unblock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18102011150729216
+    m_Key: Friend_Invite_Accept
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18102045514661888
+    m_Key: Friend_Invite_Refuse
     m_Metadata:
       m_Items: []
   m_Metadata:

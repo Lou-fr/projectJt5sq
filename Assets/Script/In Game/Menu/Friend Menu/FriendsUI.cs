@@ -1,6 +1,4 @@
 using System;
-using UnityEngine.Scripting;
-using System.Runtime.Serialization;
 using System.Collections.Generic;
 using Unity.Services.Friends.Models;
 using UnityEngine;
@@ -146,10 +144,9 @@ public class FriendsUI : MonoBehaviour
                 Availability = friend.Presence.Availability,
                 Activity = activityText
             };
+            FriendsManager.friends.Add(info);
             FriendPrefab friend1 = Instantiate(friendPrefab,FriendsContainer);
             friend1.Initialize(info);
-            FriendsManager.friends.Add(info);
         }
     }
-
 }
