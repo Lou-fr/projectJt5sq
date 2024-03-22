@@ -191,6 +191,26 @@ MonoBehaviour:
     m_Localized: Refuser
     m_Metadata:
       m_Items: []
+  - m_Id: 18447286357307392
+    m_Localized: "Rafra\xEEchir"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18447807147257856
+    m_Localized: Toutes les parties disponible
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18449130227871744
+    m_Localized: "G\xE9rer"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18450579187937280
+    m_Localized: "G\xE9rer votre partie"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18515065819213824
+    m_Localized: Expulser
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

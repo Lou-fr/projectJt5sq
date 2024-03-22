@@ -190,6 +190,26 @@ MonoBehaviour:
     m_Localized: Refuse
     m_Metadata:
       m_Items: []
+  - m_Id: 18447286357307392
+    m_Localized: Refresh
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18447807147257856
+    m_Localized: All available party
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18449130227871744
+    m_Localized: Manage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18450579187937280
+    m_Localized: Manage your game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18515065819213824
+    m_Localized: Kick
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

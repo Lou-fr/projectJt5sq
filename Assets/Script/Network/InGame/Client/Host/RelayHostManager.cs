@@ -16,7 +16,7 @@ public class RelayHostManager : MonoBehaviour
         LobbyManager.StopRelayServer += StopRelayServer;
         Menu.OnRTMM += StopRelayServerOnRTMM;
         transport = GetComponentInParent<FishyUnityTransport>();
-        if (transport is null) Debug.LogError("Cant get the request comoponent" ,this);  
+        if (transport is null) {Debug.LogError("Cant get the request comoponent" ,this);Application.Quit();};  
         StartRelayServer();      
     }
      void OnDestroy()

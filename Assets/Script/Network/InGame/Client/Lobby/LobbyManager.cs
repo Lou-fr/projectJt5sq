@@ -13,7 +13,8 @@ public class LobbyManager : MonoBehaviour
     static Lobby Curentlobby;
     static PlayerInfo playerInfo;
     bool RelayIsStarted = true;
-    public static Action<QueryResponse, string> LobbyRefreshResult = delegate {};
+    public static Action<QueryResponse, Lobby> LobbyRefreshResult = delegate {};
+    public static Action<List<Player>> LobbyPlayerResult = delegate{};
     public static Action CreateRelayServer = delegate{};
     public static Action<string> JoinRelayServer = delegate{};
     public static Action StopRelayServer = delegate{};
@@ -38,22 +39,37 @@ public class LobbyManager : MonoBehaviour
         LobbyUIPrefab.joinLobby += handleJoinLobby;
         RelayHostManager.OnJoinCode += HandleJoinCode;
         FriendsManager.OnJoinRequestAccepted += joinVialobbyCode;
+        PlayerManageUIPrefab.KickPlayer += handleKickTargetPlayer;
+        LobbyUI.OnRefreshLobbyPlayer += handleRefreshLobbyPlayer;
         Menu.OnRTMM += handleDeleteLobby;
         HandleCreateLobby();
+    }
+
+    private async void HandlePlayerOption()
+    {
+        UpdatePlayerOptions options = new UpdatePlayerOptions();
+        options.Data = new Dictionary<string, PlayerDataObject>()
+        {
+            {
+                "Username",new PlayerDataObject(visibility:PlayerDataObject.VisibilityOptions.Member,value:playerInfo.Username)
+            }
+        };
+        Debug.Log("Uploading Player data");
+        await LobbyService.Instance.UpdatePlayerAsync(Curentlobby.Id,playerInfo.Id,options);
+        Debug.Log("Upload player data is succes");
     }
 
     private async void HandleCreateLobby()
     {
         callbacks = new LobbyEventCallbacks();
-        callbacks.PlayerJoined += Relaystart;
         lobbyName = playerInfo.Username + "_lobby";
         Curentlobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName,maxPlayer,lobbyOptions);
-        Relaystart(null);
+        HandlePlayerOption();
+        Relaystart();
         await Lobbies.Instance.SubscribeToLobbyEventsAsync(Curentlobby.Id, callbacks);
         Debug.Log("Lobby started "+Curentlobby.Id);
         StartCoroutine(HeratbeatLobby(Curentlobby.Id,15));
     }
-
     void OnDestroy()
     {
         Menu.OnRTMM -= handleDeleteLobby;
@@ -61,7 +77,23 @@ public class LobbyManager : MonoBehaviour
         LobbyUIPrefab.joinLobby -= handleJoinLobby;
         RelayHostManager.OnJoinCode -= HandleJoinCode;
         FriendsManager.OnJoinRequestAccepted -= joinVialobbyCode;
+        LobbyUI.OnRefreshLobbyPlayer -= handleRefreshLobbyPlayer;
+        PlayerManageUIPrefab.KickPlayer -= handleKickTargetPlayer;
+    }
 
+    private async void handleKickTargetPlayer(string TargetId)
+    {
+        if(TargetId == Curentlobby.HostId)return;
+        await LobbyService.Instance.RemovePlayerAsync(Curentlobby.Id,TargetId);
+        Debug.Log(TargetId+" has been kick from "+Curentlobby.Id);
+        handleRefreshLobbyPlayer();
+    }
+
+    private async void handleRefreshLobbyPlayer()
+    {
+        if(Curentlobby.HostId != playerInfo.Id)return;
+        Curentlobby = await LobbyService.Instance.GetLobbyAsync(Curentlobby.Id);
+        LobbyPlayerResult?.Invoke(Curentlobby.Players);
     }
 
     private async void handleDeleteLobby()
@@ -105,6 +137,7 @@ public class LobbyManager : MonoBehaviour
                     if(RelayIsStarted is true){StopRelayServer?.Invoke(); RelayIsStarted = false;}
                     StopAllCoroutines();
                     Curentlobby = lobby;
+                    HandlePlayerOption();
                     Debug.Log("Joined "+Curentlobby.Id);
                     callbacks = new LobbyEventCallbacks();
                     callbacks.KickedFromLobby += HandleKickFromLobby;
@@ -134,7 +167,7 @@ public class LobbyManager : MonoBehaviour
         JoinRelayServer?.Invoke(z.Value.ToString());
     }
 
-    private void Relaystart(List<LobbyPlayerJoined> action)
+    private void Relaystart()
     {
         if(Curentlobby.HostId != playerInfo.Id) {Debug.Log("You are not the host of " + Curentlobby.Name +"the host is"+Curentlobby.HostId);return;}
         handleRefreshLobby();
@@ -162,7 +195,7 @@ public class LobbyManager : MonoBehaviour
             };
             QueryResponse lobbies = await Lobbies.Instance.QueryLobbiesAsync(options);
             Debug.Log("Lobby trouvé : "+ lobbies.Results.Count,this);
-            LobbyRefreshResult?.Invoke(lobbies,Curentlobby.Id);
+            LobbyRefreshResult?.Invoke(lobbies,Curentlobby);
         }catch (LobbyServiceException e){Debug.LogError(e,this);}
     }
 
@@ -208,6 +241,7 @@ public class LobbyManager : MonoBehaviour
         if(RelayIsStarted is true){StopRelayServer?.Invoke(); RelayIsStarted = false;}
         StopAllCoroutines();
         Curentlobby = lobby;
+        HandlePlayerOption();
         callbacks = new LobbyEventCallbacks();
         callbacks.KickedFromLobby += HandleKickFromLobby;
         callbacks.DataChanged += handleJoinRelay;

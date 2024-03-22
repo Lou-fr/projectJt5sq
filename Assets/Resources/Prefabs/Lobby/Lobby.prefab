@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 5136593728159275047}
   - component: {fileID: 8557519675897796596}
   m_Layer: 5
-  m_Name: JoinParty
+  m_Name: Lobby
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

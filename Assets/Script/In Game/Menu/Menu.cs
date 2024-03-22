@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Menu : MonoBehaviour
 {
     public static Action OnRTMM = delegate {};
+    public static Action<bool> LobbyUIOpen = delegate{};
     [SerializeField] private GameObject panel, LanguagePanel, CntrlParentPanel, GraphicParentPanel, RTTMPopUp, QuitPopUp, PhoneController, FriendUi,LobbyUi;
     private GameObject CntrlPanel;
     private GameObject GraphicPanel;
@@ -149,8 +150,8 @@ public class Menu : MonoBehaviour
         if(panel.activeSelf is true)panel.SetActive(false);
         if(FriendUi.activeSelf is true)FriendUi.SetActive(false);
         if(_input is null)_input = FindAnyObjectByType<BleizInputManager>().GetComponent<BleizInputManager>();
-        if(LobbyUi.activeSelf is false){LobbyUi.SetActive(true); _input.enabled = false;if(PhoneController is not null)PhoneController.SetActive(false);}
-        else{LobbyUi.SetActive(false); _input.enabled = true;if(PhoneController is not null)PhoneController.SetActive(true);}
+        if(LobbyUi.activeSelf is false){LobbyUi.SetActive(true);LobbyUIOpen?.Invoke(true); _input.enabled = false;if(PhoneController is not null)PhoneController.SetActive(false);}
+        else{LobbyUi.SetActive(false);LobbyUIOpen?.Invoke(false); _input.enabled = true;if(PhoneController is not null)PhoneController.SetActive(true);}
         
 #if UNITY_ANDROID || UNITY_IOS
 
