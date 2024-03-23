@@ -21,10 +21,13 @@ public class FriendsManager : MonoBehaviour
     public static List<PlayerProfile> pending = new List<PlayerProfile>();
     public static Action<PlayerProfile> joinRequestA = delegate{};
     public static Action<string> OnJoinRequestAccepted = delegate{};
+    Availability PlayerAvailabality;
+    int GamePrivacy =0;
     async void Awake()
     {
         await FriendsService.Instance.InitializeAsync();
         susbscribeToFriendsCallback();
+        LobbyUI.LobbyPrivacyStatus += handleGamePrivacy;
         FriendPrefab.RemoveFriend += RemoveFriends;
         FriendPrefab.BlockFriend += BlockFriend;
         PendingPrefab.CancelOutgoingRequest += CancelOutgoingRequest;
@@ -36,7 +39,9 @@ public class FriendsManager : MonoBehaviour
         FriendsUI.BlockedFriend += RefreshBlock;
         FriendsUI.PendingIncomingFriend += RefreshPendingRequestRequest;
         InvitePrefabUI.AcceptJoinReq += SendAcceptJoinRequest;
-        await SetPresence();
+        int i = 0;
+        i =PlayerPrefs.GetInt("privacyValue");
+        handleGamePrivacy(i);
     }
      void OnDestroy()
     {
@@ -51,6 +56,18 @@ public class FriendsManager : MonoBehaviour
         FriendsUI.BlockedFriend -= RefreshBlock;
         FriendsUI.PendingIncomingFriend -= RefreshPendingRequestRequest;
         InvitePrefabUI.AcceptJoinReq -= SendAcceptJoinRequest;
+        LobbyUI.LobbyPrivacyStatus -= handleGamePrivacy;
+    }
+
+    private async void handleGamePrivacy(int obj)
+    {
+        GamePrivacy = obj;
+        var activity = new Activity {Status = $"{obj};_Online~UwU~"};
+        try
+        {
+            await FriendsService.Instance.SetPresenceAsync(Availability.Online,activity);
+            Debug.Log("Availability changed to Online with game privacy to "+GamePrivacy);
+        }catch(FriendsServiceException e){Debug.LogError(e);}
     }
 
     private async void UnBlockFriend(string obj)
@@ -257,6 +274,7 @@ public class FriendsManager : MonoBehaviour
         try
         {
             await FriendsService.Instance.SetPresenceAsync(Availability.Online,activity);
+            PlayerAvailabality = Availability.Online;
             Debug.Log("Availability changed to Online");
         }catch(FriendsServiceException e){Debug.LogError(e);}
     }

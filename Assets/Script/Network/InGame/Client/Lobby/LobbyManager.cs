@@ -41,6 +41,7 @@ public class LobbyManager : MonoBehaviour
         FriendsManager.OnJoinRequestAccepted += joinVialobbyCode;
         PlayerManageUIPrefab.KickPlayer += handleKickTargetPlayer;
         LobbyUI.OnRefreshLobbyPlayer += handleRefreshLobbyPlayer;
+        LobbyUI.OnRefreshLobbyPrivacy += handleChangePrivacy;
         Menu.OnRTMM += handleDeleteLobby;
         HandleCreateLobby();
     }
@@ -79,6 +80,34 @@ public class LobbyManager : MonoBehaviour
         FriendsManager.OnJoinRequestAccepted -= joinVialobbyCode;
         LobbyUI.OnRefreshLobbyPlayer -= handleRefreshLobbyPlayer;
         PlayerManageUIPrefab.KickPlayer -= handleKickTargetPlayer;
+        LobbyUI.OnRefreshLobbyPrivacy -= handleChangePrivacy;
+    }
+
+    private async void handleChangePrivacy(int obj)
+    {
+        if(playerInfo.Id != Curentlobby.HostId)return;
+        UpdateLobbyOptions options = new UpdateLobbyOptions();
+        Curentlobby = await LobbyService.Instance.GetLobbyAsync(Curentlobby.Id);
+        if(obj is 0)
+        {
+            Debug.Log("Try to put the lobby in public");
+            if(Curentlobby.IsPrivate is false && Curentlobby.IsLocked is false)return;
+            if(Curentlobby.IsLocked is true)options.IsLocked = false;
+            options.IsPrivate = false;
+        }else if(obj is 1)
+        {
+            Debug.Log("Try to put the lobby in friend only");
+            if(Curentlobby.IsPrivate is true && Curentlobby.IsLocked is false)return;
+            if(Curentlobby.IsLocked is true)options.IsLocked = false;
+            if(Curentlobby.IsPrivate is false)options.IsPrivate = true;
+        }else
+        {
+            Debug.Log("Try to put the lobby in private");
+            if(Curentlobby.IsPrivate is true && Curentlobby.IsLocked is true)return;
+            if(Curentlobby.IsPrivate is false)options.IsPrivate= true;
+            options.IsLocked = true;
+        }
+        await LobbyService.Instance.UpdateLobbyAsync(Curentlobby.Id,options);
     }
 
     private async void handleKickTargetPlayer(string TargetId)

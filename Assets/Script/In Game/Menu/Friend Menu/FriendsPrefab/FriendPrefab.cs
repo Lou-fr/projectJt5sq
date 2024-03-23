@@ -11,12 +11,12 @@ public class FriendPrefab : MonoBehaviour
     [SerializeField] Button Join;
     public static Action<string> RemoveFriend = delegate{};
     public static Action<string> BlockFriend = delegate{};
-    public void Initialize(FriendsEntryData friend)
+    public void Initialize(FriendsEntryData friend,int GamePrivacy)
     {
         this.Friend = friend;
         FriendName.SetText(Friend.Name);
         activity.SetText(Friend.Activity);
-        if(Friend.Availability == Availability.Offline ||Friend.Availability == Availability.Invisible ||Friend.Availability == Availability.Unknown){Join.interactable = false;}
+        if(Friend.Availability == Availability.Offline ||Friend.Availability == Availability.Invisible ||Friend.Availability == Availability.Unknown || GamePrivacy == 2){Join.interactable = false;}
         else Join.onClick.AddListener(joinReq);
     }
     public void removeFriend()

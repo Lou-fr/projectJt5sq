@@ -130,12 +130,17 @@ public class FriendsUI : MonoBehaviour
         foreach(var friend in list)
         {
             string activityText;
+            int GamePrivacy = 0;
             if (friend.Presence.Availability == Availability.Offline ||friend.Presence.Availability == Availability.Invisible)
             {
                 activityText = ""+friend.Presence.LastSeen.ToLocalTime();
             }else
             {
-                activityText = friend.Presence.Availability.ToString();
+                var status = friend.Presence.GetActivity<Activity>().Status;
+                string[] propieties = status.Split("_");
+                activityText = propieties[1];
+                string[] secondpropieties = propieties[0].Split(";");
+                GamePrivacy = Int32.Parse(secondpropieties[0]);
             }
             var info = new FriendsEntryData
             {
@@ -146,7 +151,7 @@ public class FriendsUI : MonoBehaviour
             };
             FriendsManager.friends.Add(info);
             FriendPrefab friend1 = Instantiate(friendPrefab,FriendsContainer);
-            friend1.Initialize(info);
+            friend1.Initialize(info,GamePrivacy);
         }
     }
 }

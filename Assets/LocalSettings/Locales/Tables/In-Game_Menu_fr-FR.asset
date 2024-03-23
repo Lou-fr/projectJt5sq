@@ -211,6 +211,30 @@ MonoBehaviour:
     m_Localized: Expulser
     m_Metadata:
       m_Items: []
+  - m_Id: 18923531683606528
+    m_Localized: Publique
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18923582673760256
+    m_Localized: Amis Uniquement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18923673086177280
+    m_Localized: "Priv\xE9"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18925052479516672
+    m_Localized: Amis
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18925177738211328
+    m_Localized: En attente/Demande d'amis
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18925317223985152
+    m_Localized: Bloquer
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

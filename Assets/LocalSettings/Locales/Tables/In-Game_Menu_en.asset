@@ -210,6 +210,30 @@ MonoBehaviour:
     m_Localized: Kick
     m_Metadata:
       m_Items: []
+  - m_Id: 18923531683606528
+    m_Localized: Public
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18923582673760256
+    m_Localized: Friend Only
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18923673086177280
+    m_Localized: Private
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18925052479516672
+    m_Localized: Friend
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18925177738211328
+    m_Localized: Pending/Incoming
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18925317223985152
+    m_Localized: Blocked
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

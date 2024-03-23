@@ -59,7 +59,7 @@ public class Graphics : MonoBehaviour
         {
             if(i == CameraData.antialiasing)
             {
-                CurrentIndex = ((int)i);
+                CurrentIndex = (int)i;
             }
         }
         DAAMode.value = CurrentIndex;

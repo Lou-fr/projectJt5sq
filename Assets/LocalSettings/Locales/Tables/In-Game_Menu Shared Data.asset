@@ -213,6 +213,30 @@ MonoBehaviour:
     m_Key: Lobby_kick
     m_Metadata:
       m_Items: []
+  - m_Id: 18923531683606528
+    m_Key: Lobby_privacy_0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18923582673760256
+    m_Key: Lobby_privacy_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18923673086177280
+    m_Key: Lobby_privacy_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18925052479516672
+    m_Key: Friend_Friend
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18925177738211328
+    m_Key: Friend_Pending/incoming
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18925317223985152
+    m_Key: Friend_block
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
