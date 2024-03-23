@@ -11,11 +11,14 @@ public class LobbyUI : MonoBehaviour
 {
     public static Action OnRefreshlobby = delegate {};
     public static Action OnRefreshLobbyPlayer = delegate{};
+    public static Action<int> OnRefreshLobbyPrivacy = delegate{};
+    public static Action<int> LobbyPrivacyStatus = delegate{};
     [SerializeField] private Transform LobbyContainer,PlayerContainer;
     [SerializeField] private LobbyUIPrefab lobbyUIPrefab;
     [SerializeField] private PlayerManageUIPrefab PlayerManageUI;
     [SerializeField] private Button Refresh,manage;
     [SerializeField] private GameObject ManagePanel;
+    [SerializeField] private TMP_Dropdown LobbyPrivacyDropdown;
     float timeRemaining;
     Lobby currentLobby;
     string temp_content;
@@ -35,6 +38,20 @@ public class LobbyUI : MonoBehaviour
         temp_content = GetLocalal.GetString("In-Game_Menu","Lobbby_Refresh");
         var t = await AuthenticationService.Instance.GetPlayerInfoAsync();
         UserId = t.Id;
+        List<string>options=new List<string>();
+        var temp = PlayerPrefs.GetInt("privacyValue");
+        int CurrentIndex = 0;
+        for(int i = 0; i<3;i++)
+        {
+            string option = "Lobby_privacy_"+i;
+            option = GetLocalal.GetString("In-Game_Menu",option);
+            options.Add(option);
+            Debug.Log(option);
+            if(temp == i)CurrentIndex = i;
+        }
+        Debug.Log(CurrentIndex);
+        LobbyPrivacyDropdown.AddOptions(options);
+        LobbyPrivacyDropdown.value = CurrentIndex;
     }
     
     void OnDestroy()
@@ -129,5 +146,12 @@ public class LobbyUI : MonoBehaviour
                 timerRunnig = false;
             }
         }
+    }
+    public void OnValueChange(int value)
+    {
+        if(UserId != currentLobby.HostId)return;
+        OnRefreshLobbyPrivacy?.Invoke(value);
+        LobbyPrivacyStatus?.Invoke(value);
+        PlayerPrefs.SetInt("privacyValue",value);
     }
 }
