@@ -39,7 +39,9 @@ public class MainMenuUI : MonoBehaviour
     {
         if(_username is null)
         {
+            #pragma warning disable
             Unity_Auth.GetPlayerInfo();
+            #pragma warning restore
             return;
         }
         string temp = GetLocalal.GetString("StartScreen", "Welcome") + _username;
@@ -54,7 +56,9 @@ public class MainMenuUI : MonoBehaviour
 
     void OnLoginBtn()
     {
+        #pragma warning disable
         Unity_Auth.SignInWithUsernamePasswordAsync(username.text,password.text);
+        #pragma warning restore
     }
     void OnlogOutBtn()
     {

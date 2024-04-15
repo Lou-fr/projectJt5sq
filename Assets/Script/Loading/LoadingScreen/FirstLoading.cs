@@ -19,26 +19,29 @@ public class FirstLoading : MonoBehaviour
     [SerializeField] private Button PlayButton;
     [SerializeField] private GameObject sessionObject;
     [SerializeField] private GameObject error;
-    public static Action<float> ServerNotAvailaible = delegate { };
+    public static Action PreStartRelay = delegate { };
+    public static Action StartTransport = delegate { };
     float timesTry = 0;
     void Start()
     {
         Application.targetFrameRate = 60;
         PlayButton.onClick.AddListener(OnButtonPress);
     }
+    void Awake()
+    {
+        RelayHostManager.RelayInitiated += HandleLoadingScene;
+    }
     public void HandleLoadingScene()
     {
-        /**timesTry++;
-        if (response is "con_serv") { error.SetActive(true); GameObject t = GameObject.Find("Error_server");t.GetComponent<TextMeshProUGUI>().text = GetLocalal.GetString("StartScreen", "No_Session"); loadingtext.gameObject.SetActive(false); ServerNotAvailaible?.Invoke(timesTry); LogOut.SetActive(true); return; }
-        timesTry = 0;
-        StartCoroutine(LoadScene());*/
+        RelayHostManager.RelayInitiated -= HandleLoadingScene;
+        StartCoroutine(LoadScene());
     }
 
     void OnButtonPress()
     {
         SwitchLanguage.SetActive(false); LogOut.SetActive(false); loadingtext.gameObject.SetActive(true); PlayButton.gameObject.SetActive(false); Welcome.SetActive(false);
         loadingtext.text = GetLocalal.GetString("StartScreen", "Con");
-        StartCoroutine(LoadScene());
+        PreStartRelay?.Invoke();
     }
     IEnumerator LoadScene()
     {
@@ -50,6 +53,7 @@ public class FirstLoading : MonoBehaviour
         while (!asyncOperation.isDone)
         {
             loadingtext.text = loadingtextLen + (asyncOperation.progress * 100 + 10) + " %";
+            if(asyncOperation.progress < 0.9f)Debug.Log(loadingtext.text);
             if (asyncOperation.progress >= 0.9f)
             {
 #if UNITY_STANDALONE
@@ -57,6 +61,7 @@ public class FirstLoading : MonoBehaviour
                 loadingtext.text = startText;
                 if (Keyboard.current.anyKey.wasPressedThisFrame)
                 {
+                    StartTransport?.Invoke();
                     asyncOperation.allowSceneActivation = true;
                 }
 #endif
@@ -65,6 +70,7 @@ public class FirstLoading : MonoBehaviour
                 loadingtext.text = startText;
                 if (Touchscreen.current.press.wasPressedThisFrame)
                 {
+                    StartTransport?.Invoke();
                     asyncOperation.allowSceneActivation = true;
                 }
 #endif

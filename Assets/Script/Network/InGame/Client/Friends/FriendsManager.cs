@@ -11,6 +11,7 @@ using UnityEngine;
 
 public class FriendsManager : MonoBehaviour
 {
+    bool Initialized =false;
     public static Action ClearList = delegate{};
     public static Action<List<Member>> refreshRequest = delegate {};
     public static Action<List<Member>> refreshFriends = delegate {};
@@ -23,11 +24,19 @@ public class FriendsManager : MonoBehaviour
     public static Action<string> OnJoinRequestAccepted = delegate{};
     Availability PlayerAvailabality;
     int GamePrivacy =0;
-    async void Awake()
+    void Awake()
     {
+        Unity_Auth.OnSucess += Initialize;
+    }
+
+    private async void Initialize()
+    {
+        Debug.Log("Initializing friend manager...",this);
+        if(Initialized){Debug.LogWarning("friend manager already initialized",this);return;}
+        if(GameObject.FindObjectsOfType<FriendsManager>().Length > 1){Debug.LogError("another friend manager already initialized",this);return;}
         await FriendsService.Instance.InitializeAsync();
         susbscribeToFriendsCallback();
-        LobbyUI.LobbyPrivacyStatus += handleGamePrivacy;
+        LobbyManager.LobbyPrivacyStatus += handleGamePrivacy;
         FriendPrefab.RemoveFriend += RemoveFriends;
         FriendPrefab.BlockFriend += BlockFriend;
         PendingPrefab.CancelOutgoingRequest += CancelOutgoingRequest;
@@ -39,12 +48,13 @@ public class FriendsManager : MonoBehaviour
         FriendsUI.BlockedFriend += RefreshBlock;
         FriendsUI.PendingIncomingFriend += RefreshPendingRequestRequest;
         InvitePrefabUI.AcceptJoinReq += SendAcceptJoinRequest;
-        int i = 0;
-        i =PlayerPrefs.GetInt("privacyValue");
-        handleGamePrivacy(i);
+        Debug.Log("Initialized friend manager...",this);
+        Initialized = true;
     }
-     void OnDestroy()
+
+    void OnDestroy()
     {
+        Unity_Auth.OnSucess -= Initialize;
         FriendPrefab.RemoveFriend -= RemoveFriends;
         FriendPrefab.BlockFriend -= BlockFriend;
         PendingPrefab.CancelOutgoingRequest -= CancelOutgoingRequest;
@@ -56,7 +66,8 @@ public class FriendsManager : MonoBehaviour
         FriendsUI.BlockedFriend -= RefreshBlock;
         FriendsUI.PendingIncomingFriend -= RefreshPendingRequestRequest;
         InvitePrefabUI.AcceptJoinReq -= SendAcceptJoinRequest;
-        LobbyUI.LobbyPrivacyStatus -= handleGamePrivacy;
+        LobbyManager.LobbyPrivacyStatus -= handleGamePrivacy;
+        unsusbscribeToFriendsCallback();
     }
 
     private async void handleGamePrivacy(int obj)
@@ -66,7 +77,7 @@ public class FriendsManager : MonoBehaviour
         try
         {
             await FriendsService.Instance.SetPresenceAsync(Availability.Online,activity);
-            Debug.Log("Availability changed to Online with game privacy to "+GamePrivacy);
+            Debug.Log("Availability changed to Online with game privacy to "+GamePrivacy, this);
         }catch(FriendsServiceException e){Debug.LogError(e);}
     }
 
@@ -202,6 +213,34 @@ public class FriendsManager : MonoBehaviour
                 Debug.Log("Relation ship deleted "+e.Relationship);
             };
             FriendsService.Instance.MessageReceived += e =>
+            {
+                StandaloneFriendsRefresh();
+                HandleMessage(e);
+                Debug.Log("Message received");
+            };
+        }catch(FriendsServiceException e){Debug.LogError(e,this);}
+    }
+    private void unsusbscribeToFriendsCallback()
+    {
+        try
+        {
+            FriendsService.Instance.RelationshipAdded -= e =>
+            {
+                RefreshFriends();
+                RefreshPendingRequestRequest();
+                Debug.Log("Create relation ship "+e.Relationship);
+            };
+            FriendsService.Instance.PresenceUpdated -= e =>
+            {
+                RefreshFriends();
+                Debug.Log("Presence updated");
+            };
+            FriendsService.Instance.RelationshipDeleted -=e =>
+            {
+                RefreshFriends();
+                Debug.Log("Relation ship deleted "+e.Relationship);
+            };
+            FriendsService.Instance.MessageReceived -= e =>
             {
                 StandaloneFriendsRefresh();
                 HandleMessage(e);

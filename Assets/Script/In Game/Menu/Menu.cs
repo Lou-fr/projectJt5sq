@@ -21,7 +21,7 @@ public class Menu : MonoBehaviour
 #if UNITY_STANDALONE
         GraphicPanel = Instantiate(Resources.Load<GameObject>("Prefabs/Gr_computer"), GraphicParentPanel.transform);
         CntrlPanel = Instantiate(Resources.Load<GameObject>("Prefabs/Cntrl_computer"), CntrlParentPanel.transform);
-        CntrlPanel.SetActive(false);
+        CntrlPanel.SetActive(true);
 #endif
 #if UNITY_ANDROID || UNITY_IOS
         GraphicPanel = Instantiate(Resources.Load<GameObject>("Prefabs/Gr_phone"), GraphicParentPanel.transform);
@@ -35,12 +35,20 @@ public class Menu : MonoBehaviour
     }
     void Awake()
     {
-        ClientRelayManager.ServerChange += handleServerChange;
+        Sensivity_Controller.MenuReady += OnMenuReady;
+        //ClientRelayManager.ServerChange += handleServerChange;
         LobbyManager.KickFromLobby += handleServerChange;
     }
+
+    private void OnMenuReady()
+    {
+        Sensivity_Controller.MenuReady -= OnMenuReady;
+        panel.SetActive(false);
+    }
+
     void OnDestroy()
     {
-        ClientRelayManager.ServerChange -= handleServerChange;
+        //ClientRelayManager.ServerChange -= handleServerChange;
         LobbyManager.KickFromLobby -= handleServerChange;
     }
 

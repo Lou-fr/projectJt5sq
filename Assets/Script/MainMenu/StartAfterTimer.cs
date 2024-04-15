@@ -19,11 +19,9 @@ public class StartAfterTimer : MonoBehaviour
     string temp_content;
     private void Awake()
     {
-        FirstLoading.ServerNotAvailaible += HandleButtonReactivate;
     }
     private void OnDestroy()
     {
-        FirstLoading.ServerNotAvailaible -= HandleButtonReactivate;
     }
 
     private void HandleButtonReactivate(float retry)

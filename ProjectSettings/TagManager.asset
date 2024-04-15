@@ -8,6 +8,7 @@ TagManager:
   - PlayerFollowCamera
   - FollowCameraTarget
   - Network
+  - Welcome
   layers:
   - Default
   - TransparentFX

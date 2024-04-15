@@ -1,4 +1,4 @@
-#if UNITY_EDITOR
+/*#if UNITY_EDITOR
 using System;
 using FishNet.Transporting.UTP;
 using Unity.VisualScripting;
@@ -18,3 +18,18 @@ public class ConnectionKiller : MonoBehaviour
     }
 }
 #endif
+
+/*using UnityEngine;
+using FishNet.Transporting.UTP;
+
+public class ConnectionStarter : MonoBehaviour
+{
+    private FishyUnityTransport _transport;
+    void Start()
+    {
+        _transport = GetComponentInParent<FishyUnityTransport>();
+        _transport.StartConnection(true);
+        _transport.StartConnection(false);
+    }
+
+}*/
