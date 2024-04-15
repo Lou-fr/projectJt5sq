@@ -8,22 +8,22 @@ using UnityEngine;
 
 public class ClientRelayManager : MonoBehaviour
 {
-    JoinAllocation playerAllocation;
+    /*JoinAllocation playerAllocation;
     NetworkConnection clientConnection;
     NetworkDriver playerDriver;
 	FishyUnityTransport transport;
     public static Action ServerChange = delegate {};
     void Awake()
     {
-        LobbyManager.JoinRelayServer += OnJoinServer;
+        /*LobbyManager.JoinRelayServer += OnJoinServer;
 		transport = GetComponentInParent<FishyUnityTransport>();
         if (transport is null) Debug.LogError("Cant get the request comoponent" ,this);
         LobbyManager.KickFromLobby += kickFromLobby;
     }
     void OnDestroy()
     {
-        LobbyManager.JoinRelayServer -= OnJoinServer;
-        LobbyManager.KickFromLobby -= kickFromLobby;
+        //LobbyManager.JoinRelayServer -= OnJoinServer;
+        //LobbyManager.KickFromLobby -= kickFromLobby;
     }
 
     private void kickFromLobby()
@@ -46,6 +46,6 @@ public class ClientRelayManager : MonoBehaviour
     void OnApplicationQuit()
     {
        transport.StopConnection(false);
-    }
+    }*/
 
 }

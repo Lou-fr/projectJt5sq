@@ -71,6 +71,15 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Sprint"",
+                    ""type"": ""Button"",
+                    ""id"": ""0ee96900-5122-4d5e-8528-0c8cab7fd8f3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -200,9 +209,20 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""id"": ""5a1a3d09-6455-45e9-ab29-0bc9a6af6b8a"",
                     ""path"": ""<Mouse>/scroll/y"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""Clamp(min=-4,max=4)"",
                     ""groups"": ""Keyboard and Mouse"",
                     ""action"": ""Player Zoom"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f31a46d8-45df-4f13-ba45-098704098cbd"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -310,6 +330,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         m_player_Look = m_player.FindAction("Look", throwIfNotFound: true);
         m_player_LookPress = m_player.FindAction("LookPress", throwIfNotFound: true);
         m_player_PlayerZoom = m_player.FindAction("Player Zoom", throwIfNotFound: true);
+        m_player_Sprint = m_player.FindAction("Sprint", throwIfNotFound: true);
         // Debug
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
         m_Debug_ToggleDebug = m_Debug.FindAction("ToggleDebug", throwIfNotFound: true);
@@ -380,6 +401,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     private readonly InputAction m_player_Look;
     private readonly InputAction m_player_LookPress;
     private readonly InputAction m_player_PlayerZoom;
+    private readonly InputAction m_player_Sprint;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -389,6 +411,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_player_Look;
         public InputAction @LookPress => m_Wrapper.m_player_LookPress;
         public InputAction @PlayerZoom => m_Wrapper.m_player_PlayerZoom;
+        public InputAction @Sprint => m_Wrapper.m_player_Sprint;
         public InputActionMap Get() { return m_Wrapper.m_player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -413,6 +436,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             @PlayerZoom.started += instance.OnPlayerZoom;
             @PlayerZoom.performed += instance.OnPlayerZoom;
             @PlayerZoom.canceled += instance.OnPlayerZoom;
+            @Sprint.started += instance.OnSprint;
+            @Sprint.performed += instance.OnSprint;
+            @Sprint.canceled += instance.OnSprint;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -432,6 +458,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             @PlayerZoom.started -= instance.OnPlayerZoom;
             @PlayerZoom.performed -= instance.OnPlayerZoom;
             @PlayerZoom.canceled -= instance.OnPlayerZoom;
+            @Sprint.started -= instance.OnSprint;
+            @Sprint.performed -= instance.OnSprint;
+            @Sprint.canceled -= instance.OnSprint;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -537,6 +566,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnLookPress(InputAction.CallbackContext context);
         void OnPlayerZoom(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
     }
     public interface IDebugActions
     {

@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using Cinemachine;
 using FishNet.Object;
 using FishNet.Connection;
+using System;
 
 public class thirdpersonmovement : NetworkBehaviour
 {
@@ -16,13 +17,14 @@ public class thirdpersonmovement : NetworkBehaviour
     [SerializeField] private Transform cam;
     [SerializeField] private Transform groundcheck;
     private float groundDistance = 0.4f;
-    private float jumpHeight = 3f;
+    private float jumpHeight = 2f;
     [SerializeField] private GameObject CinemachineCameraTarget;
     [SerializeField] private LayerMask groundmask;
     [SerializeField] private InputActionReference mouvement;
     [SerializeField] private InputActionReference jump;
     bool isGrounded;
     private PlayerInput _playerInput;
+    BleizInputManager bleizInputManager;
     private bool IsCurrentDeviceMouse
 #if UNITY_STANDALONE
         = false;
@@ -39,25 +41,84 @@ public class thirdpersonmovement : NetworkBehaviour
     private float _cinemachineTargetPitch;
     private const float _threshold = 0.01f;
     public float CameraAngleOverride = 0.0f;
+    float _cinemachineMinZoom = 6.0f;
+    float _cinemachineMaxZoom = 10.0f;
+    CinemachineVirtualCamera CinemachineVirtualCamera;
+    Cinemachine3rdPersonFollow cinemachine3Rd;
+    [SerializeField]float _cameraZoomModifier =32.0f;
+    //Multiplayer Info (to rework)
+    bool startedCondition = false;
+    bool IsSaveHaveBeenLoaded = false;
+    Vector3 startedPosistion = new Vector3(0,-666,0);
+    bool isLobbyOwner = false;
+    public static Action ReadyForDeployment = delegate{};
 
-    public override void OnStartNetwork()
+    public override  void OnStartNetwork()
     {
         if(!base.Owner.IsLocalClient) return;
         cam = GameObject.FindAnyObjectByType<Camera>().GetComponent<Transform>();
-        GameObject.FindGameObjectWithTag("PlayerFollowCamera").GetComponent<CinemachineVirtualCamera>().Follow = transform.GetChild(0).transform;
+        CinemachineVirtualCamera = GameObject.FindGameObjectWithTag("PlayerFollowCamera").GetComponent<CinemachineVirtualCamera>();
+        cinemachine3Rd = CinemachineVirtualCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
+        CinemachineVirtualCamera.Follow = transform.GetChild(0).transform;
+        CinemachineVirtualCamera.LookAt = transform.GetChild(0).transform;
     }
-    public override void OnOwnershipClient(NetworkConnection prevOwner)
+    public override async void OnOwnershipClient(NetworkConnection prevOwner)
     {
         base.OnOwnershipClient(prevOwner);
-
+        Debug.Log(IsOwner);
+        //When multiplayer across player will be on
+        /*if(await LobbyManager.IsCurrentLobbyIsPlayerOwned()){
+            isLobbyOwner = true;
+            //LobbyManager.SendHostPosition += SaveHostPosition;
+            var position = await SaveManager.LoadPlayerPosition();
+            Debug.Log(controller.transform.position.ToString());
+            Debug.Log(position.ToString());
+            if(!IsOwner)return;
+            controller.transform.position = position;
+            Debug.Log(controller.transform.position.ToString());
+            if(this.gameObject.transform.position != position || controller.gameObject.transform.position != position || controller.transform.position != position){Debug.LogError("The possition hasn't setup");controller.transform.position = position;}
+            startedPosistion = position;
+            IsSaveHaveBeenLoaded=true;
+            SavePlayer();
+            SaveManager.SavePosition +=SavePlayer;
+        }else
+        {
+            isLobbyOwner = false;
+            Vector3 temp = new Vector3 (10f, 0f, 10f);
+            //temp = LobbyManager.ReadHostPosition();
+            //here will be the script to teleperot the joining player 
+            startedPosistion = temp;
+        }*/
+        //FOR DISABLE MULTIPLAYER WITH OTHER PLAYER
+        var position = await SaveManager.LoadPlayerPosition();
+        controller.transform.position = position;
+        if(this.gameObject.transform.position != position || controller.gameObject.transform.position != position || controller.transform.position != position){Debug.LogError("The possition hasn't setup");controller.transform.position = position;}
+        startedPosistion = position;
+        IsSaveHaveBeenLoaded=true;
+        isLobbyOwner = true;
+        SaveManager.SavePosition +=SavePlayer;
+        SavePlayer();
         _playerInput = GetComponent<PlayerInput>();
+        bleizInputManager = GetComponent<BleizInputManager>();
+    }
+    private void CheckStarterCondition(Vector3 position)
+    {
+        if(!IsOwner)return;
+        if(startedPosistion.y == -666)return;
+        Debug.Log(isLobbyOwner +" "+IsSaveHaveBeenLoaded);
+        if(!IsSaveHaveBeenLoaded){if(!isLobbyOwner){/*{if(this.gameObject.transform.position != position || controller.gameObject.transform.position != position || controller.transform.position != position){Debug.LogError("The possition hasn't setup");controller.transform.position = position;return;}else{startedCondition=true;return;}*/ReadyForDeployment?.Invoke();startedCondition=true;return; }}
+        if(!IsSaveHaveBeenLoaded)return;
+        if(this.gameObject.transform.position != position || controller.gameObject.transform.position != position || controller.transform.position != position){Debug.LogError("The possition hasn't setup");controller.transform.position = position;return;}
+        startedCondition=true;
         _playerInput.enabled = true;
+        bleizInputManager.enabled = true;
+        ReadyForDeployment?.Invoke();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(!IsOwner) return;
+        if(startedCondition is false){Debug.Log(controller.transform.position.ToString());;CheckStarterCondition(startedPosistion);return;}
         Grounded();
         Move();
     }
@@ -65,21 +126,22 @@ public class thirdpersonmovement : NetworkBehaviour
     {
         CameraRotation();
         FallUnderGround();
+        if(!(_input.ZoomCameraInput ==0.00f)){CameraZoom();}
     }
     private void CameraRotation()
     {
         // if there is an input and camera position is not fixed
         if (_input.LookInput.sqrMagnitude >= _threshold && !LockCameraPosition
 #if UNITY_STANDALONE 
-             && _press.action.IsPressed() 
+             && _input.MouseIsClicked
 #endif
             )
         {
             //Don't multiply mouse input by Time.deltaTime;
-            float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
+            float Multiplier = IsCurrentDeviceMouse ?  1.0f:Sensivity_Controller.Sensivity*Time.smoothDeltaTime;
 
-            _cinemachineTargetYaw += _input.LookInput.x * deltaTimeMultiplier *-1;
-            _cinemachineTargetPitch += _input.LookInput.y * deltaTimeMultiplier *-1;
+            _cinemachineTargetYaw += _input.LookInput.x * Multiplier *-1;
+            _cinemachineTargetPitch += _input.LookInput.y * Multiplier *-1;
         }
 
         // clamp our rotations so our values are limited 360 degrees
@@ -88,6 +150,10 @@ public class thirdpersonmovement : NetworkBehaviour
 
         // Cinemachine will follow this target
         CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride, _cinemachineTargetYaw, 0.0f);
+    }
+    private void CameraZoom()
+    {
+        cinemachine3Rd.CameraDistance = Math.Clamp(cinemachine3Rd.CameraDistance+ (_input.InvertScroll ?_input.ZoomCameraInput : -_input.ZoomCameraInput) /_cameraZoomModifier,_cinemachineMinZoom,_cinemachineMaxZoom);
     }
 
     private void Move()
@@ -101,7 +167,7 @@ public class thirdpersonmovement : NetworkBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             Vector3 moveDir = Quaternion.Euler(0f, targatAngle, 0f) * Vector3.forward;
-            controller.Move(moveDir.normalized * speed * Time.deltaTime);
+            controller.Move(moveDir.normalized * speed * Time.deltaTime* (_input.SprintIsPressed ? 1.5f :1.0f));
         }
         if (_input.SpaceIsPressed.Equals(1) && isGrounded)
         {
@@ -134,4 +200,30 @@ public class thirdpersonmovement : NetworkBehaviour
             controller.transform.position = new Vector3(0, 10, 0);
         }
     }
+    public override void OnStopClient()
+    {
+        //LobbyManager.SendHostPosition -= SaveHostPosition;
+        var currentPos = controller.transform.position;
+        Debug.Log("Position saving, is Lobby owner ?");
+        if(!isLobbyOwner)return;
+        Debug.Log("Position saving");
+        SaveManager.SavePlayerPosition(currentPos);
+        SaveManager.SavePosition -=SavePlayer;
+        Debug.Log("Position saved");
+    }
+    void SavePlayer()
+    {
+        if(!IsOwner)return;
+        Debug.Log("Initiating...");
+        if(startedCondition is false){StartCoroutine(SaveManager.Coutdown(10));;return;}
+        StartCoroutine(SaveManager.Coutdown(60));
+        SaveManager.SavePlayerPosition(controller.transform.position);
+    }
+    //Don't work due to API rate limitation
+    /*void SaveHostPosition()
+    {
+        #pragma warning disable
+        LobbyManager.SaveHostPositionAsLobbyData(controller.transform.position);
+        #pragma warning restore
+    }*/
 }

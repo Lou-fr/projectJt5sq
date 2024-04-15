@@ -10,6 +10,9 @@ public class BleizInputManager : MonoBehaviour
     public float SpaceIsPressed {  get; private set; } =0.0f;
 
     public float ZoomCameraInput { get; private set; } = 0.0f;
+    public bool InvertScroll {get;private set;} = true;
+    public bool MouseIsClicked {get; private set;}= false;
+    public bool SprintIsPressed {get; private set;} = false;
 
     InputMaster _input = null;
     void Awake()
@@ -48,6 +51,11 @@ public class BleizInputManager : MonoBehaviour
         _input.player.Look.performed += SetLook;
         _input.player.Look.canceled += SetLook;
 
+        _input.player.LookPress.performed += MouseClicked;
+        _input.player.LookPress.canceled += MouseClicked;
+
+        _input.player.Sprint.performed += SprintClicked;
+        _input.player.Sprint.canceled += SprintClicked;
     }
     private void OnDisable()
     {
@@ -65,6 +73,13 @@ public class BleizInputManager : MonoBehaviour
         _input.player.Jump.performed -= SetSpace;
         _input.player.Jump.canceled -= SetSpace;
         SpaceIsPressed = 0f;
+
+        _input.player.LookPress.performed -= MouseClicked;
+        _input.player.LookPress.canceled -= MouseClicked;
+
+        _input.player.Sprint.performed -= SprintClicked;
+        _input.player.Sprint.canceled -= SprintClicked;
+
         _input.player.Disable();
     }
     private void SetMove(InputAction.CallbackContext ctx)
@@ -83,4 +98,14 @@ public class BleizInputManager : MonoBehaviour
     {
         LookInput = ctx.ReadValue<Vector2>();
     }
+    private void MouseClicked(InputAction.CallbackContext ctx) 
+    {
+        if(ctx.ReadValue<float>() is 1)MouseIsClicked = true;
+        else MouseIsClicked=false;
+    }
+    private void SprintClicked(InputAction.CallbackContext ctx)
+    {
+        if(ctx.ReadValue<float>() is 1)SprintIsPressed = true;
+        else SprintIsPressed=false;
+    }   
 }

@@ -16,6 +16,7 @@ public class Graphics : MonoBehaviour
     private Toggle Vsync, F_S, fps;
     private TMP_Dropdown Dresolution, D_FPS, DAAMode;
     Resolution[] resolutions;
+    private List<Resolution> filteredResolution = new List<Resolution>();
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +28,6 @@ public class Graphics : MonoBehaviour
         DAAMode = GameObject.Find("Gr_C_AA").GetComponentInChildren<TMP_Dropdown>();
         Button aplychange = GameObject.Find("Gr_C_ApChange").GetComponentInChildren<Button>();
         GameObject.Find("Gr_computer(Clone)").SetActive(false);
-        GameObject.Find("Main_Menu_Panel").SetActive(false);
         aplychange.onClick.AddListener(ApplyChange);
         F_S.isOn = Screen.fullScreen;
         if (QualitySettings.vSyncCount == 0)
@@ -42,11 +42,18 @@ public class Graphics : MonoBehaviour
 
         List<string> options = new List<string>();
         int CurrentIndex = 0;
-        for (int i = 0; i < resolutions.Length; i++)
+        foreach(Resolution res in resolutions)
         {
-            string option = resolutions[i].width + "x" + resolutions[i].height;
-            options.Add(option);
-            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
+            string option = res.width.ToString() + "x" + res.height.ToString();
+            if(!options.Contains(option))
+            {
+                options.Add(option);
+                filteredResolution.Add(res);
+            }
+        }
+        for (int i = 0; i < filteredResolution.Count; i++)
+        {
+            if (filteredResolution[i].width == Screen.currentResolution.width && filteredResolution[i].height == Screen.currentResolution.height)
             {
                 CurrentIndex = i;
             }
@@ -75,8 +82,8 @@ public class Graphics : MonoBehaviour
         {
             QualitySettings.vSyncCount = 0;
         }
-        Resolution resolution = resolutions[Dresolution.value];
-        Screen.SetResolution(resolution.width, resolution.height, F_S.isOn);
+        int resolution = Dresolution.value;
+        Screen.SetResolution(filteredResolution[resolution].width, filteredResolution[resolution].height, F_S.isOn);
         fps_counter.SetActive(fps.isOn);
         switch (DAAMode.value)
         {

@@ -56,5 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "ProjectJt5sq.sln"
+    "dotnet.defaultSolution": "ProjectJt5sq.sln",
+    "dotnet.preferCSharpExtension": true
 }

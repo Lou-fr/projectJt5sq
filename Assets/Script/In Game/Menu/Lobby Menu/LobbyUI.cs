@@ -12,7 +12,6 @@ public class LobbyUI : MonoBehaviour
     public static Action OnRefreshlobby = delegate {};
     public static Action OnRefreshLobbyPlayer = delegate{};
     public static Action<int> OnRefreshLobbyPrivacy = delegate{};
-    public static Action<int> LobbyPrivacyStatus = delegate{};
     [SerializeField] private Transform LobbyContainer,PlayerContainer;
     [SerializeField] private LobbyUIPrefab lobbyUIPrefab;
     [SerializeField] private PlayerManageUIPrefab PlayerManageUI;
@@ -27,10 +26,10 @@ public class LobbyUI : MonoBehaviour
     TextMeshProUGUI temp_txt;
     async void Awake()
     {
-        LobbyManager.LobbyRefreshResult += handleDisplayLobby;
-        LobbyManager.KickFromLobby += handleEnableManage;
-        LobbyManager.LobbyPlayerResult += handleDisplayPlayer;
-        OnRefreshlobby?.Invoke();
+        //LobbyManager.LobbyRefreshResult += handleDisplayLobby;
+        //LobbyManager.KickFromLobby += handleEnableManage;
+        //LobbyManager.LobbyPlayerResult += handleDisplayPlayer;
+        //OnRefreshlobby?.Invoke();
         Refresh.onClick.AddListener(OnRefresh);
         Menu.LobbyUIOpen += _OnRefresh;
         manage.onClick.AddListener(ManageUI);
@@ -56,9 +55,9 @@ public class LobbyUI : MonoBehaviour
     
     void OnDestroy()
     {
-        LobbyManager.LobbyRefreshResult -= handleDisplayLobby;
-        LobbyManager.KickFromLobby -= handleEnableManage;
-        LobbyManager.LobbyPlayerResult -= handleDisplayPlayer;
+       //LobbyManager.LobbyRefreshResult -= handleDisplayLobby;
+       //LobbyManager.KickFromLobby -= handleEnableManage;
+       //LobbyManager.LobbyPlayerResult -= handleDisplayPlayer;
         Refresh.onClick.RemoveListener(OnRefresh);
         Menu.LobbyUIOpen -= _OnRefresh;
         manage.onClick.RemoveListener(ManageUI);
@@ -92,7 +91,7 @@ public class LobbyUI : MonoBehaviour
 
     private void OnRefresh()
     {
-        OnRefreshlobby?.Invoke();
+        //OnRefreshlobby?.Invoke();
         Refresh.interactable = false;
         timeRemaining = 5;
         timerRunnig =true;
@@ -100,7 +99,7 @@ public class LobbyUI : MonoBehaviour
     private void _OnRefresh(bool Open)
     {
         if(!Open)return;
-        OnRefreshlobby?.Invoke();
+        //OnRefreshlobby?.Invoke();
     }
     private void handleDisplayLobby(QueryResponse response, Lobby currentLoby)
     {
@@ -150,8 +149,7 @@ public class LobbyUI : MonoBehaviour
     public void OnValueChange(int value)
     {
         if(UserId != currentLobby.HostId)return;
-        OnRefreshLobbyPrivacy?.Invoke(value);
-        LobbyPrivacyStatus?.Invoke(value);
+        //OnRefreshLobbyPrivacy?.Invoke(value);
         PlayerPrefs.SetInt("privacyValue",value);
     }
 }
