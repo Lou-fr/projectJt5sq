@@ -51,7 +51,7 @@ public class LobbyManager : MonoBehaviour
         playerInfo= await Unity_Auth._GetPlayerInfo();
         LobbyUI.OnRefreshlobby += handleRefreshLobby;
         LobbyUIPrefab.joinLobby += handleJoinLobby;
-        RelayHostManager.OnJoinCode += HandleJoinCode;
+
         FriendsManager.OnJoinRequestAccepted += joinVialobbyCode;
         PlayerManageUIPrefab.KickPlayer += handleKickTargetPlayer;
         LobbyUI.OnRefreshLobbyPlayer += handleRefreshLobbyPlayer;
@@ -108,7 +108,6 @@ public class LobbyManager : MonoBehaviour
         Menu.OnRTMM -= handleRTMM;
         LobbyUI.OnRefreshlobby -= handleRefreshLobby;
         LobbyUIPrefab.joinLobby -= handleJoinLobby;
-        RelayHostManager.OnJoinCode -= HandleJoinCode;
         FriendsManager.OnJoinRequestAccepted -= joinVialobbyCode;
         LobbyUI.OnRefreshLobbyPlayer -= handleRefreshLobbyPlayer;
         PlayerManageUIPrefab.KickPlayer -= handleKickTargetPlayer;

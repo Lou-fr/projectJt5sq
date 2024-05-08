@@ -29,12 +29,12 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""movement"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""c5b69fa4-f096-472d-adcb-67393f408c49"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Jump"",
@@ -68,7 +68,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""type"": ""Value"",
                     ""id"": ""ab3af3a1-e6ab-4117-a551-d1ee0bee5d08"",
                     ""expectedControlType"": ""Axis"",
-                    ""processors"": """",
+                    ""processors"": ""Clamp(min=-0.1,max=0.1),Invert"",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
@@ -76,6 +76,24 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""name"": ""Sprint"",
                     ""type"": ""Button"",
                     ""id"": ""0ee96900-5122-4d5e-8528-0c8cab7fd8f3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=1)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""ded4f3e2-1d53-4e26-b524-65c7ed7f7436"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Walk Toggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""73659c70-fb28-4faa-87f2-88ae4253a8c4"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -225,6 +243,50 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ba190b5a-45f4-4b14-a64b-dd891e0e17b1"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""15576076-294f-4160-8cf3-18e21d1ef73f"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Walk Toggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fac22640-39d2-455e-99ba-be62fd7f7144"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7bb82fbd-29af-49a6-9f28-c9cc7c84405a"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -331,6 +393,8 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         m_player_LookPress = m_player.FindAction("LookPress", throwIfNotFound: true);
         m_player_PlayerZoom = m_player.FindAction("Player Zoom", throwIfNotFound: true);
         m_player_Sprint = m_player.FindAction("Sprint", throwIfNotFound: true);
+        m_player_Dash = m_player.FindAction("Dash", throwIfNotFound: true);
+        m_player_WalkToggle = m_player.FindAction("Walk Toggle", throwIfNotFound: true);
         // Debug
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
         m_Debug_ToggleDebug = m_Debug.FindAction("ToggleDebug", throwIfNotFound: true);
@@ -402,6 +466,8 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     private readonly InputAction m_player_LookPress;
     private readonly InputAction m_player_PlayerZoom;
     private readonly InputAction m_player_Sprint;
+    private readonly InputAction m_player_Dash;
+    private readonly InputAction m_player_WalkToggle;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -412,6 +478,8 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         public InputAction @LookPress => m_Wrapper.m_player_LookPress;
         public InputAction @PlayerZoom => m_Wrapper.m_player_PlayerZoom;
         public InputAction @Sprint => m_Wrapper.m_player_Sprint;
+        public InputAction @Dash => m_Wrapper.m_player_Dash;
+        public InputAction @WalkToggle => m_Wrapper.m_player_WalkToggle;
         public InputActionMap Get() { return m_Wrapper.m_player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -439,6 +507,12 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
+            @Dash.started += instance.OnDash;
+            @Dash.performed += instance.OnDash;
+            @Dash.canceled += instance.OnDash;
+            @WalkToggle.started += instance.OnWalkToggle;
+            @WalkToggle.performed += instance.OnWalkToggle;
+            @WalkToggle.canceled += instance.OnWalkToggle;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -461,6 +535,12 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
+            @Dash.started -= instance.OnDash;
+            @Dash.performed -= instance.OnDash;
+            @Dash.canceled -= instance.OnDash;
+            @WalkToggle.started -= instance.OnWalkToggle;
+            @WalkToggle.performed -= instance.OnWalkToggle;
+            @WalkToggle.canceled -= instance.OnWalkToggle;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -567,6 +647,8 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         void OnLookPress(InputAction.CallbackContext context);
         void OnPlayerZoom(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
+        void OnWalkToggle(InputAction.CallbackContext context);
     }
     public interface IDebugActions
     {
