@@ -7,7 +7,7 @@ public class BleizInputManager : MonoBehaviour
     
     public Vector2 LookInput { get; private set; } = Vector2.zero;
 
-    public float SpaceIsPressed {  get; private set; } =0.0f;
+    public bool SpaceIsPressed {  get; private set; } =false;
 
     public float ZoomCameraInput { get; private set; } = 0.0f;
     public bool InvertScroll {get;private set;} = true;
@@ -72,7 +72,7 @@ public class BleizInputManager : MonoBehaviour
 
         _input.player.Jump.performed -= SetSpace;
         _input.player.Jump.canceled -= SetSpace;
-        SpaceIsPressed = 0f;
+        SpaceIsPressed = false;
 
         _input.player.LookPress.performed -= MouseClicked;
         _input.player.LookPress.canceled -= MouseClicked;
@@ -92,7 +92,8 @@ public class BleizInputManager : MonoBehaviour
     }
     private void SetSpace(InputAction.CallbackContext ctx)
     {
-        SpaceIsPressed = ctx.ReadValue<float>();
+        if(ctx.ReadValue<float>() is 1)SpaceIsPressed = true;
+        else SpaceIsPressed=false;
     }
     private void SetLook(InputAction.CallbackContext ctx)
     {

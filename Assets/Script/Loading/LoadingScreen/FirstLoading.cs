@@ -29,11 +29,9 @@ public class FirstLoading : MonoBehaviour
     }
     void Awake()
     {
-        RelayHostManager.RelayInitiated += HandleLoadingScene;
     }
     public void HandleLoadingScene()
     {
-        RelayHostManager.RelayInitiated -= HandleLoadingScene;
         StartCoroutine(LoadScene());
     }
 
@@ -41,6 +39,7 @@ public class FirstLoading : MonoBehaviour
     {
         SwitchLanguage.SetActive(false); LogOut.SetActive(false); loadingtext.gameObject.SetActive(true); PlayButton.gameObject.SetActive(false); Welcome.SetActive(false);
         loadingtext.text = GetLocalal.GetString("StartScreen", "Con");
+        HandleLoadingScene();
         PreStartRelay?.Invoke();
     }
     IEnumerator LoadScene()
