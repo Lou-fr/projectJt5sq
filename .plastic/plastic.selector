@@ -1,4 +1,0 @@
-repository "Project Jt5sq@Bleiz_Software@cloud"
-  path "/"
-    br "/main"
-    co "/main"
