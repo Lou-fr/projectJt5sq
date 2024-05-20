@@ -1,0 +1,247 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: In-Game_Menu_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: a5840d78cae124a4281904217aef2bef, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 34055700480
+    m_Localized: Graphic settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1309874896896
+    m_Localized: Return to the main menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10752675069952
+    m_Localized: Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 298420092846080
+    m_Localized: Your about to return to the main menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 301342050533376
+    m_Localized: Yes
+    m_Metadata:
+      m_Items: []
+  - m_Id: 303446899081216
+    m_Localized: Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 306163289735168
+    m_Localized: Your about to quit the game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309147151155200
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 384324216078336
+    m_Localized: Full Screen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 385542766247936
+    m_Localized: Vsync
+    m_Metadata:
+      m_Items: []
+  - m_Id: 386222998470656
+    m_Localized: Apply
+    m_Metadata:
+      m_Items: []
+  - m_Id: 401949184802816
+    m_Localized: Resolution
+    m_Metadata:
+      m_Items: []
+  - m_Id: 402071096442880
+    m_Localized: Antialiasing mode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1153819599749120
+    m_Localized: FPS limiter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1157874619301888
+    m_Localized: FPS counter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1164558553104384
+    m_Localized: FPS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1166263294410752
+    m_Localized: Game language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3221336744837120
+    m_Localized: Controls
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3244266165944320
+    m_Localized: Forward
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3244345002082304
+    m_Localized: Backward
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3247681327644672
+    m_Localized: Left
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3247700646608896
+    m_Localized: Right
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3247831483727872
+    m_Localized: Jump
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3573082218348544
+    m_Localized: 'Waiting for '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3581929494462464
+    m_Localized: input
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3584544227770368
+    m_Localized: Binding
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587734373449728
+    m_Localized: Jump
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3609390286422016
+    m_Localized: Movement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3612730131005440
+    m_Localized: Reset all
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3612814801420288
+    m_Localized: Reset
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3690739085131776
+    m_Localized: Sory there is no option for controller on this device
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13840469127331840
+    m_Localized: Enter your username friend
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13843946410868736
+    m_Localized: Add
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13846590256840704
+    m_Localized: Remove
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13846716400533504
+    m_Localized: Join
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15211023331753984
+    m_Localized: Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15211058945589248
+    m_Localized: Pending ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15216928987283456
+    m_Localized: Refuse
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15216973438517248
+    m_Localized: Accept
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17642034497847296
+    m_Localized: Block
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17814107244875776
+    m_Localized: Unbloc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18102011150729216
+    m_Localized: Accept
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18102045514661888
+    m_Localized: Refuse
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18447286357307392
+    m_Localized: Refresh
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18447807147257856
+    m_Localized: All available party
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18449130227871744
+    m_Localized: Manage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18450579187937280
+    m_Localized: Manage your game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18515065819213824
+    m_Localized: Kick
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18923531683606528
+    m_Localized: Public
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18923582673760256
+    m_Localized: Friend Only
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18923673086177280
+    m_Localized: Private
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18925052479516672
+    m_Localized: Friend
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18925177738211328
+    m_Localized: Pending/Incoming
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18925317223985152
+    m_Localized: Blocked
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27105925309136896
+    m_Localized: Sensivity
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27139067852095488
+    m_Localized: Sprint
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []
