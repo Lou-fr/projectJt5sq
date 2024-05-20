@@ -47,7 +47,7 @@ public class LobbyManager : MonoBehaviour
     {
         Debug.Log("Initializing lobby manager...",this);
         if(Initialized){Debug.LogWarning("lobby manager already initialized",this);return;}
-        if(GameObject.FindObjectsOfType<LobbyManager>().Length > 1){Debug.LogError("another lobby manager already initialized",this);return;}
+        if(FindObjectsByType<LobbyManager>(FindObjectsSortMode.None).Length > 1){Debug.LogError("another lobby manager already initialized",this);return;}
         playerInfo= await Unity_Auth._GetPlayerInfo();
         LobbyUI.OnRefreshlobby += handleRefreshLobby;
         LobbyUIPrefab.joinLobby += handleJoinLobby;

@@ -356,7 +356,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -379,13 +379,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalRotation: {x: 0.48127452, y: 0.79583764, z: -0.3251209, w: 0.17121251}
+  m_LocalPosition: {x: -0.020902349, y: 3.023155, z: -0.02048552}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 43.023, y: -536.83, z: 63.576}
 --- !u!114 &410087042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1454,12 +1454,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eefdb7a93861564f816c1c8e729670f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputProvider: {fileID: 2068795585}
   defaultDistance: 6
   minDistance: 1
   maxtDistance: 6
   smoothing: 4
   zoomSensivity: 1
-  inputProvider: {fileID: 2068795585}
 --- !u!1001 &2102370525
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -33,7 +33,7 @@ public class FriendsManager : MonoBehaviour
     {
         Debug.Log("Initializing friend manager...",this);
         if(Initialized){Debug.LogWarning("friend manager already initialized",this);return;}
-        if(GameObject.FindObjectsOfType<FriendsManager>().Length > 1){Debug.LogError("another friend manager already initialized",this);return;}
+        if(FindObjectsByType<FriendsManager>(FindObjectsSortMode.None).Length > 1){Debug.LogError("another friend manager already initialized",this);return;}
         await FriendsService.Instance.InitializeAsync();
         susbscribeToFriendsCallback();
         LobbyManager.LobbyPrivacyStatus += handleGamePrivacy;
