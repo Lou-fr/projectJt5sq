@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: StartScreen_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 454cbbf8432f8cd48b37197d5a4b850a, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 15470739456
+    m_Localized: Username
+    m_Metadata:
+      m_Items: []
+  - m_Id: 886925475840
+    m_Localized: Password
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1283438198784
+    m_Localized: Log in
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1368326717440
+    m_Localized: Stay connected
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2047233540096
+    m_Localized: Play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2147112501248
+    m_Localized: Log Out
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2737783750656
+    m_Localized: Cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2811553169408
+    m_Localized: Continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2912359071744
+    m_Localized: Do you want to realy log out ?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16842552819712
+    m_Localized: 'Loading '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1382910131224576
+    m_Localized: ERROR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1383288193204224
+    m_Localized: Your token is no longer valid
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1385053026304000
+    m_Localized: Acknowledge
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1390799436693504
+    m_Localized: Press spacebar to continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1410644677017600
+    m_Localized: 'You are connected as '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6094663406632960
+    m_Localized: Couldn't connect to the server please retry later or check your
+      internet connection
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10394297125879808
+    m_Localized: Press anywhere to continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10400539164590080
+    m_Localized: Quit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25267323667218432
+    m_Localized: Connecting to the server ...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 25268453721767936
+    m_Localized: No available session for your region, please retry later
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

@@ -1,0 +1,259 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: In-Game_Menu Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: In-Game_Menu
+  m_TableCollectionNameGuidString: a5840d78cae124a4281904217aef2bef
+  m_Entries:
+  - m_Id: 34055700480
+    m_Key: Graphics
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1309874896896
+    m_Key: RTM
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10752675069952
+    m_Key: Quit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 298420092846080
+    m_Key: RTMM_Text_Confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 301342050533376
+    m_Key: Confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 303446899081216
+    m_Key: cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 306163289735168
+    m_Key: 'Quit_text_confirm
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 309147151155200
+    m_Key: Lng_st
+    m_Metadata:
+      m_Items: []
+  - m_Id: 384324216078336
+    m_Key: Gr_FS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 385542766247936
+    m_Key: Gr_Vs
+    m_Metadata:
+      m_Items: []
+  - m_Id: 386222998470656
+    m_Key: Apply
+    m_Metadata:
+      m_Items: []
+  - m_Id: 401949184802816
+    m_Key: Gr_Res
+    m_Metadata:
+      m_Items: []
+  - m_Id: 402071096442880
+    m_Key: Gr_AA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1153819599749120
+    m_Key: Gr_FPS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1157874619301888
+    m_Key: Gr_See_FPS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1164558553104384
+    m_Key: FPS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1166263294410752
+    m_Key: Lng_game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3221336744837120
+    m_Key: Cntrl_Set
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3244266165944320
+    m_Key: 19644c22-7794-4735-b8fb-25c31d45f077
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3244345002082304
+    m_Key: 31b14836-e87a-4239-973f-8389a640771e
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3247681327644672
+    m_Key: a6e1f1c4-3e9f-4920-a9f4-cf1a2585cd1b
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3247700646608896
+    m_Key: d7510905-e701-4bf5-93a4-848bacf92a4d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3247831483727872
+    m_Key: Cntrl_jump
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3573082218348544
+    m_Key: WaitForInput1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3581929494462464
+    m_Key: WaitForInput2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3584544227770368
+    m_Key: WaitForInput0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3587734373449728
+    m_Key: Jump
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3609390286422016
+    m_Key: movement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3612730131005440
+    m_Key: resetall
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3612814801420288
+    m_Key: reset
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3690739085131776
+    m_Key: NoCntrlPhone
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13840469127331840
+    m_Key: Add_Friend
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13843946410868736
+    m_Key: 'Add_Friend_btn
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13846590256840704
+    m_Key: Remove_Friend
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13846716400533504
+    m_Key: Join_Friend
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15211023331753984
+    m_Key: Cancel_friend_request
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15211058945589248
+    m_Key: Friend_request_pending
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15216928987283456
+    m_Key: Friend_request_incoming_refuse
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15216973438517248
+    m_Key: Friend_request_incoming_accept
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17642034497847296
+    m_Key: Friend_Block
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17814107244875776
+    m_Key: Friend_Unblock
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18102011150729216
+    m_Key: Friend_Invite_Accept
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18102045514661888
+    m_Key: Friend_Invite_Refuse
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18447286357307392
+    m_Key: Lobbby_Refresh
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18447807147257856
+    m_Key: Lobby_TitleMenu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18449130227871744
+    m_Key: Lobby_Manage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18450579187937280
+    m_Key: 'Lobby_ManageTitle
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18515065819213824
+    m_Key: Lobby_kick
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18923531683606528
+    m_Key: Lobby_privacy_0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18923582673760256
+    m_Key: Lobby_privacy_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18923673086177280
+    m_Key: Lobby_privacy_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18925052479516672
+    m_Key: Friend_Friend
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18925177738211328
+    m_Key: Friend_Pending/incoming
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18925317223985152
+    m_Key: Friend_block
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27105925309136896
+    m_Key: Sensivity_text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 27139067852095488
+    m_Key: Sprint
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 982371476355678208
+  references:
+    version: 2
+    RefIds:
+    - rid: 982371476355678208
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
+        asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1706719338837
