@@ -11,11 +11,11 @@ public class DontDestroy : MonoBehaviour
     }
     void Start()
     {
-        for(int i = 0;i< Object.FindObjectsOfType<DontDestroy>().Length;i++)
+        for(int i = 0;i< FindObjectsByType<DontDestroy>(FindObjectsSortMode.None).Length;i++)
         {
-            if(Object.FindObjectsOfType<DontDestroy>()[i] != this)
+            if(FindObjectsByType<DontDestroy>(FindObjectsSortMode.None)[i] != this)
             {
-                if (Object.FindObjectsOfType<DontDestroy>()[i].ObjectId ==ObjectId)
+                if (FindObjectsByType<DontDestroy>(FindObjectsSortMode.None)[i].ObjectId ==ObjectId)
                 {
                     Destroy(gameObject);
                 }
