@@ -7,34 +7,31 @@ namespace BleizEntertainment
 {
     public class CameraZoom : MonoBehaviour
     {
-        [SerializeField] private PlayerInput inputProvider;
         [SerializeField] private float defaultDistance = 6f;
         [SerializeField] private float minDistance = 1f;
         [SerializeField] private float maxtDistance = 6f;
         [SerializeField] private float smoothing = 4f;
-        [SerializeField] private float zoomSensivity = 1f;
+        private GeneralReusableSettingsData settingsData;
+        private InputMaster.PlayerActions playerAction;
         private CinemachinePositionComposer framingTransposer;
         private float currentTargetDistance;
-
-        private void Awake()
+        public void Init(InputMaster.PlayerActions playeraction)
         {
             framingTransposer = GameObject.Find("FollowCamera").GetComponent<CinemachinePositionComposer>();
             currentTargetDistance = defaultDistance;
-            inputProvider.playerActions.PlayerZoom.performed += Zoom;
+            settingsData = new GeneralReusableSettingsData();//GetComponent<Player>().userSettingsData;
+            playerAction = playeraction;
+            playerAction.PlayerZoom.performed += Zoom;
         }
         private void OnDestroy()
         {
-            inputProvider.playerActions.PlayerZoom.performed -= Zoom;
-        }
-        private void Update()
-        {
-
+            playerAction.PlayerZoom.performed -= Zoom;
         }
 
         private void Zoom(InputAction.CallbackContext context)
         {
             var inputAxis = context.ReadValue<Single>();
-            float zoomValue = inputAxis* zoomSensivity;
+            float zoomValue = inputAxis* settingsData.UserZoomSensivity;
 
             currentTargetDistance = Mathf.Clamp(currentTargetDistance + zoomValue, minDistance, maxtDistance);
 

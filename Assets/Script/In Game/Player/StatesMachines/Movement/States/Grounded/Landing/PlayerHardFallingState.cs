@@ -13,15 +13,15 @@ namespace BleizEntertainment
         public override void Enter()
         {
             base.Enter();
-            stateMachine._Player.Input.playerActions.movement.Disable();
+            stateMachine.Player.Input.playerActions.movement.Disable();
             ResetVelocity();
-            StartAnimation(stateMachine._Player.animationData.hLandParameterHash);
+            StartAnimation(stateMachine.Player.animationData.hLandParameterHash);
         }
         public override void Exit()
         {
             base.Exit();
-            stateMachine._Player.Input.playerActions.movement.Enable();
-            StopAnimation(stateMachine._Player.animationData.hLandParameterHash);
+            stateMachine.Player.Input.playerActions.movement.Enable();
+            StopAnimation(stateMachine.Player.animationData.hLandParameterHash);
         }
         public override void PhysicUpdate()
         {
@@ -35,7 +35,7 @@ namespace BleizEntertainment
         }
         public override void OnAnimationExitEvent()
         {
-            stateMachine._Player.Input.playerActions.movement.Enable();
+            stateMachine.Player.Input.playerActions.movement.Enable();
         }
         public override void OnAnimationTransitionEvent()
         {
@@ -45,13 +45,13 @@ namespace BleizEntertainment
         {
             base.AddInputActionCallbacks();
 
-            stateMachine._Player.Input.playerActions.movement.started += OnMovementStarted;
+            stateMachine.Player.Input.playerActions.movement.started += OnMovementStarted;
         }
         protected override void RemoveInputActionCallbacks()
         {
             base.RemoveInputActionCallbacks();
 
-            stateMachine._Player.Input.playerActions.movement.started -= OnMovementStarted;
+            stateMachine.Player.Input.playerActions.movement.started -= OnMovementStarted;
         }
         private void OnMovementStarted(InputAction.CallbackContext context)
         {

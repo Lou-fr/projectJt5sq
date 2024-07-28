@@ -10,7 +10,7 @@ namespace BleizEntertainment
             base.Enter();
             stateMachine.reasubleData.MovementDecelerationforce = movementData.StopData.HeavyDecelerationForce;
             stateMachine.reasubleData.CurrentJumpForce = airborneData.jumpData.StrongForce;
-            StartAnimation(stateMachine._Player.animationData.hStopParameterHash);
+            StartAnimation(stateMachine.Player.animationData.hStopParameterHash);
         }
         protected override void OnMove()
         {
@@ -23,7 +23,7 @@ namespace BleizEntertainment
         public override void Exit()
         {
             base.Exit();
-            StopAnimation(stateMachine._Player.animationData.hStopParameterHash);
+            StopAnimation(stateMachine.Player.animationData.hStopParameterHash);
         }
     }
 }

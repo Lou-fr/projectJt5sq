@@ -20,17 +20,17 @@ namespace BleizEntertainment
             enterTime = Time.time;
             stateMachine.reasubleData.MovementSpeedModifier = 0f;
             stateMachine.reasubleData.CurrentJumpForce = airborneData.jumpData.StationnaryForce;
-            StartAnimation(stateMachine._Player.animationData.iddleParameterHash);
-            animationNumber = stateMachine._Player.animationData.PlayOtherAnimation;
+            StartAnimation(stateMachine.Player.animationData.iddleParameterHash);
+            animationNumber = stateMachine.Player.animationData.PlayOtherAnimation;
             ResetVelocity();
         }
         public override void Exit()
         {
             base.Exit();
-            StopAnimation(stateMachine._Player.animationData.iddleParameterHash);
-            StopAnimation(stateMachine._Player.animationData.TidlleAnimationParameterHash);
-            StopAnimation(stateMachine._Player.animationData.idlleAnimationParameterHash);
-            stateMachine._Player.animationData.PlayOtherAnimation = animationNumber;
+            StopAnimation(stateMachine.Player.animationData.iddleParameterHash);
+            StopAnimation(stateMachine.Player.animationData.TidlleAnimationParameterHash);
+            StopAnimation(stateMachine.Player.animationData.idlleAnimationParameterHash);
+            stateMachine.Player.animationData.PlayOtherAnimation = animationNumber;
         }
         public override void Update()
         {
@@ -51,14 +51,14 @@ namespace BleizEntertainment
                 Debug.Log(animationNumber);
                 return;
             }
-            if(Time.time - enterTime > stateMachine._Player.animationData.timeBeforeIdleAnimation)
+            if(Time.time - enterTime > stateMachine.Player.animationData.timeBeforeIdleAnimation)
             {
                 int calledAnimation;
                 if (animationNumber)
                 {
-                    calledAnimation = stateMachine._Player.animationData.TidlleAnimationParameterHash;
+                    calledAnimation = stateMachine.Player.animationData.TidlleAnimationParameterHash;
                 }
-                else calledAnimation = stateMachine._Player.animationData.idlleAnimationParameterHash;
+                else calledAnimation = stateMachine.Player.animationData.idlleAnimationParameterHash;
                 if(!debugedOnce) { Debug.Log(calledAnimation);debugedOnce = !debugedOnce; }
 
                 StartAnimation(calledAnimation);
@@ -67,8 +67,8 @@ namespace BleizEntertainment
         public override void OnAnimationTransitionEvent()
         {
             IsPlayedSinceLast = !IsPlayedSinceLast;
-            if(!animationNumber){ StopAnimation(stateMachine._Player.animationData.idlleAnimationParameterHash); return; }
-            StopAnimation(stateMachine._Player.animationData.TidlleAnimationParameterHash);
+            if(!animationNumber){ StopAnimation(stateMachine.Player.animationData.idlleAnimationParameterHash); return; }
+            StopAnimation(stateMachine.Player.animationData.TidlleAnimationParameterHash);
 
 
         }

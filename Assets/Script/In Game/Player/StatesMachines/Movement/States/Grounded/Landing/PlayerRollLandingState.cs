@@ -13,12 +13,12 @@ namespace BleizEntertainment
             stateMachine.reasubleData.MovementSpeedModifier = movementData.RollData.SpeedModifier;
             base.Enter();
             stateMachine.reasubleData.ShouldSprint = false;
-            StartAnimation(stateMachine._Player.animationData.RollParameterHash);
+            StartAnimation(stateMachine.Player.animationData.RollParameterHash);
         }
         public override void Exit()
         {
             base.Exit();
-            StopAnimation(stateMachine._Player.animationData.RollParameterHash);
+            StopAnimation(stateMachine.Player.animationData.RollParameterHash);
         }
         public override void PhysicUpdate()
         {

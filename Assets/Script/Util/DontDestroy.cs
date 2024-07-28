@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DontDestroy : MonoBehaviour
@@ -11,11 +9,11 @@ public class DontDestroy : MonoBehaviour
     }
     void Start()
     {
-        for(int i = 0;i< FindObjectsByType<DontDestroy>(FindObjectsSortMode.None).Length;i++)
+        for (int i = 0; i < FindObjectsByType<DontDestroy>(FindObjectsSortMode.None).Length; i++)
         {
-            if(FindObjectsByType<DontDestroy>(FindObjectsSortMode.None)[i] != this)
+            if (FindObjectsByType<DontDestroy>(FindObjectsSortMode.None)[i] != this)
             {
-                if (FindObjectsByType<DontDestroy>(FindObjectsSortMode.None)[i].ObjectId ==ObjectId)
+                if (FindObjectsByType<DontDestroy>(FindObjectsSortMode.None)[i].ObjectId == ObjectId)
                 {
                     Destroy(gameObject);
                 }

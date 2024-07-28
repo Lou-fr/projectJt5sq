@@ -56,7 +56,7 @@ public class LobbyManager : MonoBehaviour
         PlayerManageUIPrefab.KickPlayer += handleKickTargetPlayer;
         LobbyUI.OnRefreshLobbyPlayer += handleRefreshLobbyPlayer;
         LobbyUI.OnRefreshLobbyPrivacy += handleChangePrivacy;
-        FirstLoading.StartTransport += handlePrivacyPlayingMode;
+        //FirstLoading.StartTransport += handlePrivacyPlayingMode;
         BleizEntertainment.Menu.OnRTMM += handleRTMM;
         HandleCreateLobby();
         Debug.Log("Initialized lobby manager...",this);

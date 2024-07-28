@@ -17,7 +17,7 @@ namespace BleizEntertainment
         {
             stateMachine.reasubleData.MovementSpeedModifier = _dashData.SpeedModifier;
             base.Enter();
-            StartAnimation(stateMachine._Player.animationData.dashParameterHash);
+            StartAnimation(stateMachine.Player.animationData.dashParameterHash);
             stateMachine.reasubleData.RotationData = _dashData.RotationData;
             stateMachine.reasubleData.CurrentJumpForce = airborneData.jumpData.StrongForce;
             AddForceOnTransitionFromStationaryState();
@@ -29,7 +29,7 @@ namespace BleizEntertainment
         {
             base.Exit();
             SetBaseRotationData();
-            StopAnimation(stateMachine._Player.animationData.dashParameterHash);
+            StopAnimation(stateMachine.Player.animationData.dashParameterHash);
         }
 
         public override void OnAnimationTransitionEvent()
@@ -54,10 +54,10 @@ namespace BleizEntertainment
         private void AddForceOnTransitionFromStationaryState()
         {
             if (stateMachine.reasubleData.MovementInput != Vector2.zero) return;
-            Vector3 characterRotationDirection = stateMachine._Player.transform.forward;
+            Vector3 characterRotationDirection = stateMachine.Player.transform.forward;
             characterRotationDirection.y = 0f;
             UpdateTargetRotation(characterRotationDirection, false);
-            stateMachine._Player.rigidBody.linearVelocity = characterRotationDirection * GetMovementSpeed();
+            stateMachine.Player.rigidBody.linearVelocity = characterRotationDirection * GetMovementSpeed();
         }
         private void UpdateConsecutiveDashes()
         {
@@ -70,7 +70,7 @@ namespace BleizEntertainment
             if (consecutiveDashedUsed == _dashData.ConsecutiveDashesLimitAmount)
             {
                 consecutiveDashedUsed = 0;
-                stateMachine._Player.Input.DisableActionFor(stateMachine._Player.Input.playerActions.Dash, _dashData.DashLimitReachedCooldown);
+                stateMachine.Player.Input.DisableActionFor(stateMachine.Player.Input.playerActions.Dash, _dashData.DashLimitReachedCooldown);
             }
         }
 
@@ -83,12 +83,12 @@ namespace BleizEntertainment
         protected override void AddInputActionCallbacks()
         {
             base.AddInputActionCallbacks();
-            stateMachine._Player.Input.playerActions.movement.performed += OnMovementPerformed;
+            stateMachine.Player.Input.playerActions.movement.performed += OnMovementPerformed;
         }
         protected override void RemoveInputActionCallbacks()
         {
             base.RemoveInputActionCallbacks();
-            stateMachine._Player.Input.playerActions.movement.performed += OnMovementPerformed;
+            stateMachine.Player.Input.playerActions.movement.performed += OnMovementPerformed;
 
         }
         #endregion

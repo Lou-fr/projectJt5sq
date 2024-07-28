@@ -11,12 +11,12 @@ namespace BleizEntertainment
         {
             stateMachine.reasubleData.MovementSpeedModifier = 0f;
             base.Enter();
-            StartAnimation(stateMachine._Player.animationData.stoppingParameterHash);
+            StartAnimation(stateMachine.Player.animationData.stoppingParameterHash);
         }
         public override void Exit()
         {
             base.Exit();
-            StopAnimation(stateMachine._Player.animationData.stoppingParameterHash);
+            StopAnimation(stateMachine.Player.animationData.stoppingParameterHash);
         }
         public override void PhysicUpdate()
         {
@@ -38,12 +38,12 @@ namespace BleizEntertainment
         protected override void AddInputActionCallbacks()
         {
             base.AddInputActionCallbacks();
-            stateMachine._Player.Input.playerActions.movement.started += OnMovementStarted;
+            stateMachine.Player.Input.playerActions.movement.started += OnMovementStarted;
         }
         protected override void RemoveInputActionCallbacks()
         {
             base.RemoveInputActionCallbacks();
-            stateMachine._Player.Input.playerActions.movement.started += OnMovementStarted;
+            stateMachine.Player.Input.playerActions.movement.started += OnMovementStarted;
         }
 
 

@@ -10,11 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c80c02932a7f8547b4e341e774a1e63, type: 3}
-  m_Name: Player
+  m_Name: AchlysBase
   m_EditorClassIdentifier: 
-  <chatacterData>k__BackingField:
-    <ChatacterName>k__BackingField: 
-    <ChatacterId>k__BackingField: 0
+  <CharacterInfoData>k__BackingField:
+    <ChatacterName>k__BackingField: Achlys
+    <ChatacterId>k__BackingField: 13
+    <BaseCharacterHp>k__BackingField: 329
+    <Controller>k__BackingField: {fileID: 9100000, guid: 1def841865c5558458e81ce2ab156472, type: 2}
+    <AssociatedSkin>k__BackingField: {fileID: 7110542648142507708, guid: a6b8eece2763cf94eaba617e41c5a821, type: 3}
+    <characterHeight>k__BackingField: 1.75
   <groundedData>k__BackingField:
     <BaseSpeed>k__BackingField: 5
     <GroundToFallRayDistance>k__BackingField: 1
@@ -211,11 +215,11 @@ MonoBehaviour:
       <IsRifles>k__BackingField: 0
     <MeleeCombatData>k__BackingField:
       <BasicAttackData>k__BackingField:
-        <TimeBeforeResetConsecutive>k__BackingField: 0.61
+        <TimeBeforeResetConsecutive>k__BackingField: 0.6
         <TimeBetwinAttack>k__BackingField: 0.1
-        <maxConsecutiveAttack>k__BackingField: 2
+        <maxConsecutiveAttack>k__BackingField: 4
         <FirstAttackDmg>k__BackingField: 20
-        <SecondAttackM>k__BackingField: 2
+        <SecondAttackM>k__BackingField: 1
         <ThirdAttackM>k__BackingField: 1.1
         <FourthAttackM>k__BackingField: 1.2
         <FifthAttackM>k__BackingField: 1.3
@@ -223,5 +227,5 @@ MonoBehaviour:
         <TimeBitwinChargeAttack>k__BackingField: 1
         <BaseChargeAttackDamage>k__BackingField: 30
       <BasicHeavyChargedAtack>k__BackingField:
-        <TimeBitwinHeavyChargeAttack>k__BackingField: 1
-        <BaseHeavyChargeAck>k__BackingField: 20
+        <TimeBitwinHeavyChargeAttack>k__BackingField: 1.5
+        <BaseHeavyChargeAck>k__BackingField: 30

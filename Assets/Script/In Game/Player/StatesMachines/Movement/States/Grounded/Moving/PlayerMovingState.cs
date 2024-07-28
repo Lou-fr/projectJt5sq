@@ -12,14 +12,14 @@ namespace BleizEntertainment
 
         public override void Enter()
         {
-            StartAnimation(stateMachine._Player.animationData.movingParameterHash);
+            StartAnimation(stateMachine.Player.animationData.movingParameterHash);
             base.Enter();
         }
 
         public override void Exit()
         {
             base.Exit();
-            StopAnimation(stateMachine._Player.animationData.movingParameterHash);
+            StopAnimation(stateMachine.Player.animationData.movingParameterHash);
         }
     }
 }

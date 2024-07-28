@@ -15,7 +15,7 @@ namespace BleizEntertainment
 
         public override void Enter()
         {
-            StartAnimation(stateMachine._Player.animationData.runParameterHash);
+            StartAnimation(stateMachine.Player.animationData.runParameterHash);
             base.Enter();
             stateMachine.reasubleData.MovementSpeedModifier = movementData.RunData.speedModifier;
             stateMachine.reasubleData.CurrentJumpForce = airborneData.jumpData.MediumForce;
@@ -24,7 +24,7 @@ namespace BleizEntertainment
         public override void Exit()
         {
             base.Exit();
-            StopAnimation(stateMachine._Player.animationData.runParameterHash);
+            StopAnimation(stateMachine.Player.animationData.runParameterHash);
         }
         public override void Update()
         {

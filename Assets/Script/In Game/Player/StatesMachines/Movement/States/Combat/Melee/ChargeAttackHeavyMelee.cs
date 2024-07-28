@@ -38,12 +38,12 @@ namespace BleizEntertainment
         protected override void AddInputActionCallbacks()
         {
             base.AddInputActionCallbacks();
-            stateMachine._Player.Input.playerActions.Charged_Attack.canceled += OnChargeAtackCancel;
+            stateMachine.Player.Input.playerActions.Charged_Attack.canceled += OnChargeAtackCancel;
         }
         protected override void RemoveInputActionCallbacks()
         {
             base.RemoveInputActionCallbacks();
-            stateMachine._Player.Input.playerActions.Charged_Attack.canceled -= OnChargeAtackCancel;
+            stateMachine.Player.Input.playerActions.Charged_Attack.canceled -= OnChargeAtackCancel;
         }
 
 

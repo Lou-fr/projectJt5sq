@@ -15,10 +15,10 @@ namespace BleizEntertainment
         {
             base.Enter();
             stateMachine.reasubleData.MovementSpeedModifier = 0f;
-            playerPosOnEnter = stateMachine._Player.transform.position;
+            playerPosOnEnter = stateMachine.CharacterHandler.transform.position;
             ResetVerticalVelocity();
-            StartAnimation(stateMachine._Player.animationData.FallParameterHash);
-            stateMachine._Player.Input.playerActions.movement.Disable();
+            StartAnimation(stateMachine.Player.animationData.FallParameterHash);
+            stateMachine.Player.Input.playerActions.movement.Disable();
         }
         public override void PhysicUpdate()
         {
@@ -28,8 +28,8 @@ namespace BleizEntertainment
         public override void Exit()
         {
             base.Exit();
-            StopAnimation(stateMachine._Player.animationData.FallParameterHash);
-            stateMachine._Player.Input.playerActions.movement.Enable();
+            StopAnimation(stateMachine.Player.animationData.FallParameterHash);
+            stateMachine.Player.Input.playerActions.movement.Enable();
 
         }
         #endregion
@@ -39,7 +39,7 @@ namespace BleizEntertainment
         }
         protected override void OnContactWithGround(Collider collider)
         {
-            float fallDistance = playerPosOnEnter.y - stateMachine._Player.transform.position.y;
+            float fallDistance = playerPosOnEnter.y - stateMachine.CharacterHandler.transform.position.y;
             Debug.Log(fallDistance);
             if (fallDistance < fallData.MinimuToBeConsideredHardFall)
             {
@@ -63,7 +63,7 @@ namespace BleizEntertainment
             }
 
             Vector3 limitedVelocity = new Vector3(0f, -fallData.FallSpeedLimit - playerVerticalVelocity.y, 0f);
-            stateMachine._Player.rigidBody.AddForce(limitedVelocity,ForceMode.VelocityChange);
+            stateMachine.Player.rigidBody.AddForce(limitedVelocity,ForceMode.VelocityChange);
         }
         #endregion
     }
