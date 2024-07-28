@@ -1,15 +1,11 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class StartAfterTimer : MonoBehaviour
 {
 #if !UNITY_SERVER
-    [SerializeField]private Button btn;
+    [SerializeField] private Button btn;
     [SerializeField] GameObject welcome;
     [SerializeField] GameObject lng;
     float basetime = 7.5f;
@@ -30,7 +26,7 @@ public class StartAfterTimer : MonoBehaviour
         btn1.onClick.RemoveAllListeners();
         btn1.onClick.AddListener(btn_press);
         btn.interactable = false;
-        temp_txt = btn.GameObject().GetComponentInChildren<TextMeshProUGUI>();
+        temp_txt = btn.gameObject.GetComponent<TextMeshProUGUI>();
         temp_content = temp_txt.text;
         timeRemaining = basetime * retry;
         timerRunnig = true;
@@ -41,7 +37,7 @@ public class StartAfterTimer : MonoBehaviour
         welcome.SetActive(true);
         btn.gameObject.SetActive(true);
     }
-    
+
     private void FixedUpdate()
     {
         if (timerRunnig)
@@ -49,14 +45,14 @@ public class StartAfterTimer : MonoBehaviour
             if (timeRemaining > 0.1)
             {
                 timeRemaining -= Time.deltaTime;
-                temp_txt.text = temp_content + "(" + Mathf.FloorToInt(timeRemaining % 60) +"s)";
+                temp_txt.text = temp_content + "(" + Mathf.FloorToInt(timeRemaining % 60) + "s)";
             }
             else
             {
                 Debug.Log("Timer is out");
                 temp_txt.text = temp_content;
                 lng.SetActive(true);
-                btn.interactable=true;
+                btn.interactable = true;
                 timerRunnig = false;
             }
         }

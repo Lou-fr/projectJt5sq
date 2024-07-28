@@ -10,20 +10,20 @@ namespace BleizEntertainment
         private WeaponsDataClass WeaponsClass;
         public PlayerGroundedState(PlayerStateMachine playerStateMachine) : base(playerStateMachine)
         {
-            slopeData = stateMachine._Player.collidersUtility.CapsuleCollidersUtility.slopeData;
-            combatData = stateMachine._Player.data.combatData;
+            slopeData = stateMachine.Player.collidersUtility.CapsuleCollidersUtility.slopeData;
+            combatData = stateMachine.Character.combatData;
             WeaponsClass = combatData.WeaponsDataClass;
         }
         public override void Enter()
         {
             base.Enter();
             UpdateShouldSprintState();
-            StartAnimation(stateMachine._Player.animationData.GroundedParameterHash);
+            StartAnimation(stateMachine.Player.animationData.GroundedParameterHash);
         }
         public override void Exit()
         {
             base.Exit();
-            StopAnimation(stateMachine._Player.animationData.GroundedParameterHash);
+            StopAnimation(stateMachine.Player.animationData.GroundedParameterHash);
         }
         public override void PhysicUpdate()
         {
@@ -33,19 +33,20 @@ namespace BleizEntertainment
 
         private void Float()
         {
-            Vector3 capsuleCollideCenterInWorldSpace = stateMachine._Player.collidersUtility.CapsuleCollidersUtility.capsuleColliderData.collider.bounds.center;
+            Vector3 capsuleCollideCenterInWorldSpace = stateMachine.Player.collidersUtility.CapsuleCollidersUtility.capsuleColliderData.collider.bounds.center;
             Ray downwardsRayFromCapsuleCenter = new Ray(capsuleCollideCenterInWorldSpace, Vector3.down);
-            if (Physics.Raycast(downwardsRayFromCapsuleCenter, out RaycastHit hit, slopeData.FloatRayDistance, stateMachine._Player.layerData.groundLayer, QueryTriggerInteraction.Ignore))
+            if (Physics.Raycast(downwardsRayFromCapsuleCenter, out RaycastHit hit, slopeData.FloatRayDistance, stateMachine.Player.layerData.groundLayer, QueryTriggerInteraction.Ignore))
             {
                 float groundAngle = Vector3.Angle(hit.normal, -downwardsRayFromCapsuleCenter.direction);
 
                 float slopeSpeedModifier = SetSlopeSpeedModifierOnAngle(groundAngle);
                 if (slopeSpeedModifier == 0) return;
-                float distanceToFloatinPoint = stateMachine._Player.collidersUtility.CapsuleCollidersUtility.capsuleColliderData.ColliderCenterInLocalSpace.y * stateMachine._Player.transform.localScale.y - hit.distance;
+                float distanceToFloatinPoint = stateMachine.Player.collidersUtility.CapsuleCollidersUtility.capsuleColliderData.ColliderCenterInLocalSpace.y * stateMachine.Player.transform.localScale.y - hit.distance;
                 if (distanceToFloatinPoint == 0) return;
                 float ammountToLift = distanceToFloatinPoint * slopeData.StepReachForce - GetPlayerVerticalVelocity().y;
                 Vector3 liftForce = new Vector3(0f, ammountToLift, 0f);
-                stateMachine._Player.rigidBody.AddForce(liftForce, ForceMode.VelocityChange);
+                Debug.DrawLine(liftForce, liftForce,Color.blue);
+                stateMachine.Player.rigidBody.AddForce(liftForce, ForceMode.VelocityChange);
             }
 
         }
@@ -59,29 +60,29 @@ namespace BleizEntertainment
 
         private bool IsThereGroundUnderneath()
         {
-            PlayerTriggerColliderData triggerColliderData = stateMachine._Player.collidersUtility.TriggerColliderData;
+            PlayerTriggerColliderData triggerColliderData = stateMachine.Player.collidersUtility.TriggerColliderData;
             Vector3 groundColliderCenterInWorldSpace = triggerColliderData.GroundCheckCollider.bounds.center;
-            Collider[] overlappedGroundColliders = Physics.OverlapBox(groundColliderCenterInWorldSpace, triggerColliderData.GroundCheckColliderVerticalExtents, triggerColliderData.GroundCheckCollider.transform.rotation, stateMachine._Player.layerData.groundLayer, QueryTriggerInteraction.Ignore);
+            Collider[] overlappedGroundColliders = Physics.OverlapBox(groundColliderCenterInWorldSpace, triggerColliderData.GroundCheckColliderVerticalExtents, triggerColliderData.GroundCheckCollider.transform.rotation, stateMachine.Player.layerData.groundLayer, QueryTriggerInteraction.Ignore);
             return overlappedGroundColliders.Length > 0;
         }
         #region ReusableData
         protected override void AddInputActionCallbacks()
         {
             base.AddInputActionCallbacks();
-            stateMachine._Player.Input.playerActions.movement.canceled += OnMovementCancel;
-            stateMachine._Player.Input.playerActions.Dash.started += OnDashStarted;
-            stateMachine._Player.Input.playerActions.Jump.started += OnJumpStarted;
-            stateMachine._Player.Input.playerActions.Base_Attack.started += OnAttackStarted;
-            stateMachine._Player.Input.playerActions.Charged_Attack.performed += OnChargeAttackStarted;
+            stateMachine.Player.Input.playerActions.movement.canceled += OnMovementCancel;
+            stateMachine.Player.Input.playerActions.Dash.started += OnDashStarted;
+            stateMachine.Player.Input.playerActions.Jump.started += OnJumpStarted;
+            stateMachine.Player.Input.playerActions.Base_Attack.started += OnAttackStarted;
+            stateMachine.Player.Input.playerActions.Charged_Attack.performed += OnChargeAttackStarted;
         }
         protected override void RemoveInputActionCallbacks()
         {
             base.RemoveInputActionCallbacks();
-            stateMachine._Player.Input.playerActions.movement.canceled -= OnMovementCancel;
-            stateMachine._Player.Input.playerActions.Dash.started -= OnDashStarted;
-            stateMachine._Player.Input.playerActions.Jump.started -= OnJumpStarted;
-            stateMachine._Player.Input.playerActions.Base_Attack.started -= OnAttackStarted;
-            stateMachine._Player.Input.playerActions.Charged_Attack.performed -= OnChargeAttackStarted;
+            stateMachine.Player.Input.playerActions.movement.canceled -= OnMovementCancel;
+            stateMachine.Player.Input.playerActions.Dash.started -= OnDashStarted;
+            stateMachine.Player.Input.playerActions.Jump.started -= OnJumpStarted;
+            stateMachine.Player.Input.playerActions.Base_Attack.started -= OnAttackStarted;
+            stateMachine.Player.Input.playerActions.Charged_Attack.performed -= OnChargeAttackStarted;
         }
 
         protected virtual void OnMove()
@@ -100,9 +101,10 @@ namespace BleizEntertainment
             {
                 return;
             }
-            Vector3 capsuleColliderCenterInWorldSpace = stateMachine._Player.collidersUtility.CapsuleCollidersUtility.capsuleColliderData.collider.bounds.center;
-            Ray downwardsRayFromCapsuleBottom = new Ray(capsuleColliderCenterInWorldSpace - stateMachine._Player.collidersUtility.CapsuleCollidersUtility.capsuleColliderData.ColliderVerticalExtents, Vector3.down);
-            if (!Physics.Raycast(downwardsRayFromCapsuleBottom, out _, movementData.GroundToFallRayDistance, stateMachine._Player.layerData.groundLayer, QueryTriggerInteraction.Ignore))
+            Vector3 capsuleColliderCenterInWorldSpace = stateMachine.Player.collidersUtility.CapsuleCollidersUtility.capsuleColliderData.collider.bounds.center;
+            Ray downwardsRayFromCapsuleBottom = new Ray(capsuleColliderCenterInWorldSpace - stateMachine.Player.collidersUtility.CapsuleCollidersUtility.capsuleColliderData.ColliderVerticalExtents, Vector3.down);
+            Debug.DrawRay(capsuleColliderCenterInWorldSpace, Vector3.down,Color.red);
+            if (!Physics.Raycast(downwardsRayFromCapsuleBottom, out _, movementData.GroundToFallRayDistance, stateMachine.Player.layerData.groundLayer, QueryTriggerInteraction.Ignore))
             {
                 OnFall();
             }

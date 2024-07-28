@@ -2,7 +2,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-using Unity.VisualScripting;
 public class Sensivity_Controller : MonoBehaviour
 {
     SensivityReader reader;

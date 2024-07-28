@@ -1,16 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace BleizEntertainment
 {
     public class PlayerAnimationEventTrigger : MonoBehaviour
     {
-        private Player player;
-
-        private void Awake()
+        private PlayerOffHandler AssignedPlayer;
+        private Animator assignedAnimator;
+        public void Init(Animator animator, PlayerOffHandler player)
         {
-            player = transform.parent.GetComponent<Player>();
+            assignedAnimator = animator;
+            AssignedPlayer = player;
         }
 
         public void TriggerOnMovementStateAnimationEnterEvent()
@@ -20,7 +20,7 @@ namespace BleizEntertainment
                 return;
             }
 
-            player.TriggerOnMovementStateAnimationEnterEvent();
+            AssignedPlayer.TriggerOnMovementStateAnimationEnterEvent();
         }
 
         public void TriggerOnMovementStateAnimationExitEvent()
@@ -30,7 +30,7 @@ namespace BleizEntertainment
                 return;
             }
 
-            player.OnMovementStateAnimationExitEvent();
+            AssignedPlayer.OnMovementStateAnimationExitEvent();
         }
 
         public void TriggerOnMovementStateAnimationTransitionEvent()
@@ -40,12 +40,68 @@ namespace BleizEntertainment
                 return;
             }
 
-            player.OnMovementStateAnimationTransitionEvent();
+            AssignedPlayer.OnMovementStateAnimationTransitionEvent();
         }
 
         private bool IsInAnimationTransition(int layerIndex = 0)
         {
-            return player.animator.IsInTransition(layerIndex);
+            return assignedAnimator.IsInTransition(layerIndex);
         }
     }
+#if BleizOnline
+    public class PlayerAnimationEventTrigger : NetworkBehaviour
+    {
+        private PlayerHandler AssignedPlayer;
+        private Animator assignedAnimator;
+        public void Init(Animator animator, PlayerHandler player)
+        {
+            assignedAnimator = animator;
+            AssignedPlayer = player;
+        }
+
+        public override void OnNetworkSpawn()
+        {
+            base.OnNetworkSpawn();
+            if (!IsOwner) return;
+        }
+
+        public void TriggerOnMovementStateAnimationEnterEvent()
+        {
+            if (!IsOwner) return;
+            if (IsInAnimationTransition())
+            {
+                return;
+            }
+
+            AssignedPlayer.TriggerOnMovementStateAnimationEnterEvent();
+        }
+
+        public void TriggerOnMovementStateAnimationExitEvent()
+        {
+            if (!IsOwner) return;
+            if (IsInAnimationTransition())
+            {
+                return;
+            }
+
+            AssignedPlayer.OnMovementStateAnimationExitEvent();
+        }
+
+        public void TriggerOnMovementStateAnimationTransitionEvent()
+        {
+            if (!IsOwner) return;
+            if (IsInAnimationTransition())
+            {
+                return;
+            }
+
+            AssignedPlayer.OnMovementStateAnimationTransitionEvent();
+        }
+
+        private bool IsInAnimationTransition(int layerIndex = 0)
+        {
+            return assignedAnimator.IsInTransition(layerIndex);
+        }
+    }
+#endif
 }

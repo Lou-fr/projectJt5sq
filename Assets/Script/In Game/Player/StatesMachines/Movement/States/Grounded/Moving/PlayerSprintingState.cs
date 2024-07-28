@@ -15,7 +15,7 @@ namespace BleizEntertainment
         }
         public override void Enter()
         {
-            StartAnimation(stateMachine._Player.animationData.sprintParameterHash);
+            StartAnimation(stateMachine.Player.animationData.sprintParameterHash);
             base.Enter();
             stateMachine.reasubleData.MovementSpeedModifier = sprintData.SpeedModifier;
             stateMachine.reasubleData.CurrentJumpForce = airborneData.jumpData.StrongForce;
@@ -30,7 +30,7 @@ namespace BleizEntertainment
                 keepSprinting = false;
                 stateMachine.reasubleData.ShouldSprint = false;
             }
-            StopAnimation(stateMachine._Player.animationData.sprintParameterHash);
+            StopAnimation(stateMachine.Player.animationData.sprintParameterHash);
         }
         public override void Update()
         {
@@ -57,12 +57,12 @@ namespace BleizEntertainment
         protected override void AddInputActionCallbacks()
         {
             base.AddInputActionCallbacks();
-            stateMachine._Player.Input.playerActions.Sprint.performed += OnSprintPerformed;
+            stateMachine.Player.Input.playerActions.Sprint.performed += OnSprintPerformed;
         }
         protected override void RemoveInputActionCallbacks()
         {
             base.RemoveInputActionCallbacks();
-            stateMachine._Player.Input.playerActions.Sprint.performed -= OnSprintPerformed;
+            stateMachine.Player.Input.playerActions.Sprint.performed -= OnSprintPerformed;
 
         }
         protected override void OnMovementCancel(InputAction.CallbackContext context)

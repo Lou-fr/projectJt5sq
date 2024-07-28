@@ -19,7 +19,7 @@ namespace BleizEntertainment
         public override void Enter()
         {
             base.Enter();
-            stateMachine._Player.Input.playerActions.movement.Disable();
+            stateMachine.Player.Input.playerActions.movement.Disable();
             timeBeforeResetConsecutive = basicAttackData.TimeBeforeResetConsecutive;
             timebetwinAttack = basicAttackData.TimeBetwinAttack;
             maxConsecutiveAttack = basicAttackData.maxConsecutiveAttack;
@@ -36,7 +36,7 @@ namespace BleizEntertainment
         public override void Exit()
         {
             enterTime = Time.time;
-            StopAnimation(stateMachine._Player.animationData.combatAnimationParameterHash);
+            StopAnimation(stateMachine.Player.animationData.combatAnimationParameterHash);
             base.Exit();
             stateMachine.reasubleCombatData.BasicAtackEnterTime = enterTime;
             stateMachine.reasubleCombatData.currentConsecutiveAttack = currentConsecutiveAttack;
@@ -50,31 +50,34 @@ namespace BleizEntertainment
                 isConsecutive = false;
                 currentConsecutiveAttack = 1;
             }
-            changeAnimationCount(stateMachine._Player.animationData.ackNumberAnimationParameterHash, currentConsecutiveAttack);
-            StartAnimation(stateMachine._Player.animationData.combatAnimationParameterHash);
             if (!isConsecutive)
             {
+                StartAnimation();
                 FirstAck();
                 return;
             }
             if (enterTime - lastAttack < timebetwinAttack) { stateMachine.ChangeState(stateMachine.idlingState); return; }
             if (currentConsecutiveAttack == 2)
             {
+                StartAnimation();
                 SecondAck();
                 return;
             }
             if (currentConsecutiveAttack == 3)
             {
+                StartAnimation();
                 ThirdAck();
                 return;
             }
             if (currentConsecutiveAttack == 4)
             {
+                StartAnimation();
                 FourthAck();
                 return;
             }
             if (currentConsecutiveAttack == 5)
             {
+                StartAnimation();
                 FifthAck();
                 return;
             }
@@ -115,11 +118,16 @@ namespace BleizEntertainment
         }
         public override void OnAnimationTransitionEvent()
         {
-            stateMachine._Player.Input.playerActions.movement.Enable();   
+            stateMachine.Player.Input.playerActions.movement.Enable();   
         }
         public override void OnAnimationExitEvent()
         {
             stateMachine.ChangeState(stateMachine.idlingState);
+        }
+        void StartAnimation()
+        {
+            changeAnimationCount(stateMachine.Player.animationData.ackNumberAnimationParameterHash, currentConsecutiveAttack);
+            StartAnimation(stateMachine.Player.animationData.combatAnimationParameterHash);
         }
         #endregion
     }

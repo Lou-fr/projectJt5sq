@@ -11,12 +11,12 @@ namespace BleizEntertainment
         {
             base.Enter();
             ResetSprintState();
-            StartAnimation(stateMachine._Player.animationData.airborneParameterHash);
+            StartAnimation(stateMachine.Player.animationData.airborneParameterHash);
         }
         public override void Exit()
         {
             base.Exit();
-            StopAnimation(stateMachine._Player.animationData.airborneParameterHash);
+            StopAnimation(stateMachine.Player.animationData.airborneParameterHash);
         }
         #region Reusable Methods
         protected override void OnContactWithGround(Collider collider)

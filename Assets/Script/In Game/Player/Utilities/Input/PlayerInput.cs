@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +13,7 @@ namespace BleizEntertainment
         {
             inputActions = new InputMaster();
             playerActions = inputActions.player;
+            gameObject.GetComponent<CameraZoom>().Init(playerActions);
         }
         private void OnEnable()
         {

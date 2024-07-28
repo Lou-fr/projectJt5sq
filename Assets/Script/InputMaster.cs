@@ -41,7 +41,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""ba821234-142a-4720-8d96-db286b40b4df"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -53,13 +53,13 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""LookPress"",
                     ""type"": ""Button"",
                     ""id"": ""5c4e2c04-ba87-4915-b55a-0dad04de8227"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -95,7 +95,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""name"": ""Walk Toggle"",
                     ""type"": ""Button"",
                     ""id"": ""73659c70-fb28-4faa-87f2-88ae4253a8c4"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -104,7 +104,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""name"": ""Base_Attack"",
                     ""type"": ""Button"",
                     ""id"": ""17b98521-3b68-4c9b-b462-6910e88f139d"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -113,7 +113,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""name"": ""Charged_Attack"",
                     ""type"": ""Button"",
                     ""id"": ""edd8961a-1371-43f0-b7b9-75fddee2057f"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": ""Hold(duration=0.75)"",
                     ""initialStateCheck"": false
@@ -122,7 +122,61 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""name"": ""UnlockCursor"",
                     ""type"": ""Button"",
                     ""id"": ""816c1d89-a43f-4a71-8c07-d751fa1b3a77"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchCharater1"",
+                    ""type"": ""Button"",
+                    ""id"": ""bea34cb8-d126-4d18-8abb-5f41edaef521"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchCharater2"",
+                    ""type"": ""Button"",
+                    ""id"": ""20869042-0960-4189-af52-a1a3bd2a3618"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchCharater3"",
+                    ""type"": ""Button"",
+                    ""id"": ""07f53f87-2f16-4694-81c1-cf7fc2529034"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchCharater4"",
+                    ""type"": ""Button"",
+                    ""id"": ""d033020c-7131-4c81-9b0c-bf9b34ef81ec"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleDebug"",
+                    ""type"": ""Button"",
+                    ""id"": ""cf49509d-b9b8-46dd-b5a6-919891fc6676"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Return"",
+                    ""type"": ""Button"",
+                    ""id"": ""3ec38554-ad95-4fff-994e-fee71e001511"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -348,47 +402,65 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""action"": ""UnlockCursor"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Debug"",
-            ""id"": ""aff778b1-4af6-478e-95e4-d1dbf9c60c49"",
-            ""actions"": [
-                {
-                    ""name"": ""ToggleDebug"",
-                    ""type"": ""Button"",
-                    ""id"": ""30df3584-c967-466a-9b71-8cc02e58b71b"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Return"",
-                    ""type"": ""Button"",
-                    ""id"": ""b20bb37b-c416-4b99-9528-1ca0973013f0"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
+                    ""name"": """",
+                    ""id"": ""c1c9a11b-d98d-43b8-979d-9c3146d12586"",
+                    ""path"": ""<Keyboard>/numpad1"",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
+                    ""processors"": """",
+                    ""groups"": "";Keyboard and Mouse"",
+                    ""action"": ""SwitchCharater1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
                 {
                     ""name"": """",
-                    ""id"": ""9dfd9b25-847d-4121-a030-3ae380e04e44"",
-                    ""path"": ""<Keyboard>/#(')"",
+                    ""id"": ""582e9c25-f3ec-43ae-b635-e1687882aadf"",
+                    ""path"": ""<Keyboard>/numpad2"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard and Mouse;Phone;Gamepad"",
+                    ""groups"": "";Keyboard and Mouse"",
+                    ""action"": ""SwitchCharater2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f731f524-52df-4679-9ba7-c7ac577ad5df"",
+                    ""path"": ""<Keyboard>/numpad3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchCharater3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e51e4a87-1120-4259-a038-d26681165d52"",
+                    ""path"": ""<Keyboard>/numpad4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchCharater4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""69fb53c5-f7a3-40dd-8038-c76a40e8bd50"",
+                    ""path"": ""<Keyboard>/f10"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""ToggleDebug"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""9e27c22a-1501-41a6-83f4-3687d56d3012"",
+                    ""id"": ""fdc89f7a-2125-4ede-9174-4db87f40f5e9"",
                     ""path"": ""<Keyboard>/enter"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -398,6 +470,12 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""DebugAction"",
+            ""id"": ""aff778b1-4af6-478e-95e4-d1dbf9c60c49"",
+            ""actions"": [],
+            ""bindings"": []
         }
     ],
     ""controlSchemes"": [
@@ -459,16 +537,20 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         m_player_Base_Attack = m_player.FindAction("Base_Attack", throwIfNotFound: true);
         m_player_Charged_Attack = m_player.FindAction("Charged_Attack", throwIfNotFound: true);
         m_player_UnlockCursor = m_player.FindAction("UnlockCursor", throwIfNotFound: true);
-        // Debug
-        m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
-        m_Debug_ToggleDebug = m_Debug.FindAction("ToggleDebug", throwIfNotFound: true);
-        m_Debug_Return = m_Debug.FindAction("Return", throwIfNotFound: true);
+        m_player_SwitchCharater1 = m_player.FindAction("SwitchCharater1", throwIfNotFound: true);
+        m_player_SwitchCharater2 = m_player.FindAction("SwitchCharater2", throwIfNotFound: true);
+        m_player_SwitchCharater3 = m_player.FindAction("SwitchCharater3", throwIfNotFound: true);
+        m_player_SwitchCharater4 = m_player.FindAction("SwitchCharater4", throwIfNotFound: true);
+        m_player_ToggleDebug = m_player.FindAction("ToggleDebug", throwIfNotFound: true);
+        m_player_Return = m_player.FindAction("Return", throwIfNotFound: true);
+        // DebugAction
+        m_DebugAction = asset.FindActionMap("DebugAction", throwIfNotFound: true);
     }
 
     ~@InputMaster()
     {
-        //Debug.Assert(!m_player.enabled, "This will cause a leak and performance issues, InputMaster.player.Disable() has not been called.");
-        //Debug.Assert(!m_Debug.enabled, "This will cause a leak and performance issues, InputMaster.Debug.Disable() has not been called.");
+        Debug.Assert(!m_player.enabled, "This will cause a leak and performance issues, InputMaster.player.Disable() has not been called.");
+        Debug.Assert(!m_DebugAction.enabled, "This will cause a leak and performance issues, InputMaster.DebugAction.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -541,6 +623,12 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     private readonly InputAction m_player_Base_Attack;
     private readonly InputAction m_player_Charged_Attack;
     private readonly InputAction m_player_UnlockCursor;
+    private readonly InputAction m_player_SwitchCharater1;
+    private readonly InputAction m_player_SwitchCharater2;
+    private readonly InputAction m_player_SwitchCharater3;
+    private readonly InputAction m_player_SwitchCharater4;
+    private readonly InputAction m_player_ToggleDebug;
+    private readonly InputAction m_player_Return;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -556,6 +644,12 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         public InputAction @Base_Attack => m_Wrapper.m_player_Base_Attack;
         public InputAction @Charged_Attack => m_Wrapper.m_player_Charged_Attack;
         public InputAction @UnlockCursor => m_Wrapper.m_player_UnlockCursor;
+        public InputAction @SwitchCharater1 => m_Wrapper.m_player_SwitchCharater1;
+        public InputAction @SwitchCharater2 => m_Wrapper.m_player_SwitchCharater2;
+        public InputAction @SwitchCharater3 => m_Wrapper.m_player_SwitchCharater3;
+        public InputAction @SwitchCharater4 => m_Wrapper.m_player_SwitchCharater4;
+        public InputAction @ToggleDebug => m_Wrapper.m_player_ToggleDebug;
+        public InputAction @Return => m_Wrapper.m_player_Return;
         public InputActionMap Get() { return m_Wrapper.m_player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -598,6 +692,24 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             @UnlockCursor.started += instance.OnUnlockCursor;
             @UnlockCursor.performed += instance.OnUnlockCursor;
             @UnlockCursor.canceled += instance.OnUnlockCursor;
+            @SwitchCharater1.started += instance.OnSwitchCharater1;
+            @SwitchCharater1.performed += instance.OnSwitchCharater1;
+            @SwitchCharater1.canceled += instance.OnSwitchCharater1;
+            @SwitchCharater2.started += instance.OnSwitchCharater2;
+            @SwitchCharater2.performed += instance.OnSwitchCharater2;
+            @SwitchCharater2.canceled += instance.OnSwitchCharater2;
+            @SwitchCharater3.started += instance.OnSwitchCharater3;
+            @SwitchCharater3.performed += instance.OnSwitchCharater3;
+            @SwitchCharater3.canceled += instance.OnSwitchCharater3;
+            @SwitchCharater4.started += instance.OnSwitchCharater4;
+            @SwitchCharater4.performed += instance.OnSwitchCharater4;
+            @SwitchCharater4.canceled += instance.OnSwitchCharater4;
+            @ToggleDebug.started += instance.OnToggleDebug;
+            @ToggleDebug.performed += instance.OnToggleDebug;
+            @ToggleDebug.canceled += instance.OnToggleDebug;
+            @Return.started += instance.OnReturn;
+            @Return.performed += instance.OnReturn;
+            @Return.canceled += instance.OnReturn;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -635,6 +747,24 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             @UnlockCursor.started -= instance.OnUnlockCursor;
             @UnlockCursor.performed -= instance.OnUnlockCursor;
             @UnlockCursor.canceled -= instance.OnUnlockCursor;
+            @SwitchCharater1.started -= instance.OnSwitchCharater1;
+            @SwitchCharater1.performed -= instance.OnSwitchCharater1;
+            @SwitchCharater1.canceled -= instance.OnSwitchCharater1;
+            @SwitchCharater2.started -= instance.OnSwitchCharater2;
+            @SwitchCharater2.performed -= instance.OnSwitchCharater2;
+            @SwitchCharater2.canceled -= instance.OnSwitchCharater2;
+            @SwitchCharater3.started -= instance.OnSwitchCharater3;
+            @SwitchCharater3.performed -= instance.OnSwitchCharater3;
+            @SwitchCharater3.canceled -= instance.OnSwitchCharater3;
+            @SwitchCharater4.started -= instance.OnSwitchCharater4;
+            @SwitchCharater4.performed -= instance.OnSwitchCharater4;
+            @SwitchCharater4.canceled -= instance.OnSwitchCharater4;
+            @ToggleDebug.started -= instance.OnToggleDebug;
+            @ToggleDebug.performed -= instance.OnToggleDebug;
+            @ToggleDebug.canceled -= instance.OnToggleDebug;
+            @Return.started -= instance.OnReturn;
+            @Return.performed -= instance.OnReturn;
+            @Return.canceled -= instance.OnReturn;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -653,59 +783,43 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     }
     public PlayerActions @player => new PlayerActions(this);
 
-    // Debug
-    private readonly InputActionMap m_Debug;
-    private List<IDebugActions> m_DebugActionsCallbackInterfaces = new List<IDebugActions>();
-    private readonly InputAction m_Debug_ToggleDebug;
-    private readonly InputAction m_Debug_Return;
-    public struct DebugActions
+    // DebugAction
+    private readonly InputActionMap m_DebugAction;
+    private List<IDebugActionActions> m_DebugActionActionsCallbackInterfaces = new List<IDebugActionActions>();
+    public struct DebugActionActions
     {
         private @InputMaster m_Wrapper;
-        public DebugActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
-        public InputAction @ToggleDebug => m_Wrapper.m_Debug_ToggleDebug;
-        public InputAction @Return => m_Wrapper.m_Debug_Return;
-        public InputActionMap Get() { return m_Wrapper.m_Debug; }
+        public DebugActionActions(@InputMaster wrapper) { m_Wrapper = wrapper; }
+        public InputActionMap Get() { return m_Wrapper.m_DebugAction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(DebugActions set) { return set.Get(); }
-        public void AddCallbacks(IDebugActions instance)
+        public static implicit operator InputActionMap(DebugActionActions set) { return set.Get(); }
+        public void AddCallbacks(IDebugActionActions instance)
         {
-            if (instance == null || m_Wrapper.m_DebugActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_DebugActionsCallbackInterfaces.Add(instance);
-            @ToggleDebug.started += instance.OnToggleDebug;
-            @ToggleDebug.performed += instance.OnToggleDebug;
-            @ToggleDebug.canceled += instance.OnToggleDebug;
-            @Return.started += instance.OnReturn;
-            @Return.performed += instance.OnReturn;
-            @Return.canceled += instance.OnReturn;
+            if (instance == null || m_Wrapper.m_DebugActionActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_DebugActionActionsCallbackInterfaces.Add(instance);
         }
 
-        private void UnregisterCallbacks(IDebugActions instance)
+        private void UnregisterCallbacks(IDebugActionActions instance)
         {
-            @ToggleDebug.started -= instance.OnToggleDebug;
-            @ToggleDebug.performed -= instance.OnToggleDebug;
-            @ToggleDebug.canceled -= instance.OnToggleDebug;
-            @Return.started -= instance.OnReturn;
-            @Return.performed -= instance.OnReturn;
-            @Return.canceled -= instance.OnReturn;
         }
 
-        public void RemoveCallbacks(IDebugActions instance)
+        public void RemoveCallbacks(IDebugActionActions instance)
         {
-            if (m_Wrapper.m_DebugActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_DebugActionActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
-        public void SetCallbacks(IDebugActions instance)
+        public void SetCallbacks(IDebugActionActions instance)
         {
-            foreach (var item in m_Wrapper.m_DebugActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_DebugActionActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_DebugActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_DebugActionActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
-    public DebugActions @Debug => new DebugActions(this);
+    public DebugActionActions @DebugAction => new DebugActionActions(this);
     private int m_KeyboardandMouseSchemeIndex = -1;
     public InputControlScheme KeyboardandMouseScheme
     {
@@ -746,10 +860,14 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         void OnBase_Attack(InputAction.CallbackContext context);
         void OnCharged_Attack(InputAction.CallbackContext context);
         void OnUnlockCursor(InputAction.CallbackContext context);
-    }
-    public interface IDebugActions
-    {
+        void OnSwitchCharater1(InputAction.CallbackContext context);
+        void OnSwitchCharater2(InputAction.CallbackContext context);
+        void OnSwitchCharater3(InputAction.CallbackContext context);
+        void OnSwitchCharater4(InputAction.CallbackContext context);
         void OnToggleDebug(InputAction.CallbackContext context);
         void OnReturn(InputAction.CallbackContext context);
+    }
+    public interface IDebugActionActions
+    {
     }
 }

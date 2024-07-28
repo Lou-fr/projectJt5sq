@@ -15,14 +15,14 @@ MonoBehaviour:
   m_GroupName: Localization-String-Tables-English (en)
   m_GUID: 262af450bba4a1547828183dddb3934a
   m_SerializeEntries:
-  - m_GUID: 6b5fed9ef0e47564a8fe4edec697780f
-    m_Address: StartScreen_en
+  - m_GUID: 0f22142be6637e0418013c0b1716c327
+    m_Address: In-Game_Menu_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 0f22142be6637e0418013c0b1716c327
-    m_Address: In-Game_Menu_en
+  - m_GUID: 6b5fed9ef0e47564a8fe4edec697780f
+    m_Address: StartScreen_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en

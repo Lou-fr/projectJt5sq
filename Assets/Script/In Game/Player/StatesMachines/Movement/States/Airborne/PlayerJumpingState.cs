@@ -63,16 +63,16 @@ namespace BleizEntertainment
         private void Jump()
         {
             Vector3 jumpForce = stateMachine.reasubleData.CurrentJumpForce;
-            Vector3 jumpDirection = stateMachine._Player.transform.forward;
+            Vector3 jumpDirection = stateMachine.CharacterHandler.transform.forward;
             if (shoulKeepRotating)
             {
                 jumpDirection = GetTargetRotationDirection(stateMachine.reasubleData.CurrentTargetRotation.y);
             }
             jumpForce.x *= jumpDirection.x;
             jumpForce.z *= jumpDirection.z;
-            Vector3 capsuleColliderCenterInWWorldSpace = stateMachine._Player.collidersUtility.CapsuleCollidersUtility.capsuleColliderData.collider.bounds.center;
+            Vector3 capsuleColliderCenterInWWorldSpace = stateMachine.Player.collidersUtility.CapsuleCollidersUtility.capsuleColliderData.collider.bounds.center;
             Ray downwardRayFromCapsuleCenter = new Ray(capsuleColliderCenterInWWorldSpace, Vector3.down);
-            if (Physics.Raycast(downwardRayFromCapsuleCenter, out RaycastHit hit, jumpData.JumpToGroundTayDistance,stateMachine._Player.layerData.groundLayer,QueryTriggerInteraction.Ignore ))
+            if (Physics.Raycast(downwardRayFromCapsuleCenter, out RaycastHit hit, jumpData.JumpToGroundTayDistance,stateMachine.Player.layerData.groundLayer,QueryTriggerInteraction.Ignore ))
             {
                 float groundAndle = Vector3.Angle(hit.normal,-downwardRayFromCapsuleCenter.direction);
                 if (IsMovingUp())
@@ -90,7 +90,7 @@ namespace BleizEntertainment
             }
 
             ResetVelocity();
-            stateMachine._Player.rigidBody.AddForce(jumpForce, ForceMode.VelocityChange);
+            stateMachine.Player.rigidBody.AddForce(jumpForce, ForceMode.VelocityChange);
         }
         #endregion
     }

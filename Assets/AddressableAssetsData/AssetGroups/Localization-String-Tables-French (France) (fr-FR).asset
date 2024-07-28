@@ -15,14 +15,14 @@ MonoBehaviour:
   m_GroupName: Localization-String-Tables-French (France) (fr-FR)
   m_GUID: fce6d25ba8c88894b947c39196588eda
   m_SerializeEntries:
-  - m_GUID: 50b86608d33681b449ef42d6dd9d366b
-    m_Address: StartScreen_fr-FR
+  - m_GUID: 1be2e2e3653c60e4dbe7607a1ca8473f
+    m_Address: In-Game_Menu_fr-FR
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-fr-FR
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 1be2e2e3653c60e4dbe7607a1ca8473f
-    m_Address: In-Game_Menu_fr-FR
+  - m_GUID: 50b86608d33681b449ef42d6dd9d366b
+    m_Address: StartScreen_fr-FR
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-fr-FR

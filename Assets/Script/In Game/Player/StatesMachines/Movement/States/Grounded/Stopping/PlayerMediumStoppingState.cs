@@ -10,12 +10,12 @@ namespace BleizEntertainment
             base.Enter();
             stateMachine.reasubleData.MovementDecelerationforce = movementData.StopData.MediumDecelerationForce;
             stateMachine.reasubleData.CurrentJumpForce = airborneData.jumpData.MediumForce;
-            StartAnimation(stateMachine._Player.animationData.mStopParameterHash);
+            StartAnimation(stateMachine.Player.animationData.mStopParameterHash);
         }
         public override void Exit()
         {
             base.Exit();
-            StopAnimation(stateMachine._Player.animationData.mStopParameterHash);
+            StopAnimation(stateMachine.Player.animationData.mStopParameterHash);
         }
     }
 }

@@ -10,11 +10,12 @@ namespace BleizEntertainment
         protected PlayerAirborneData airborneData;
         public PlayerMovementStates(PlayerStateMachine playerMovementStateMachine)
         {
-            stateMachine = playerMovementStateMachine;
-            movementData = stateMachine._Player.data.groundedData;
-            airborneData = stateMachine._Player.data.airboneData;
-            InitializeData();
+                stateMachine = playerMovementStateMachine;
+                movementData = stateMachine.Character.groundedData;
+                airborneData = stateMachine.Character.airboneData;
+                InitializeData();
         }
+
         #region IState
         private void InitializeData()
         {
@@ -23,7 +24,9 @@ namespace BleizEntertainment
 
         public virtual void Enter()
         {
-            Debug.Log("State " + GetType().Name);
+#if UNITY_EDITOR
+            Debug.Log($"STATE MACHINE Entering State {GetType().Name} , ");
+#endif
             AddInputActionCallbacks();
         }
 
@@ -43,7 +46,6 @@ namespace BleizEntertainment
 
         public virtual void Update()
         {
-
         }
         public virtual void OnAnimationEnterEvent()
         {
@@ -58,15 +60,16 @@ namespace BleizEntertainment
         }
         public virtual void OnTriggerEnter(Collider collider)
         {
-            if (stateMachine._Player.layerData.IsGroundLayer(collider.gameObject.layer))
+            if (stateMachine.Player.layerData.IsGroundLayer(collider.gameObject.layer))
             {
                 OnContactWithGround(collider);
                 return;
             }
         }
-        public void OnTriggerExit(Collider collider)
+        public virtual void OnTriggerExit(Collider collider)
         {
-            if (stateMachine._Player.layerData.IsGroundLayer(collider.gameObject.layer))
+
+            if (stateMachine.Player.layerData.IsGroundLayer(collider.gameObject.layer))
             {
                 OnContactWithGroundExited(collider);
                 return;
@@ -76,7 +79,7 @@ namespace BleizEntertainment
         #region Main
         private void ReadMovementInput()
         {
-            stateMachine.reasubleData.MovementInput = stateMachine._Player.Input.playerActions.movement.ReadValue<Vector2>();
+            stateMachine.reasubleData.MovementInput = stateMachine.Player.Input.playerActions.movement.ReadValue<Vector2>();
         }
 
         private void Move()
@@ -87,7 +90,7 @@ namespace BleizEntertainment
             Vector3 targetRotationDirection = GetTargetRotationDirection(targetRotationYAngle);
             float movementSpeed = GetMovementSpeed();
             Vector3 currentPlayerHorizontalVelocity = GetPlayerHorizontalVelocity();
-            stateMachine._Player.rigidBody.AddForce(targetRotationDirection * movementSpeed - currentPlayerHorizontalVelocity, ForceMode.VelocityChange);
+            stateMachine.Player.rigidBody.AddForce(targetRotationDirection * movementSpeed - currentPlayerHorizontalVelocity, ForceMode.VelocityChange);
         }
 
         private float Rotate(Vector3 direction)
@@ -104,7 +107,7 @@ namespace BleizEntertainment
         }
         private float AddCameraRotationToAngle(float angle)
         {
-            angle += stateMachine._Player.mainCameraTransform.eulerAngles.y;
+            angle += stateMachine.Player.mainCameraTransform.eulerAngles.y;
             if (angle > 360f) angle -= 360f;
             return angle;
         }
@@ -118,26 +121,28 @@ namespace BleizEntertainment
         #region Reusable Methods
         protected void StartAnimation(int animationHash)
         {
-            stateMachine._Player.animator.SetBool(animationHash,true);
+            stateMachine.assignedAnimator.SetBool(animationHash,true);
+            //stateMachine.assignedNetworkAnimator.SetTrigger(animationHash,true);
         }
         protected void StopAnimation(int animationHash)
         {
-            stateMachine._Player.animator.SetBool(animationHash, false);
+            stateMachine.assignedAnimator.SetBool(animationHash, false);
+            //stateMachine.assignedNetworkAnimator.SetTrigger(animationHash, false);
         }
         protected void changeAnimationCount(int animationHash, int number)
         {
-            stateMachine._Player.animator.SetInteger(animationHash, number);
+            stateMachine.assignedAnimator.SetInteger(animationHash, number);
         }
         protected Vector3 GetPlayerHorizontalVelocity()
         {
-            Vector3 playerHorizontalVelocity = stateMachine._Player.rigidBody.linearVelocity;
+            Vector3 playerHorizontalVelocity = stateMachine.Player.rigidBody.linearVelocity;
 
             playerHorizontalVelocity.y = 0f;
             return playerHorizontalVelocity;
         }
         protected Vector3 GetPlayerVerticalVelocity()
         {
-            return new Vector3(0f, stateMachine._Player.rigidBody.linearVelocity.y, 0f);
+            return new Vector3(0f, stateMachine.Player.rigidBody.linearVelocity.y, 0f);
         }
 
         protected float GetMovementSpeed()
@@ -151,12 +156,12 @@ namespace BleizEntertainment
         }
         protected void RotateTowardsTargetRotation()
         {
-            float currentYAngle = stateMachine._Player.rigidBody.rotation.eulerAngles.y;
+            float currentYAngle = stateMachine.Player.rigidBody.rotation.eulerAngles.y;
             if (currentYAngle == stateMachine.reasubleData.CurrentTargetRotation.y) return;
             float smoothedYAngle = Mathf.SmoothDampAngle(currentYAngle, stateMachine.reasubleData.CurrentTargetRotation.y, ref stateMachine.reasubleData.DampedTargetRotationCurrentVelocity.y, stateMachine.reasubleData.TimeToReachTargetRotation.y - stateMachine.reasubleData.DampedTargetRotationPassedTime.y);
             stateMachine.reasubleData.DampedTargetRotationPassedTime.y += Time.deltaTime;
             Quaternion targetRotation = Quaternion.Euler(0f, smoothedYAngle, 0f);
-            stateMachine._Player.rigidBody.MoveRotation(targetRotation);
+            stateMachine.Player.rigidBody.MoveRotation(targetRotation);
         }
         protected float UpdateTargetRotation(Vector3 direction, bool shouldConsiderCameraRotation = true)
         {
@@ -172,32 +177,32 @@ namespace BleizEntertainment
         }
         protected void ResetVelocity()
         {
-            stateMachine._Player.rigidBody.linearVelocity = Vector3.zero;
+            stateMachine.Player.rigidBody.linearVelocity = Vector3.zero;
         }
         protected void ResetVerticalVelocity()
         {
             Vector3 playerHorizontalVelocity = GetPlayerHorizontalVelocity();
-            stateMachine._Player.rigidBody.linearVelocity =playerHorizontalVelocity;
+            stateMachine.Player.rigidBody.linearVelocity =playerHorizontalVelocity;
         }
         protected virtual void AddInputActionCallbacks()
         {
-            stateMachine._Player.Input.playerActions.WalkToggle.started += OnWalkToggleStarted;
+            stateMachine.Player.Input.playerActions.WalkToggle.started += OnWalkToggleStarted;
         }
         protected virtual void RemoveInputActionCallbacks()
         {
-            stateMachine._Player.Input.playerActions.WalkToggle.started -= OnWalkToggleStarted;
+            stateMachine.Player.Input.playerActions.WalkToggle.started -= OnWalkToggleStarted;
         }
         protected void DecelerateHorizontally()
         {
             Vector3 playerHorizontalVelocity = GetPlayerHorizontalVelocity();
 
-            stateMachine._Player.rigidBody.AddForce(-playerHorizontalVelocity * stateMachine.reasubleData.MovementDecelerationforce, ForceMode.Acceleration);
+            stateMachine.Player.rigidBody.AddForce(-playerHorizontalVelocity * stateMachine.reasubleData.MovementDecelerationforce, ForceMode.Acceleration);
         }
         protected void DecelerateVertically()
         {
             Vector3 playerVertivalVelocity = GetPlayerVerticalVelocity();
 
-            stateMachine._Player.rigidBody.AddForce(-playerVertivalVelocity * stateMachine.reasubleData.MovementDecelerationforce, ForceMode.Acceleration);
+            stateMachine.Player.rigidBody.AddForce(-playerVertivalVelocity * stateMachine.reasubleData.MovementDecelerationforce, ForceMode.Acceleration);
         }
         protected bool IsMovingHorizontally(float minimumMagnitude = 0.1f)
         {

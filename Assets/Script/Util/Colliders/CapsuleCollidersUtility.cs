@@ -12,7 +12,7 @@ namespace BleizEntertainment
 
         public void Initialize(GameObject gameObject)
         {
-            if (capsuleColliderData != null) return;
+            if (capsuleColliderData != null) if (capsuleColliderData.Id == gameObject.name) return;
             capsuleColliderData = new CapsuleColliderData();
             capsuleColliderData.Initialize(gameObject);
         }
