@@ -8162,6 +8162,11 @@ PrefabInstance:
       propertyPath: m_CameraDistance
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 8255053522806244668, guid: 7c201e01be6a52b4bb5885475c3afd7c,
+        type: 3}
+      propertyPath: AutoEnableInputs
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

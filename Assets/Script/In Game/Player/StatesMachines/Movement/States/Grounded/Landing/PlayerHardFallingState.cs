@@ -7,7 +7,7 @@ namespace BleizEntertainment
 {
     public class PlayerHardFallingState : PlayerLandingState
     {
-        public PlayerHardFallingState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
+        public PlayerHardFallingState(PlayerStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
         {
         }
         public override void Enter()

@@ -4,7 +4,7 @@ namespace BleizEntertainment
 {
     public class PlayerAriborneState : PlayerMovementStates
     {
-        public PlayerAriborneState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
+        public PlayerAriborneState(PlayerStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
         {
         }
         public override void Enter()

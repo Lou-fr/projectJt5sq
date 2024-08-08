@@ -6,14 +6,14 @@ namespace BleizEntertainment
 {
     public class PlayerMovingState : PlayerGroundedState
     {
-        public PlayerMovingState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
+        public PlayerMovingState(PlayerStateMachine playerStateMachine) : base(playerStateMachine)
         {
         }
 
         public override void Enter()
         {
-            base.Enter();
             StartAnimation(stateMachine._Player.animationData.movingParameterHash);
+            base.Enter();
         }
 
         public override void Exit()

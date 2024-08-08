@@ -98,6 +98,33 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Base_Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""17b98521-3b68-4c9b-b462-6910e88f139d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Charged_Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""edd8961a-1371-43f0-b7b9-75fddee2057f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold(duration=0.75)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UnlockCursor"",
+                    ""type"": ""Button"",
+                    ""id"": ""816c1d89-a43f-4a71-8c07-d751fa1b3a77"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -287,6 +314,39 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7f6147b6-5d50-4a80-ad27-987034d238ea"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Base_Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""88a02f32-e5cd-42d6-b66b-2a6cda747977"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Charged_Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8bc82360-9b88-4527-93f4-04cae4c0cbfc"",
+                    ""path"": ""<Keyboard>/alt"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""UnlockCursor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -395,6 +455,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         m_player_Sprint = m_player.FindAction("Sprint", throwIfNotFound: true);
         m_player_Dash = m_player.FindAction("Dash", throwIfNotFound: true);
         m_player_WalkToggle = m_player.FindAction("Walk Toggle", throwIfNotFound: true);
+        m_player_Base_Attack = m_player.FindAction("Base_Attack", throwIfNotFound: true);
+        m_player_Charged_Attack = m_player.FindAction("Charged_Attack", throwIfNotFound: true);
+        m_player_UnlockCursor = m_player.FindAction("UnlockCursor", throwIfNotFound: true);
         // Debug
         m_Debug = asset.FindActionMap("Debug", throwIfNotFound: true);
         m_Debug_ToggleDebug = m_Debug.FindAction("ToggleDebug", throwIfNotFound: true);
@@ -468,6 +531,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     private readonly InputAction m_player_Sprint;
     private readonly InputAction m_player_Dash;
     private readonly InputAction m_player_WalkToggle;
+    private readonly InputAction m_player_Base_Attack;
+    private readonly InputAction m_player_Charged_Attack;
+    private readonly InputAction m_player_UnlockCursor;
     public struct PlayerActions
     {
         private @InputMaster m_Wrapper;
@@ -480,6 +546,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         public InputAction @Sprint => m_Wrapper.m_player_Sprint;
         public InputAction @Dash => m_Wrapper.m_player_Dash;
         public InputAction @WalkToggle => m_Wrapper.m_player_WalkToggle;
+        public InputAction @Base_Attack => m_Wrapper.m_player_Base_Attack;
+        public InputAction @Charged_Attack => m_Wrapper.m_player_Charged_Attack;
+        public InputAction @UnlockCursor => m_Wrapper.m_player_UnlockCursor;
         public InputActionMap Get() { return m_Wrapper.m_player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -513,6 +582,15 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             @WalkToggle.started += instance.OnWalkToggle;
             @WalkToggle.performed += instance.OnWalkToggle;
             @WalkToggle.canceled += instance.OnWalkToggle;
+            @Base_Attack.started += instance.OnBase_Attack;
+            @Base_Attack.performed += instance.OnBase_Attack;
+            @Base_Attack.canceled += instance.OnBase_Attack;
+            @Charged_Attack.started += instance.OnCharged_Attack;
+            @Charged_Attack.performed += instance.OnCharged_Attack;
+            @Charged_Attack.canceled += instance.OnCharged_Attack;
+            @UnlockCursor.started += instance.OnUnlockCursor;
+            @UnlockCursor.performed += instance.OnUnlockCursor;
+            @UnlockCursor.canceled += instance.OnUnlockCursor;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -541,6 +619,15 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             @WalkToggle.started -= instance.OnWalkToggle;
             @WalkToggle.performed -= instance.OnWalkToggle;
             @WalkToggle.canceled -= instance.OnWalkToggle;
+            @Base_Attack.started -= instance.OnBase_Attack;
+            @Base_Attack.performed -= instance.OnBase_Attack;
+            @Base_Attack.canceled -= instance.OnBase_Attack;
+            @Charged_Attack.started -= instance.OnCharged_Attack;
+            @Charged_Attack.performed -= instance.OnCharged_Attack;
+            @Charged_Attack.canceled -= instance.OnCharged_Attack;
+            @UnlockCursor.started -= instance.OnUnlockCursor;
+            @UnlockCursor.performed -= instance.OnUnlockCursor;
+            @UnlockCursor.canceled -= instance.OnUnlockCursor;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -649,6 +736,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnWalkToggle(InputAction.CallbackContext context);
+        void OnBase_Attack(InputAction.CallbackContext context);
+        void OnCharged_Attack(InputAction.CallbackContext context);
+        void OnUnlockCursor(InputAction.CallbackContext context);
     }
     public interface IDebugActions
     {

@@ -9,7 +9,7 @@ namespace BleizEntertainment
         private bool IsPlayedSinceLast;
         private bool animationNumber;
         bool debugedOnce;
-        public PlayerIdlingState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
+        public PlayerIdlingState(PlayerStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
         {
 
         }

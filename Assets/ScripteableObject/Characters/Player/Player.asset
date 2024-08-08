@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c80c02932a7f8547b4e341e774a1e63, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
+  <chatacterData>k__BackingField:
+    <ChatacterName>k__BackingField: 
+    <ChatacterId>k__BackingField: 0
   <groundedData>k__BackingField:
     <BaseSpeed>k__BackingField: 5
     <GroundToFallRayDistance>k__BackingField: 1
@@ -96,7 +99,7 @@ MonoBehaviour:
       <RotationData>k__BackingField:
         <TargetRotationReachTime>k__BackingField: {x: 0, y: 0.02, z: 0}
       <JumpToGroundTayDistance>k__BackingField: 2
-      <DecelerationForce>k__BackingField: 1.5
+      <DecelerationForce>k__BackingField: 2.5
       <JumpForceModifierOnSlopeUpWards>k__BackingField:
         serializedVersion: 2
         m_Curve:
@@ -190,10 +193,35 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      <StationnaryForce>k__BackingField: {x: 0, y: 1.5, z: 0}
-      <WeakForce>k__BackingField: {x: 1, y: 1.25, z: 1}
-      <MediumForce>k__BackingField: {x: 1.75, y: 1.25, z: 1.75}
-      <StrongForce>k__BackingField: {x: 2.25, y: 1.25, z: 2.25}
+      <StationnaryForce>k__BackingField: {x: 0, y: 5, z: 0}
+      <WeakForce>k__BackingField: {x: 1, y: 5, z: 1}
+      <MediumForce>k__BackingField: {x: 3, y: 5.25, z: 3}
+      <StrongForce>k__BackingField: {x: 5, y: 5.25, z: 5}
     <fallData>k__BackingField:
       <FallSpeedLimit>k__BackingField: 10
       <MinimuToBeConsideredHardFall>k__BackingField: 5
+  <combatData>k__BackingField:
+    <WeaponsDataClass>k__BackingField:
+      <IsMelee>k__BackingField: 1
+      <IsFirearms>k__BackingField: 0
+      <IsProjectile>k__BackingField: 0
+      <IsMagic>k__BackingField: 0
+      <IsHeavy>k__BackingField: 1
+      <IsPistol>k__BackingField: 0
+      <IsRifles>k__BackingField: 0
+    <MeleeCombatData>k__BackingField:
+      <BasicAttackData>k__BackingField:
+        <TimeBeforeResetConsecutive>k__BackingField: 0.61
+        <TimeBetwinAttack>k__BackingField: 0.1
+        <maxConsecutiveAttack>k__BackingField: 2
+        <FirstAttackDmg>k__BackingField: 20
+        <SecondAttackM>k__BackingField: 2
+        <ThirdAttackM>k__BackingField: 1.1
+        <FourthAttackM>k__BackingField: 1.2
+        <FifthAttackM>k__BackingField: 1.3
+      <BasicChargedAtack>k__BackingField:
+        <TimeBitwinChargeAttack>k__BackingField: 1
+        <BaseChargeAttackDamage>k__BackingField: 30
+      <BasicHeavyChargedAtack>k__BackingField:
+        <TimeBitwinHeavyChargeAttack>k__BackingField: 1
+        <BaseHeavyChargeAck>k__BackingField: 20

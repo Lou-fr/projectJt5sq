@@ -7,7 +7,7 @@ namespace BleizEntertainment
     {
         private float startTime;
         private PlayerSprintData sprintData;
-        public PlayerRunningState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
+        public PlayerRunningState(PlayerStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
         {
             sprintData = movementData.SprintData;
         }
@@ -15,11 +15,11 @@ namespace BleizEntertainment
 
         public override void Enter()
         {
+            StartAnimation(stateMachine._Player.animationData.runParameterHash);
             base.Enter();
             stateMachine.reasubleData.MovementSpeedModifier = movementData.RunData.speedModifier;
             stateMachine.reasubleData.CurrentJumpForce = airborneData.jumpData.MediumForce;
             startTime = Time.time;
-            StartAnimation(stateMachine._Player.animationData.runParameterHash);
         }
         public override void Exit()
         {

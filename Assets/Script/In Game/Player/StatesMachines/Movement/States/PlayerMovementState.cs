@@ -5,10 +5,10 @@ namespace BleizEntertainment
 {
     public class PlayerMovementStates : IState
     {
-        protected PlayerMovementStateMachine stateMachine;
+        protected PlayerStateMachine stateMachine;
         protected PlayerGroundedData movementData;
         protected PlayerAirborneData airborneData;
-        public PlayerMovementStates(PlayerMovementStateMachine playerMovementStateMachine)
+        public PlayerMovementStates(PlayerStateMachine playerMovementStateMachine)
         {
             stateMachine = playerMovementStateMachine;
             movementData = stateMachine._Player.data.groundedData;
@@ -104,7 +104,7 @@ namespace BleizEntertainment
         }
         private float AddCameraRotationToAngle(float angle)
         {
-            angle += stateMachine._Player.MainCameraTransform.eulerAngles.y;
+            angle += stateMachine._Player.mainCameraTransform.eulerAngles.y;
             if (angle > 360f) angle -= 360f;
             return angle;
         }
@@ -123,6 +123,10 @@ namespace BleizEntertainment
         protected void StopAnimation(int animationHash)
         {
             stateMachine._Player.animator.SetBool(animationHash, false);
+        }
+        protected void changeAnimationCount(int animationHash, int number)
+        {
+            stateMachine._Player.animator.SetInteger(animationHash, number);
         }
         protected Vector3 GetPlayerHorizontalVelocity()
         {
