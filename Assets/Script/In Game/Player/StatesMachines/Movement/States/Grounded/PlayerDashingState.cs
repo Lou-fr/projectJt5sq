@@ -9,7 +9,7 @@ namespace BleizEntertainment
         private float startTime;
         private int consecutiveDashedUsed;
         private bool shouldKeepRotating;
-        public PlayerDashingState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
+        public PlayerDashingState(PlayerStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
         {
             _dashData = movementData.dashData;
         }

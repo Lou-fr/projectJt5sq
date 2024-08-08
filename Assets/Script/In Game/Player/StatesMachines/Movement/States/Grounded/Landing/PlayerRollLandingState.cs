@@ -5,7 +5,7 @@ namespace BleizEntertainment
 {
     public class PlayerRollLandingState : PlayerLandingState
     {
-        public PlayerRollLandingState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
+        public PlayerRollLandingState(PlayerStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
         {
         }
         public override void Enter()

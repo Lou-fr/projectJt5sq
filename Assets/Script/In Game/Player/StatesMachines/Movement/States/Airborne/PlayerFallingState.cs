@@ -6,7 +6,7 @@ namespace BleizEntertainment
     {
         private PlayerFallData fallData;
         private Vector3 playerPosOnEnter;
-        public PlayerFallingState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
+        public PlayerFallingState(PlayerStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
         {
             fallData = airborneData.fallData;
         }

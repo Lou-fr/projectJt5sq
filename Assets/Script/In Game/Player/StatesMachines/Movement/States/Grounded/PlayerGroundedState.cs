@@ -6,9 +6,13 @@ namespace BleizEntertainment
     public class PlayerGroundedState : PlayerMovementStates
     {
         private SlopeData slopeData;
-        public PlayerGroundedState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
+        protected PlayerCombatDataState combatData;
+        private WeaponsDataClass WeaponsClass;
+        public PlayerGroundedState(PlayerStateMachine playerStateMachine) : base(playerStateMachine)
         {
             slopeData = stateMachine._Player.collidersUtility.CapsuleCollidersUtility.slopeData;
+            combatData = stateMachine._Player.data.combatData;
+            WeaponsClass = combatData.WeaponsDataClass;
         }
         public override void Enter()
         {
@@ -67,14 +71,19 @@ namespace BleizEntertainment
             stateMachine._Player.Input.playerActions.movement.canceled += OnMovementCancel;
             stateMachine._Player.Input.playerActions.Dash.started += OnDashStarted;
             stateMachine._Player.Input.playerActions.Jump.started += OnJumpStarted;
+            stateMachine._Player.Input.playerActions.Base_Attack.started += OnAttackStarted;
+            stateMachine._Player.Input.playerActions.Charged_Attack.performed += OnChargeAttackStarted;
         }
         protected override void RemoveInputActionCallbacks()
         {
             base.RemoveInputActionCallbacks();
             stateMachine._Player.Input.playerActions.movement.canceled -= OnMovementCancel;
             stateMachine._Player.Input.playerActions.Dash.started -= OnDashStarted;
-            stateMachine._Player.Input.playerActions.Jump.started += OnJumpStarted;
+            stateMachine._Player.Input.playerActions.Jump.started -= OnJumpStarted;
+            stateMachine._Player.Input.playerActions.Base_Attack.started -= OnAttackStarted;
+            stateMachine._Player.Input.playerActions.Charged_Attack.performed -= OnChargeAttackStarted;
         }
+
         protected virtual void OnMove()
         {
             if (stateMachine.reasubleData.ShouldSprint)
@@ -131,6 +140,28 @@ namespace BleizEntertainment
             stateMachine.ChangeState(stateMachine.jumpingState);
         }
 
+        protected virtual void OnAttackStarted(InputAction.CallbackContext context)
+        {
+            if (WeaponsClass.IsMelee) { stateMachine.ChangeState(stateMachine.MeleeAtackState); return; }
+        }
+        protected virtual void OnChargeAttackStarted(InputAction.CallbackContext context)
+        {
+            if (WeaponsClass.IsMelee) 
+            {
+                if(WeaponsClass.IsHeavy)
+                {
+                    stateMachine.ChangeState(stateMachine.ChargeHeavyMeleeAtackState);
+                    return;
+                }
+                stateMachine.ChangeState(stateMachine.ChargeMeleeAtackState);
+                return;
+            }
+            if (WeaponsClass.IsRifles)
+            {
+
+                return;
+            }
+        }
         #endregion
     }
 }

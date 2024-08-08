@@ -57,7 +57,7 @@ public class LobbyManager : MonoBehaviour
         LobbyUI.OnRefreshLobbyPlayer += handleRefreshLobbyPlayer;
         LobbyUI.OnRefreshLobbyPrivacy += handleChangePrivacy;
         FirstLoading.StartTransport += handlePrivacyPlayingMode;
-        Menu.OnRTMM += handleRTMM;
+        BleizEntertainment.Menu.OnRTMM += handleRTMM;
         HandleCreateLobby();
         Debug.Log("Initialized lobby manager...",this);
     }
@@ -105,7 +105,7 @@ public class LobbyManager : MonoBehaviour
     void OnDestroy()
     {
         Unity_Auth.OnSucess -= Initialize;
-        Menu.OnRTMM -= handleRTMM;
+        BleizEntertainment.Menu.OnRTMM -= handleRTMM;
         LobbyUI.OnRefreshlobby -= handleRefreshLobby;
         LobbyUIPrefab.joinLobby -= handleJoinLobby;
         FriendsManager.OnJoinRequestAccepted -= joinVialobbyCode;

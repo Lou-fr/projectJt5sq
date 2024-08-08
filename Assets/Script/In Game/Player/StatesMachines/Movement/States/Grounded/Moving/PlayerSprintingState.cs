@@ -9,18 +9,18 @@ namespace BleizEntertainment
         private float startTime;
         private bool keepSprinting;
         private bool ShouldResetSprintingState;
-        public PlayerSprintingState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
+        public PlayerSprintingState(PlayerStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
         {
             sprintData = movementData.SprintData;
         }
         public override void Enter()
         {
+            StartAnimation(stateMachine._Player.animationData.sprintParameterHash);
             base.Enter();
             stateMachine.reasubleData.MovementSpeedModifier = sprintData.SpeedModifier;
             stateMachine.reasubleData.CurrentJumpForce = airborneData.jumpData.StrongForce;
             ShouldResetSprintingState = true;
             startTime = Time.time;
-            StartAnimation(stateMachine._Player.animationData.sprintParameterHash);
         }
         public override void Exit()
         {

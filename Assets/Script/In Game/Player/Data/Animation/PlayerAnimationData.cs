@@ -34,6 +34,10 @@ namespace BleizEntertainment
         [Header("Idlling State: IdleAnimation switch parameter")]
         [field: SerializeField][field: Range(0f, 60f)] public float timeBeforeIdleAnimation = 10f;
 
+        [Header("Combat state: combat parameter Names")]
+        [SerializeField] private string combatAnimationParameterName = "IsIncombat";
+        [SerializeField] private string ackNumberAnimationParameterName = "attackNumber";
+
         public int GroundedParameterHash { get; private set; }
         public int movingParameterHash { get; private set; }
         public int stoppingParameterHash { get; private set; }
@@ -52,6 +56,8 @@ namespace BleizEntertainment
         public int idlleAnimationParameterHash { get; private set; }
         public int TidlleAnimationParameterHash { get; private set; }
         public bool PlayOtherAnimation { get; set; } = false;
+        public int combatAnimationParameterHash { get; private set; }
+        public int ackNumberAnimationParameterHash { get; private set; }
 
         public void Initialize()
         {
@@ -72,6 +78,8 @@ namespace BleizEntertainment
             FallParameterHash = Animator.StringToHash(fallParameterName);
             idlleAnimationParameterHash = Animator.StringToHash(idlleAnimationParameterName);
             TidlleAnimationParameterHash = Animator.StringToHash(TidlleAnimationParameterName);
+            combatAnimationParameterHash = Animator.StringToHash(combatAnimationParameterName);
+            ackNumberAnimationParameterHash = Animator.StringToHash(ackNumberAnimationParameterName);
         }
 
     }

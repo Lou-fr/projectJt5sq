@@ -2,8 +2,9 @@ using UnityEngine;
 
 namespace BleizEntertainment
 {
-    public class PlayerStateReasubleData
+    public class PlayerStateMovementReusableData
     {
+        #region Movement reusable data
         public Vector2 MovementInput { get; set; }
         public float MovementSpeedModifier { get; set; } = 1f;
         public float MovementOnSlopesSpeedModifier { get; set; } = 1f;
@@ -45,5 +46,7 @@ namespace BleizEntertainment
         public Vector3 CurrentJumpForce { get; set; }
 
         public PlayerRotationData RotationData { get; set; }
+        #endregion
+
     }
 }

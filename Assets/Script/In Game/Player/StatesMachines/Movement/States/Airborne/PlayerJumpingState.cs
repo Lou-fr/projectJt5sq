@@ -7,7 +7,7 @@ namespace BleizEntertainment
         private bool shoulKeepRotating;
         private PlayerJumpData jumpData;
         private bool canStartFalling;
-        public PlayerJumpingState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
+        public PlayerJumpingState(PlayerStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
         {
             jumpData = airborneData.jumpData;
         }

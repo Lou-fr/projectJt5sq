@@ -7,6 +7,7 @@ using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class LobbyUI : MonoBehaviour
 {
     public static Action OnRefreshlobby = delegate {};
@@ -31,7 +32,7 @@ public class LobbyUI : MonoBehaviour
         //LobbyManager.LobbyPlayerResult += handleDisplayPlayer;
         //OnRefreshlobby?.Invoke();
         Refresh.onClick.AddListener(OnRefresh);
-        Menu.LobbyUIOpen += _OnRefresh;
+        BleizEntertainment.Menu.LobbyUIOpen += _OnRefresh;
         manage.onClick.AddListener(ManageUI);
         temp_txt = Refresh.gameObject.GetComponentInChildren<TextMeshProUGUI>();
         temp_content = GetLocalal.GetString("In-Game_Menu","Lobbby_Refresh");
@@ -59,7 +60,7 @@ public class LobbyUI : MonoBehaviour
        //LobbyManager.KickFromLobby -= handleEnableManage;
        //LobbyManager.LobbyPlayerResult -= handleDisplayPlayer;
         Refresh.onClick.RemoveListener(OnRefresh);
-        Menu.LobbyUIOpen -= _OnRefresh;
+        BleizEntertainment.Menu.LobbyUIOpen -= _OnRefresh;
         manage.onClick.RemoveListener(ManageUI);
     }
 

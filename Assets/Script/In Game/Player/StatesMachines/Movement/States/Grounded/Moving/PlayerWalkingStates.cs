@@ -4,17 +4,17 @@ namespace BleizEntertainment
 {
     public class PlayerWalkingState : PlayerMovingState
     {
-        public PlayerWalkingState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
+        public PlayerWalkingState(PlayerStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
         {
         }
         #region IState Methods
 
         public override void Enter()
         {
+            StartAnimation(stateMachine._Player.animationData.walkParameterHash);
             base.Enter();
             stateMachine.reasubleData.MovementSpeedModifier = movementData.WalkData.speedModifier;
             stateMachine.reasubleData.CurrentJumpForce = airborneData.jumpData.WeakForce;
-            StartAnimation(stateMachine._Player.animationData.walkParameterHash);
         }
         public override void Exit()
         {

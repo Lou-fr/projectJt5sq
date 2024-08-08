@@ -6,7 +6,7 @@ namespace BleizEntertainment
 {
     public class PlayerLandingState : PlayerGroundedState
     {
-        public PlayerLandingState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
+        public PlayerLandingState(PlayerStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
         {
         }
         public override void Enter()

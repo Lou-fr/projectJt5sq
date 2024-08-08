@@ -2,7 +2,7 @@ namespace BleizEntertainment
 {
     public class PlayerHeavyStoppingState : PlayerStoppingState
     {
-        public PlayerHeavyStoppingState(PlayerMovementStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
+        public PlayerHeavyStoppingState(PlayerStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
         {
         }
         public override void Enter()
