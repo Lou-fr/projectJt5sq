@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Localization-Assets-Shared
   m_EditorClassIdentifier: 
   m_GroupName: Localization-Assets-Shared
-  m_GUID: bcf0be4163c895b4aa5c27ca048b3a5c
+  m_GUID: 197ce5b3ffc3468469dd3d8a9c41a667
   m_SerializeEntries:
   - m_GUID: 454cbbf8432f8cd48b37197d5a4b850a
     m_Address: Assets/LocalSettings/Locales/Tables/StartScreen Shared Data.asset
@@ -26,8 +26,8 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
-  m_Settings: {fileID: 11400000, guid: b7d73dfc372c3574c96f29cb6815b19d, type: 2}
+  m_Settings: {fileID: 11400000, guid: db73d689df1a52d4eaeb1b4317c9273d, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 686f5525c6461a646bda3181602f4618, type: 2}
-    - {fileID: 11400000, guid: 1ae1f023545d2f644a0355b0405f0043, type: 2}
+    - {fileID: 11400000, guid: 821969a6364edf74d9c4fd715339b87c, type: 2}
+    - {fileID: 11400000, guid: 4ff903dea565d5049b3eee192e242e68, type: 2}

@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LoadingBetweenPosition : MonoBehaviour
@@ -35,6 +32,6 @@ public class LoadingBetweenPosition : MonoBehaviour
 
     private void handleRemoveLoadingScreen()
     {
-        if(IsMenuReady && IsPositionSetup)loadingScreen.SetActive(false);
+        if (IsMenuReady && IsPositionSetup) loadingScreen.SetActive(false);
     }
 }

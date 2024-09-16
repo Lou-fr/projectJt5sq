@@ -3,7 +3,7 @@ using UnityEngine;
 namespace BleizEntertainment
 {
     [CreateAssetMenu(fileName = "Player", menuName = "BleizEntertainment/Characters/Player")]
-    public class PlayerSO : ScriptableObject
+    public class CharacterSO : ScriptableObject
     {
         [field: SerializeField] public ChatacterInfoData CharacterInfoData { get; private set; }
         [field: SerializeField] public PlayerGroundedData groundedData { get; private set; }

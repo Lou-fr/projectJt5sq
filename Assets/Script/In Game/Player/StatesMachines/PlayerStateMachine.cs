@@ -7,7 +7,7 @@ namespace BleizEntertainment
     {
         public CharacterOffHandler CharacterHandler { get; protected set; }//For mutliplayer swicht back to CharacterHandler
         public PlayerOffHandler Player { get; protected set; }//For mutliplayer swicht back to playerhandler
-        public PlayerSO Character { get; }
+        public CharacterSO Character { get; }
         public Animator assignedAnimator { get; private set; }
         //public ClientNetworkAnimator assignedNetworkAnimator { get; private set; }
         public PlayerStateMovementReusableData reasubleData { get; }
