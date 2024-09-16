@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Localization-String-Tables-English (en)
   m_EditorClassIdentifier: 
   m_GroupName: Localization-String-Tables-English (en)
-  m_GUID: 262af450bba4a1547828183dddb3934a
+  m_GUID: 36b5c6cb405da9745924bd45ca50c89d
   m_SerializeEntries:
   - m_GUID: 0f22142be6637e0418013c0b1716c327
     m_Address: In-Game_Menu_en
@@ -28,8 +28,8 @@ MonoBehaviour:
     - Locale-en
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
-  m_Settings: {fileID: 11400000, guid: b7d73dfc372c3574c96f29cb6815b19d, type: 2}
+  m_Settings: {fileID: 11400000, guid: db73d689df1a52d4eaeb1b4317c9273d, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 6da1b33c41fdfc443b1bfb52d9ce61a2, type: 2}
-    - {fileID: 11400000, guid: ea819706225130b4e81966ddbadd66b5, type: 2}
+    - {fileID: 11400000, guid: 952c3ea66b3f0bd4cbeffd802003c985, type: 2}
+    - {fileID: 11400000, guid: b3c1ec2ad1e3cd54ba33ffcaee889446, type: 2}

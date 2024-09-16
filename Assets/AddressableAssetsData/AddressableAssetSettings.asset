@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 56f518eded7a8414ca3ff6ebec74092e
   m_currentHash:
     serializedVersion: 2
-    Hash: 700948a4be3a23446acca5b06f126dce
+    Hash: f582d40229b3c22de6173b3f9d120538
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_CatalogRequestsTimeout: 0
@@ -59,11 +59,16 @@ MonoBehaviour:
   m_BuildAddressablesWithPlayerBuild: 0
   m_overridePlayerVersion: '[UnityEditor.PlayerSettings.bundleVersion]'
   m_GroupAssets:
-  - {fileID: 11400000, guid: 52212d8710a0dd140932edcf6dfb7a10, type: 2}
-  - {fileID: 11400000, guid: f2213fed69805584fbd3bf707b4cf35b, type: 2}
-  - {fileID: 11400000, guid: bcc5770cb86894140b275666eac6916e, type: 2}
   - {fileID: 11400000, guid: 8418ae5d64c8df34c876e50ce841c33f, type: 2}
+  - {fileID: 11400000, guid: 19eae714981dc1d4ca1ad9d597f1e80b, type: 2}
   - {fileID: 11400000, guid: d3b5dafd4ce99664ea40e2e4e1c64ea8, type: 2}
+  - {fileID: 11400000, guid: 16dae38cf5ea54e4e9896254363db540, type: 2}
+  - {fileID: 11400000, guid: f2213fed69805584fbd3bf707b4cf35b, type: 2}
+  - {fileID: 11400000, guid: 3794025f29eab7249866c6e936af09f2, type: 2}
+  - {fileID: 11400000, guid: 52212d8710a0dd140932edcf6dfb7a10, type: 2}
+  - {fileID: 11400000, guid: bcc5770cb86894140b275666eac6916e, type: 2}
+  - {fileID: 11400000, guid: d47e84f5565104f46a8ed880b52ee2c7, type: 2}
+  - {fileID: 11400000, guid: ec77ea825d2161742982a0916708989f, type: 2}
   m_BuildSettings:
     m_LogResourceManagerExceptions: 1
     m_BundleBuildPath: Temp/com.unity.addressables/AssetBundles
@@ -115,7 +120,7 @@ MonoBehaviour:
     m_ClassName: 
   m_ActivePlayerDataBuilderIndex: 2
   m_DataBuilders:
-  - {fileID: 11400000, guid: ccc0d0d963b571147b87533ff23f6ab8, type: 2}
-  - {fileID: 11400000, guid: 4d583849d1caae341952645a75182d2a, type: 2}
-  - {fileID: 11400000, guid: 460fdad7164db1942a9a5c3b4d15710c, type: 2}
+  - {fileID: 11400000, guid: ca7a322d251278445bfbd2c4ec8b9a7a, type: 2}
+  - {fileID: 11400000, guid: 987082343a489d54793e1e8db22788fd, type: 2}
+  - {fileID: 11400000, guid: fc9dd166c0a5d9a49a3833a831d107f2, type: 2}
   m_ActiveProfileId: 48912e9c404c56d4bb87e0f19b2797c8

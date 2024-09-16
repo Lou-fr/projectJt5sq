@@ -9,7 +9,7 @@ namespace BleizEntertainment
         [SerializeField] private Transform CharacterContainer;
         private CharacterLightUIPrefab[] InitiatedPrefab = new CharacterLightUIPrefab[4];
 
-        public void InitLightUI(PlayerSO[] charactersInfo, int i)
+        public void InitLightUI(CharacterSO[] charactersInfo, int i)
         {
             foreach (Transform child in CharacterContainer)
             {
@@ -17,7 +17,7 @@ namespace BleizEntertainment
             }
             for (int index = 0; index < i; index++)
             {
-                PlayerSO character = charactersInfo[index];
+                CharacterSO character = charactersInfo[index];
                 InitiatedPrefab[index] = Instantiate(LightUIPrefab, CharacterContainer);
                 InitiatedPrefab[index].Init(character, index);
             }

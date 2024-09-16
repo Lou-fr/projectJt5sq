@@ -14,7 +14,7 @@ namespace BleizEntertainment
         private bool activate = false;
         Color BaseColor;
 
-        public void Init(PlayerSO charactergeneral, int Index)
+        public void Init(CharacterSO charactergeneral, int Index)
         {
             characterName.SetText(charactergeneral.CharacterInfoData.ChatacterName);
             UltPercentage = 0;
@@ -25,6 +25,12 @@ namespace BleizEntertainment
             BaseColor = ActiveBackground.color;
             BaseColor.a = 0;
             ActiveBackground.color = BaseColor;
+            Sprite sprite = charactergeneral.CharacterInfoData.AssociatedProfilePicture;
+            if (sprite != null) 
+            { 
+                characterProfile.sprite = sprite;
+            }
+
         }
         private void OnDestroy()
         {

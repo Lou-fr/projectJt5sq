@@ -10,7 +10,7 @@ namespace BleizEntertainment
         private PlayerOffHandler PlayerHandler;
         public Animator AssignedAnimator { get; private set; }
         private PlayerAnimationEventTrigger AssignedTrigger;
-        public PlayerSO AssignedCharacter { get; private set; }
+        public CharacterSO AssignedCharacter { get; private set; }
         public PlayerStateReusableCombatData CombatData { get; private set; } = new PlayerStateReusableCombatData();
         public static Action<float,bool> healthPercetange= delegate {};
         public static Action CharacterDead= delegate {};
@@ -19,7 +19,7 @@ namespace BleizEntertainment
         protected int maxHealth;
         public bool IsAlive { get; protected set; } = true;
         bool Activate;
-        public void Init(PlayerOffHandler player, int assignedNumber, PlayerSO assignedCharacter, PlayerInput input, PlayerLayerData layerdata, PlayerAnimationData animationData, bool activate = false)
+        public void Init(PlayerOffHandler player, int assignedNumber, CharacterSO assignedCharacter, PlayerInput input, PlayerLayerData layerdata, PlayerAnimationData animationData, bool activate = false)
         {
             AssignedNumber = assignedNumber;
 #if DEBUG || UNITY_EDITOR

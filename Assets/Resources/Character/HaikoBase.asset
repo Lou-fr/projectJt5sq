@@ -17,7 +17,7 @@ MonoBehaviour:
     <ChatacterId>k__BackingField: 2410
     <BaseCharacterHp>k__BackingField: 92
     <Controller>k__BackingField: {fileID: 9100000, guid: 1def841865c5558458e81ce2ab156472, type: 2}
-    <AssociatedSkin>k__BackingField: {fileID: 7110542648142507708, guid: a6b8eece2763cf94eaba617e41c5a821, type: 3}
+    <AssociatedSkin>k__BackingField: {fileID: 7110542648142507708, guid: 69b4d2150f32f824195fcf8719c88300, type: 3}
     <characterHeight>k__BackingField: 1.75
   <groundedData>k__BackingField:
     <BaseSpeed>k__BackingField: 5

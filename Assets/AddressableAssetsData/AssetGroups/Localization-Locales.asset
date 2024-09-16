@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Localization-Locales
   m_EditorClassIdentifier: 
   m_GroupName: Localization-Locales
-  m_GUID: f0e2cda7f1f717c45811fd3466a58c9b
+  m_GUID: da60e62f8afa672449705bcd22d4f0c7
   m_SerializeEntries:
   - m_GUID: 1d843c7bff0735e468cda096dc1a53bc
     m_Address: French (France) (fr-FR)
@@ -28,8 +28,8 @@ MonoBehaviour:
     - Locale
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
-  m_Settings: {fileID: 11400000, guid: b7d73dfc372c3574c96f29cb6815b19d, type: 2}
+  m_Settings: {fileID: 11400000, guid: db73d689df1a52d4eaeb1b4317c9273d, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 3e5db1a50cd22494e90e9ef0521ade26, type: 2}
-    - {fileID: 11400000, guid: 218faf58809c47c43a4047a9565e4856, type: 2}
+    - {fileID: 11400000, guid: 3b85afc263482a8458faed5ef7801982, type: 2}
+    - {fileID: 11400000, guid: a4b82761c0195e34b8a09cdff7b6de91, type: 2}

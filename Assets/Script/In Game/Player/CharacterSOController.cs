@@ -155,7 +155,7 @@ namespace BleizEntertainment
         protected CharacterDictionary characterDictionary = new();
         private PlayerOffHandler playerHandler;
         public CharacterSelecterUI characterSelecterUI { get; private set; }
-        public PlayerSO[] ListCurrentChara { get; protected set; } = new PlayerSO[4];
+        public CharacterSO[] ListCurrentChara { get; protected set; } = new CharacterSO[4];
         bool Iniated = false;
         public int CharacterNumber { get; private set; } = 0;
         public void Awake()
@@ -178,7 +178,7 @@ namespace BleizEntertainment
             int[] t = { 2410, 13, 857 };
             return t;
         }
-        private (bool, PlayerSO) ChekDuplicate(PlayerSO playerSO, PlayerSO[] list)
+        private (bool, CharacterSO) ChekDuplicate(CharacterSO playerSO, CharacterSO[] list)
         {
             for (int i = 0; i < list.Length; i++)
             {
@@ -193,7 +193,7 @@ namespace BleizEntertainment
         {
             try
             {
-                PlayerSO temp = characterDictionary.GetPlayerSOFromId(id);
+                CharacterSO temp = characterDictionary.GetPlayerSOFromId(id);
                 if (ChekDuplicate(temp, ListCurrentChara) != (true, null))
                 {
                     CharacterNumber++;
@@ -217,7 +217,7 @@ namespace BleizEntertainment
             for (int i = 0; i < CharacterNumber; i++)
             {
                 if (index >= CharacterNumber) return;
-                PlayerSO characterSO = ListCurrentChara[i];
+                CharacterSO characterSO = ListCurrentChara[i];
                 playerHandler.currentCharacters[i] = GameObject.Instantiate(characterSO.CharacterInfoData.AssociatedSkin,playerHandler.gameObject.transform);
                 Debug.Log($"CHARCTER SWAP  SYS : {characterSO.CharacterInfoData.ChatacterName}", this);
                 CharacterOffHandler charHandler = playerHandler.currentCharacters[i].AddComponent<CharacterOffHandler>();

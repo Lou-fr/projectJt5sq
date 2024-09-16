@@ -5,16 +5,16 @@ namespace BleizEntertainment
 {
     public class CharacterDictionary
     {
-        public IDictionary<int, PlayerSO> CharacterDicti { get; private set; } = new Dictionary<int, PlayerSO>(); 
+        public IDictionary<int, CharacterSO> CharacterDicti { get; private set; } = new Dictionary<int, CharacterSO>(); 
 
-        public PlayerSO GetPlayerSOFromId(int id)
+        public CharacterSO GetPlayerSOFromId(int id)
         {
             return CharacterDicti[id];
         }
         public void Initialize()
         {
-            PlayerSO[] load = Resources.LoadAll<PlayerSO>("Character/");
-            foreach (PlayerSO characterInfo in load)
+            CharacterSO[] load = Resources.LoadAll<CharacterSO>("Character/");
+            foreach (CharacterSO characterInfo in load)
             {
                     CharacterDicti.Add(characterInfo.CharacterInfoData.ChatacterId, characterInfo);
                 Debug.Log($"CHARCTER DICITIONNARY : Added {characterInfo.CharacterInfoData.ChatacterName} at the id {characterInfo.CharacterInfoData.ChatacterId}");    

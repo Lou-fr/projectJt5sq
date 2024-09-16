@@ -777,6 +777,7 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+  m_ScrollDeltaPerTick: 6
 --- !u!114 &276536278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2856,8 +2857,8 @@ GameObject:
   - component: {fileID: 1167079869}
   - component: {fileID: 1167079871}
   - component: {fileID: 1167079870}
-  - component: {fileID: 1167079872}
   - component: {fileID: 1167079873}
+  - component: {fileID: 1167079874}
   m_Layer: 5
   m_Name: CharacterSelectorRightSide
   m_TagString: Untagged
@@ -2922,20 +2923,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1167079868}
   m_CullTransparentMesh: 1
---- !u!114 &1167079872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1167079868}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 209c285b5f634034a9c9417a320b7b5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LightUIPrefab: {fileID: 4496176145820843491, guid: d7b52b34fb791f648b4325e9f78197f5, type: 3}
-  CharacterContainer: {fileID: 1167079869}
 --- !u!114 &1167079873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2962,6 +2949,20 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1167079874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1167079868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e783ea38d1685e41830dbc2bad0eb61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LightUIPrefab: {fileID: 4496176145820843491, guid: 8677dec0f412f7e43bbb329308803a42, type: 3}
+  CharacterContainer: {fileID: 1167079869}
 --- !u!1 &1237980752
 GameObject:
   m_ObjectHideFlags: 0
@@ -3323,7 +3324,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9b4a273d260b3de42b98905c10da346c, type: 2}
+  - {fileID: 2100000, guid: 4d03e89e067668f4cbe39e0b2645c4af, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4192,23 +4193,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &1698269170 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5557739426418556529, guid: 4774c1a51bcf080479bb127ef62283f9, type: 3}
-  m_PrefabInstance: {fileID: 2694954530161041684}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1698269178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1698269170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efb022b10fa31584ca0da793450149f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1733058095
 GameObject:
   m_ObjectHideFlags: 0
@@ -5265,10 +5249,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4148978860952775935, guid: 4774c1a51bcf080479bb127ef62283f9, type: 3}
-      propertyPath: <layerData>k__BackingField.<groundLayer>k__BackingField.m_Bits
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 4750266048006327859, guid: 4774c1a51bcf080479bb127ef62283f9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5313,17 +5293,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 6081998467579592966, guid: 4774c1a51bcf080479bb127ef62283f9, type: 3}
-      propertyPath: m_Constraints
-      value: 112
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5557739426418556529, guid: 4774c1a51bcf080479bb127ef62283f9, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1698269178}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4774c1a51bcf080479bb127ef62283f9, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
