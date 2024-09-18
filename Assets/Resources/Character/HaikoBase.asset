@@ -9,15 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c80c02932a7f8547b4e341e774a1e63, type: 3}
+  m_Script: {fileID: 11500000, guid: f135078894ff3d042927caaae916bbdd, type: 3}
   m_Name: HaikoBase
   m_EditorClassIdentifier: 
   <CharacterInfoData>k__BackingField:
     <ChatacterName>k__BackingField: Aiko
     <ChatacterId>k__BackingField: 2410
     <BaseCharacterHp>k__BackingField: 92
-    <Controller>k__BackingField: {fileID: 9100000, guid: 1def841865c5558458e81ce2ab156472, type: 2}
-    <AssociatedSkin>k__BackingField: {fileID: 7110542648142507708, guid: 69b4d2150f32f824195fcf8719c88300, type: 3}
+    <Controller>k__BackingField: {fileID: 9100000, guid: 7f72327429b5d0341bf490e38f266175, type: 2}
+    <AssociatedSkin>k__BackingField: {fileID: 2136474214080692675, guid: 3304f26c66cf3c44c97e091366bbbf86, type: 3}
+    <AssociatedProfilePicture>k__BackingField: {fileID: 0}
     <characterHeight>k__BackingField: 1.75
   <groundedData>k__BackingField:
     <BaseSpeed>k__BackingField: 5

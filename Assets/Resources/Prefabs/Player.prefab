@@ -132,7 +132,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5557739426418556529}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0055735ce39d11640b5b6d8dc3a834e1, type: 3}
+  m_Script: {fileID: 11500000, guid: b0681e88ed48f42458ddfb5f3d7a8b7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <collidersUtility>k__BackingField:
@@ -173,8 +173,8 @@ MonoBehaviour:
     combatAnimationParameterName: IsIncombat
     ackNumberAnimationParameterName: attackNumber
   <userSettingsData>k__BackingField:
-    <BaseZoomSensivity>k__BackingField: 1
-  characterController: {fileID: 5762814573439297485}
+    <BaseZoomSensivity>k__BackingField: 5.89
+  characterController: {fileID: 1211615057939100870}
   currentCharacters:
   - {fileID: 0}
   - {fileID: 0}
@@ -189,7 +189,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5557739426418556529}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7baca4e8a8fc17418cbc62627615750, type: 3}
+  m_Script: {fileID: 11500000, guid: 5480072f0b33394429e33933b901275e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!54 &6081998467579592966
@@ -251,13 +251,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5557739426418556529}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2eefdb7a93861564f816c1c8e729670f, type: 3}
+  m_Script: {fileID: 11500000, guid: 7c518ee22c39a274cb7204ccafeb95e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultDistance: 6
-  minDistance: 1
-  maxtDistance: 6
-  smoothing: 4
 --- !u!114 &5762814573439297485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,9 +263,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5557739426418556529}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 967ea50ef4a55b146930686c19fa9938, type: 3}
+  m_Script: {fileID: 11500000, guid: 214dbe9786a44aa48a542c77465c3e02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultDistance: 6
+  minDistance: 1
+  maxtDistance: 6
+  smoothing: 4
 --- !u!1 &5950241313334120294
 GameObject:
   m_ObjectHideFlags: 0
