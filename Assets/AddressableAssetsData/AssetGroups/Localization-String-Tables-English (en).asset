@@ -14,22 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GroupName: Localization-String-Tables-English (en)
   m_GUID: 36b5c6cb405da9745924bd45ca50c89d
-  m_SerializeEntries:
-  - m_GUID: 0f22142be6637e0418013c0b1716c327
-    m_Address: In-Game_Menu_en
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6b5fed9ef0e47564a8fe4edec697780f
-    m_Address: StartScreen_en
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-en
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 1
-  m_Settings: {fileID: 11400000, guid: db73d689df1a52d4eaeb1b4317c9273d, type: 2}
+  m_Settings: {fileID: 11400000, guid: 3aac8a833cc9e534daff5508435418de, type: 2}
   m_SchemaSet:
-    m_Schemas:
-    - {fileID: 11400000, guid: 952c3ea66b3f0bd4cbeffd802003c985, type: 2}
-    - {fileID: 11400000, guid: b3c1ec2ad1e3cd54ba33ffcaee889446, type: 2}
+    m_Schemas: []

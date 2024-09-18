@@ -14,20 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GroupName: Localization-Assets-Shared
   m_GUID: 197ce5b3ffc3468469dd3d8a9c41a667
-  m_SerializeEntries:
-  - m_GUID: 454cbbf8432f8cd48b37197d5a4b850a
-    m_Address: Assets/LocalSettings/Locales/Tables/StartScreen Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a5840d78cae124a4281904217aef2bef
-    m_Address: Assets/LocalSettings/Locales/Tables/In-Game_Menu Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 1
-  m_Settings: {fileID: 11400000, guid: db73d689df1a52d4eaeb1b4317c9273d, type: 2}
+  m_Settings: {fileID: 11400000, guid: 3aac8a833cc9e534daff5508435418de, type: 2}
   m_SchemaSet:
-    m_Schemas:
-    - {fileID: 11400000, guid: 821969a6364edf74d9c4fd715339b87c, type: 2}
-    - {fileID: 11400000, guid: 4ff903dea565d5049b3eee192e242e68, type: 2}
+    m_Schemas: []
