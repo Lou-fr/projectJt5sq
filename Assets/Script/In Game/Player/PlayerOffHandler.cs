@@ -8,6 +8,7 @@ namespace BleizEntertainment
 {
     [RequireComponent(typeof(PlayerInput))]
     [RequireComponent(typeof(CameraZoom))]
+    [RequireComponent(typeof(WrapMain))]
     public class PlayerOffHandler : MonoBehaviour
     {
         [field: Header("references")]
@@ -30,6 +31,7 @@ namespace BleizEntertainment
         //please for any public content do not send information about the reson of the death
         public static Action<int,string> damageReceive = delegate { };
         public static Action<int,bool> HealReceive = delegate { };
+        public static Action<int,Vector3> allDead = delegate { };
         protected int currentCara = 0;
         private void Awake()
         {
@@ -99,7 +101,7 @@ namespace BleizEntertainment
                     }
                 }
             }
-            EditorApplication.isPlaying = false;
+            allDead?.Invoke(0,this.transform.position);
         }
         private void SwitchCharater1(InputAction.CallbackContext context)
         {

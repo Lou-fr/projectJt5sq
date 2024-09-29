@@ -16,7 +16,7 @@ namespace BleizEntertainment
             CharacterSO[] load = Resources.LoadAll<CharacterSO>("Character/");
             foreach (CharacterSO characterInfo in load)
             {
-                    CharacterDicti.Add(characterInfo.CharacterInfoData.ChatacterId, characterInfo);
+                CharacterDicti.Add(characterInfo.CharacterInfoData.ChatacterId, characterInfo);
                 Debug.Log($"CHARCTER DICITIONNARY : Added {characterInfo.CharacterInfoData.ChatacterName} at the id {characterInfo.CharacterInfoData.ChatacterId}");    
             }
         }

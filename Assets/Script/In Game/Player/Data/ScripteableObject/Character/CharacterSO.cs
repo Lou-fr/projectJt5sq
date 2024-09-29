@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace BleizEntertainment
 {
-    [CreateAssetMenu(fileName = "Player", menuName = "BleizEntertainment/Characters/Player")]
+    [CreateAssetMenu(fileName = "Characters", menuName = "BleizEntertainment/Characters")]
     public class CharacterSO : ScriptableObject
     {
         [field: SerializeField] public ChatacterInfoData CharacterInfoData { get; private set; }
