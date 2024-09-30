@@ -17,9 +17,17 @@ MonoBehaviour:
   <Wraps>k__BackingField:
   - <Id>k__BackingField: 0
     <Wrap>k__BackingField: {x: 45, y: 40, z: 0}
-    <CanHeal>k__BackingField: 0
+    <CanHeal>k__BackingField: 1
     <WrapName>k__BackingField: South
   - <Id>k__BackingField: 1
     <Wrap>k__BackingField: {x: -45, y: 40, z: 0}
     <CanHeal>k__BackingField: 1
     <WrapName>k__BackingField: North
+  - <Id>k__BackingField: 2
+    <Wrap>k__BackingField: {x: 0, y: 40, z: 45}
+    <CanHeal>k__BackingField: 1
+    <WrapName>k__BackingField: East
+  - <Id>k__BackingField: 3
+    <Wrap>k__BackingField: {x: 0, y: 40, z: -45}
+    <CanHeal>k__BackingField: 1
+    <WrapName>k__BackingField: West

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace BleizEntertainment
@@ -6,6 +7,7 @@ namespace BleizEntertainment
     {
         private PlayerFallData fallData;
         private Vector3 playerPosOnEnter;
+        public static Action<float> FallDistance = delegate { };
         public PlayerFallingState(PlayerStateMachine playerMovementStateMachine) : base(playerMovementStateMachine)
         {
             fallData = airborneData.fallData;
@@ -40,6 +42,7 @@ namespace BleizEntertainment
         protected override void OnContactWithGround(Collider collider)
         {
             float fallDistance = playerPosOnEnter.y - stateMachine.CharacterHandler.transform.position.y;
+            FallDistance?.Invoke(fallDistance);
             Debug.Log(fallDistance);
             if (fallDistance < fallData.MinimuToBeConsideredHardFall)
             {

@@ -1,3 +1,4 @@
+using BleizEntertainment.Maps.death;
 using System;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ namespace BleizEntertainment
         public static Action<float,bool> healthPercetange= delegate {};
         public static Action CharacterDead= delegate {};
         public static Action CharacterRespawn= delegate {};
-        protected int health;
+        public int health { get; protected set; }
         protected int maxHealth;
         public bool IsAlive { get; protected set; } = true;
         bool Activate;
@@ -30,6 +31,8 @@ namespace BleizEntertainment
             maxHealth = assignedCharacter.CharacterInfoData.BaseCharacterHp;
             PlayerOffHandler.damageReceive += Hit;
             PlayerOffHandler.HealReceive += heal;
+            DeathSystem.healAndRespawn += heal;
+            PlayerFallingState.FallDistance += DMGfromFall;
             health =maxHealth;
             AssignedAnimator = GetComponent<Animator>();
             AssignedTrigger = GetComponent<PlayerAnimationEventTrigger>();
@@ -61,6 +64,8 @@ namespace BleizEntertainment
         {
             PlayerOffHandler.HealReceive -= heal;
             PlayerOffHandler.damageReceive -= Hit;
+            DeathSystem.healAndRespawn -= heal;
+            PlayerFallingState.FallDistance -= DMGfromFall;
 #if DEBUG || UNITY_EDITOR
             Debug.Log($"CHARACTER SYS : Destroy request inboud clearing all component|n°{AssignedNumber}");
 #endif
@@ -101,17 +106,29 @@ namespace BleizEntertainment
             if (0 >= health) { IsAlive = false; Debug.LogWarning($"{AssignedCharacter.CharacterInfoData.ChatacterName} is dead,with the following reason: {entityORreason}; Damage receive {damage}"); CharacterDead.Invoke();  }
             Debug.Log(health);
         }
-        void heal(int healing,bool healOverwrite = false)
+        void heal(int healing,bool healOverwrite = false,bool allowRespawn = false)
         {
             if(!Activate && !healOverwrite) return;
-            if (!IsAlive) CharacterRespawn?.Invoke();
-            health = health+healing;
-            if(health > maxHealth) health = maxHealth;
-            healthPercetange?.Invoke(HealthToHealthPercentage(health, maxHealth),healOverwrite);
+            if (IsAlive)
+            {
+                health = health + healing;
+                if (health > maxHealth) health = maxHealth;
+                healthPercetange?.Invoke(HealthToHealthPercentage(health, maxHealth), healOverwrite);
+                return;
+            }
+            if (!IsAlive && allowRespawn) IsAlive = true;
+            health = maxHealth;
+            healthPercetange?.Invoke(HealthToHealthPercentage(health, maxHealth), healOverwrite);
         }
         float HealthToHealthPercentage(int health, int maxHealth)
         {
             return (health * 100) / maxHealth;
+        }
+        void DMGfromFall(float distance)
+        {
+            if(distance <= 2)return;
+            float damageDeal = distance * (maxHealth * 0.1f);
+            Hit((int)damageDeal, "Fall Damage");
         }
         #endregion
     }

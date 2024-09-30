@@ -18,15 +18,9 @@ namespace BleizEntertainment
             }
         }
         #region Death Related function
-        public static Vector3[] AllWrapAtCurentRegion(int regionId)
+        public static WrapDict[] AllWrapAtCurentRegion(int regionId)
         {
-            WrapDict[] wraps = WrapDictionaryMapsWide[regionId].Wraps;
-            Vector3[] wrapPos = new Vector3[wraps.Length];
-            for(int i=0; i < wraps.Length; i++)
-            {
-                wrapPos[i] = wraps[i].Wrap;
-            }
-            return wrapPos;
+            return WrapDictionaryMapsWide[regionId].Wraps;
         }
         #endregion
         #region General Use Function
