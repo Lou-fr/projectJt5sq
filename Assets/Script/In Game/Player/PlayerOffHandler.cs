@@ -1,3 +1,4 @@
+using BleizEntertainment.Maps.death;
 using System;
 using Unity.Cinemachine;
 using UnityEditor;
@@ -28,11 +29,11 @@ namespace BleizEntertainment
         public PlayerStateMachine playerStateMachine { get; protected set; }
         public PlayerStateMovementReusableData reusableData { get; private set; }
         public GameObject[] currentCharacters = new GameObject[4];
-        //please for any public content do not send information about the reson of the death
+        //please for any public content do not send information about the reason of the death
         public static Action<int,string> damageReceive = delegate { };
-        public static Action<int,bool> HealReceive = delegate { };
+        public static Action<int,bool,bool> HealReceive = delegate { };
         public static Action<int,Vector3> allDead = delegate { };
-        protected int currentCara = 0;
+        protected int currentCara,regionId = 0; 
         private void Awake()
         {
             rigidBody = GetComponent<Rigidbody>();
@@ -43,6 +44,7 @@ namespace BleizEntertainment
             collidersUtility.CapsuleCollidersUtility.Initialize(gameObject);
             Cursor.lockState = CursorLockMode.Locked;
             CharacterOffHandler.CharacterDead += DeathSwapChar;
+            DeathSystem.wrapAndRespawn += wrap;
             cinemachineController = GameObject.FindGameObjectWithTag("FollowCamera").GetComponent<CinemachineInputAxisController>();
         }
         private void OnDestroy()
@@ -53,6 +55,8 @@ namespace BleizEntertainment
             Input.playerActions.SwitchCharater2.performed -= SwitchCharater2;
             Input.playerActions.SwitchCharater3.performed -= SwitchCharater3;
             Input.playerActions.SwitchCharater4.performed -= SwitchCharater4;
+            DeathSystem.wrapAndRespawn -= wrap;
+            CharacterOffHandler.CharacterDead -= DeathSwapChar;
         }
         public void Spawn()
         {
@@ -101,7 +105,7 @@ namespace BleizEntertainment
                     }
                 }
             }
-            allDead?.Invoke(0,this.transform.position);
+            allDead?.Invoke(regionId,this.transform.position);
         }
         private void SwitchCharater1(InputAction.CallbackContext context)
         {
@@ -211,7 +215,11 @@ namespace BleizEntertainment
         }
         public static void healReceive(int IncomingHealing, bool HealingOverwite)
         {
-            HealReceive.Invoke(IncomingHealing, HealingOverwite);
+            HealReceive.Invoke(IncomingHealing, HealingOverwite,false);
+        }
+        void wrap(Vector3 wrapPos)
+        {
+            this.transform.position = wrapPos;
         }
         #endregion
     }
