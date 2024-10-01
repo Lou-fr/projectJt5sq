@@ -60,13 +60,13 @@ namespace BleizEntertainment
         private void LimitVerticalVelocity()
         {
             Vector3 playerVerticalVelocity = GetPlayerVerticalVelocity();
-            if(playerVerticalVelocity.y >= -fallData.FallSpeedLimit)
+            if (playerVerticalVelocity.y >= -fallData.FallSpeedLimit)
             {
                 return;
             }
 
             Vector3 limitedVelocity = new Vector3(0f, -fallData.FallSpeedLimit - playerVerticalVelocity.y, 0f);
-            stateMachine.Player.rigidBody.AddForce(limitedVelocity,ForceMode.VelocityChange);
+            stateMachine.Player.rigidBody.AddForce(limitedVelocity, ForceMode.VelocityChange);
         }
         #endregion
     }
