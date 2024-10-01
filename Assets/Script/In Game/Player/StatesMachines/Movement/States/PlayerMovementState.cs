@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,12 +9,13 @@ namespace BleizEntertainment
         protected PlayerStateMachine stateMachine;
         protected PlayerGroundedData movementData;
         protected PlayerAirborneData airborneData;
+        public static Action<int> SwapCharTo = delegate { };
         public PlayerMovementStates(PlayerStateMachine playerMovementStateMachine)
         {
-                stateMachine = playerMovementStateMachine;
-                movementData = stateMachine.Character.groundedData;
-                airborneData = stateMachine.Character.airboneData;
-                InitializeData();
+            stateMachine = playerMovementStateMachine;
+            movementData = stateMachine.Character.groundedData;
+            airborneData = stateMachine.Character.airboneData;
+            InitializeData();
         }
 
         #region IState
@@ -121,7 +123,7 @@ namespace BleizEntertainment
         #region Reusable Methods
         protected void StartAnimation(int animationHash)
         {
-            stateMachine.assignedAnimator.SetBool(animationHash,true);
+            stateMachine.assignedAnimator.SetBool(animationHash, true);
             //stateMachine.assignedNetworkAnimator.SetTrigger(animationHash,true);
         }
         protected void StopAnimation(int animationHash)
@@ -182,15 +184,23 @@ namespace BleizEntertainment
         protected void ResetVerticalVelocity()
         {
             Vector3 playerHorizontalVelocity = GetPlayerHorizontalVelocity();
-            stateMachine.Player.rigidBody.linearVelocity =playerHorizontalVelocity;
+            stateMachine.Player.rigidBody.linearVelocity = playerHorizontalVelocity;
         }
         protected virtual void AddInputActionCallbacks()
         {
             stateMachine.Player.Input.playerActions.WalkToggle.started += OnWalkToggleStarted;
+            stateMachine.Player.Input.playerActions.SwitchCharater1.started += SwitchCharater1;
+            stateMachine.Player.Input.playerActions.SwitchCharater2.started += SwitchCharater2;
+            stateMachine.Player.Input.playerActions.SwitchCharater3.started += SwitchCharater3;
+            stateMachine.Player.Input.playerActions.SwitchCharater4.started += SwitchCharater4;
         }
         protected virtual void RemoveInputActionCallbacks()
         {
             stateMachine.Player.Input.playerActions.WalkToggle.started -= OnWalkToggleStarted;
+            stateMachine.Player.Input.playerActions.SwitchCharater1.started -= SwitchCharater1;
+            stateMachine.Player.Input.playerActions.SwitchCharater2.started -= SwitchCharater2;
+            stateMachine.Player.Input.playerActions.SwitchCharater3.started -= SwitchCharater3;
+            stateMachine.Player.Input.playerActions.SwitchCharater4.started -= SwitchCharater4;
         }
         protected void DecelerateHorizontally()
         {
@@ -237,6 +247,22 @@ namespace BleizEntertainment
         protected virtual void OnWalkToggleStarted(InputAction.CallbackContext context)
         {
             stateMachine.reasubleData.ShouldWalk = !stateMachine.reasubleData.ShouldWalk;
+        }
+        protected virtual void SwitchCharater1(InputAction.CallbackContext context)
+        {
+            SwapCharTo?.Invoke(0);
+        }
+        protected virtual void SwitchCharater2(InputAction.CallbackContext context)
+        {
+            SwapCharTo?.Invoke(1);
+        }
+        protected virtual void SwitchCharater3(InputAction.CallbackContext context)
+        {
+            SwapCharTo?.Invoke(2);
+        }
+        protected virtual void SwitchCharater4(InputAction.CallbackContext context)
+        {
+            SwapCharTo?.Invoke(3);
         }
         #endregion
     }

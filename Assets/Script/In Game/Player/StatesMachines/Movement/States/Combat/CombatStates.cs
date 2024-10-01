@@ -11,17 +11,8 @@ namespace BleizEntertainment
         {
             
         }
-        protected override void OnAttackStarted(InputAction.CallbackContext context)
-        {
-            
-        }
-        protected override void OnDashStarted(InputAction.CallbackContext context)
-        {
-            
-        }
-        protected override void OnJumpStarted(InputAction.CallbackContext context)
-        {
-            
-        }
+        protected override void OnAttackStarted(InputAction.CallbackContext context) { }
+        protected override void OnDashStarted(InputAction.CallbackContext context) { }
+        protected override void OnJumpStarted(InputAction.CallbackContext context) { }
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace BleizEntertainment
 {
@@ -28,5 +29,9 @@ namespace BleizEntertainment
             stateMachine.reasubleData.ShouldSprint = false;
         }
         #endregion
+        protected override void SwitchCharater1(InputAction.CallbackContext context) { }
+        protected override void SwitchCharater2(InputAction.CallbackContext context) { }
+        protected override void SwitchCharater3(InputAction.CallbackContext context) { }
+        protected override void SwitchCharater4(InputAction.CallbackContext context) { }
     }
 }

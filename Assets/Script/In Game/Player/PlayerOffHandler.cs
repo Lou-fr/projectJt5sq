@@ -1,9 +1,7 @@
 using BleizEntertainment.Maps.death;
 using System;
 using Unity.Cinemachine;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace BleizEntertainment
 {
@@ -30,10 +28,10 @@ namespace BleizEntertainment
         public PlayerStateMovementReusableData reusableData { get; private set; }
         public GameObject[] currentCharacters = new GameObject[4];
         //please for any public content do not send information about the reason of the death
-        public static Action<int,string> damageReceive = delegate { };
-        public static Action<int,bool,bool> HealReceive = delegate { };
-        public static Action<int,Vector3> allDead = delegate { };
-        protected int currentCara,regionId = 0; 
+        public static Action<int, string> damageReceive = delegate { };
+        public static Action<int, bool, bool> HealReceive = delegate { };
+        public static Action<int, Vector3> allDead = delegate { };
+        protected int currentCara, regionId = 0;
         private void Awake()
         {
             rigidBody = GetComponent<Rigidbody>();
@@ -51,10 +49,7 @@ namespace BleizEntertainment
         {
             Input.playerActions.UnlockCursor.performed -= Unlockcursor;
             Input.playerActions.UnlockCursor.canceled -= Lockcursor;
-            Input.playerActions.SwitchCharater1.performed -= SwitchCharater1;
-            Input.playerActions.SwitchCharater2.performed -= SwitchCharater2;
-            Input.playerActions.SwitchCharater3.performed -= SwitchCharater3;
-            Input.playerActions.SwitchCharater4.performed -= SwitchCharater4;
+            PlayerMovementStates.SwapCharTo -= SwapCharTo;
             DeathSystem.wrapAndRespawn -= wrap;
             CharacterOffHandler.CharacterDead -= DeathSwapChar;
         }
@@ -63,16 +58,13 @@ namespace BleizEntertainment
             InitliazeCollider(currentCharacters[0]);
             playerStateMachine = new(this, currentCharacters[0].GetComponent<CharacterOffHandler>(), reusableData);
             playerStateMachine.ChangeState(playerStateMachine.idlingState);
+            PlayerMovementStates.SwapCharTo += SwapCharTo;
         }
         private void Start()
         {
             Input = GetComponent<PlayerInput>();
             Input.playerActions.UnlockCursor.performed += Unlockcursor;
             Input.playerActions.UnlockCursor.canceled += Lockcursor;
-            Input.playerActions.SwitchCharater1.performed += SwitchCharater1;
-            Input.playerActions.SwitchCharater2.performed += SwitchCharater2;
-            Input.playerActions.SwitchCharater3.performed += SwitchCharater3;
-            Input.playerActions.SwitchCharater4.performed += SwitchCharater4;
             characterController.Spawn();
         }
         private void Unlockcursor(UnityEngine.InputSystem.InputAction.CallbackContext context)
@@ -100,45 +92,29 @@ namespace BleizEntertainment
                     CharacterOffHandler offHandler = character.GetComponent<CharacterOffHandler>();
                     if (offHandler.IsAlive)
                     {
-                        swapCharTo(offHandler.AssignedNumber);
+                        SwapCharTo(offHandler.AssignedNumber);
                         return;
                     }
                 }
             }
-            allDead?.Invoke(regionId,this.transform.position);
+            allDead?.Invoke(regionId, this.transform.position);
         }
-        private void SwitchCharater1(InputAction.CallbackContext context)
-        {
-            swapCharTo(0);
-        }
-        private void SwitchCharater2(InputAction.CallbackContext context)
-        {
-            swapCharTo(1);
-        }
-        private void SwitchCharater3(InputAction.CallbackContext context)
-        {
-            swapCharTo(2);
-        }
-        private void SwitchCharater4(InputAction.CallbackContext context)
-        {
-            swapCharTo(3);
-        }
-        private bool swapCharTo(int newChar)
+        private void SwapCharTo(int newChar)
         {
             if (characterController.ListCurrentChara[newChar] == null)
             {
                 Debug.LogError($"PLAYER SYS : Player tried change to {newChar} but not any character is found on this possition and player is still {characterController.ListCurrentChara[currentCara].CharacterInfoData.ChatacterName} ");
-                return false;
+                return;
             }
             if (characterController.ListCurrentChara[newChar] == characterController.ListCurrentChara[currentCara])
             {
                 Debug.LogError($"PLAYER SYS : Player tried change to {newChar} but the player is already {characterController.ListCurrentChara[currentCara].CharacterInfoData.ChatacterName} ");
-                return false;
+                return;
             }
             if (!currentCharacters[newChar].GetComponent<CharacterOffHandler>().IsAlive)
             {
                 Debug.LogError($"PLAYER SYS : Player tried change to {newChar} but the character {characterController.ListCurrentChara[newChar].CharacterInfoData.ChatacterName} is dead ");
-                return false;
+                return;
             }
             Input.DisableActionFor(Input.playerActions.SwitchCharater1, 1);
             Input.DisableActionFor(Input.playerActions.SwitchCharater2, 1);
@@ -150,7 +126,7 @@ namespace BleizEntertainment
             characterController.characterSelecterUI.ChangeLightUI(lastSTM, currentCara);
             Debug.Log(currentCara + " " + lastSTM);
             ActivateStateMachine(newChar);
-            return true;
+            return;
         }
         #endregion
         #region ColliderUtilites
@@ -208,14 +184,14 @@ namespace BleizEntertainment
         #endregion
 
         #region Vitals Component
-        public static void hitTaken(int dmg,string entityORreason)
+        public static void hitTaken(int dmg, string entityORreason)
         {
             Debug.Log(dmg);
-            damageReceive.Invoke(dmg,entityORreason);
+            damageReceive.Invoke(dmg, entityORreason);
         }
         public static void healReceive(int IncomingHealing, bool HealingOverwite)
         {
-            HealReceive.Invoke(IncomingHealing, HealingOverwite,false);
+            HealReceive.Invoke(IncomingHealing, HealingOverwite, false);
         }
         void wrap(Vector3 wrapPos)
         {
