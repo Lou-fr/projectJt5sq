@@ -31,7 +31,8 @@ namespace BleizEntertainment
         public static Action<int, string> damageReceive = delegate { };
         public static Action<int, bool, bool> HealReceive = delegate { };
         public static Action<int, Vector3> allDead = delegate { };
-        protected int currentCara, regionId = 0;
+        public int regionId = 0;
+        protected int currentCara = 0;
         private void Awake()
         {
             rigidBody = GetComponent<Rigidbody>();
@@ -43,6 +44,7 @@ namespace BleizEntertainment
             Cursor.lockState = CursorLockMode.Locked;
             CharacterOffHandler.CharacterDead += DeathSwapChar;
             DeathSystem.wrapAndRespawn += wrap;
+            Warp.MapsWarp += wrap;
             cinemachineController = GameObject.FindGameObjectWithTag("FollowCamera").GetComponent<CinemachineInputAxisController>();
         }
         private void OnDestroy()
@@ -51,6 +53,7 @@ namespace BleizEntertainment
             Input.playerActions.UnlockCursor.canceled -= Lockcursor;
             PlayerMovementStates.SwapCharTo -= SwapCharTo;
             DeathSystem.wrapAndRespawn -= wrap;
+            Warp.MapsWarp -= wrap;
             CharacterOffHandler.CharacterDead -= DeathSwapChar;
         }
         public void Spawn()

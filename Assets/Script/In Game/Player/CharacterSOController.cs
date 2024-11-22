@@ -175,7 +175,7 @@ namespace BleizEntertainment
 
         public int[] GetListCurrentCharacter()
         {
-            int[] t = { 2410, 13, 857 };
+            int[] t = { 1 };
             return t;
         }
         private (bool, CharacterSO) ChekDuplicate(CharacterSO playerSO, CharacterSO[] list)
