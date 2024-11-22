@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f135078894ff3d042927caaae916bbdd, type: 3}
-  m_Name: AchlysBase
+  m_Name: CalliataBase
   m_EditorClassIdentifier: 
   <CharacterInfoData>k__BackingField:
-    <ChatacterName>k__BackingField: Achlys
-    <ChatacterId>k__BackingField: 13
-    <BaseCharacterHp>k__BackingField: 329
-    <Controller>k__BackingField: {fileID: 9100000, guid: 7f72327429b5d0341bf490e38f266175, type: 2}
-    <AssociatedSkin>k__BackingField: {fileID: 6940840005045683118, guid: eb5e7e2d1f67d2a42998930cdd5f6191, type: 3}
+    <ChatacterName>k__BackingField: Caliata
+    <ChatacterId>k__BackingField: 1
+    <BaseCharacterHp>k__BackingField: 500
+    <Controller>k__BackingField: {fileID: 9100000, guid: 85ce159575146f941ac0f39a9fe2d8f8, type: 2}
+    <AssociatedSkin>k__BackingField: {fileID: 5655153373750273532, guid: 5e7ed2f3cebbb334c937e9d9c3447ae6, type: 3}
     <AssociatedProfilePicture>k__BackingField: {fileID: 0}
     <characterHeight>k__BackingField: 1.75
   <groundedData>k__BackingField:
@@ -207,11 +207,11 @@ MonoBehaviour:
       <MinimuToBeConsideredHardFall>k__BackingField: 5
   <combatData>k__BackingField:
     <WeaponsDataClass>k__BackingField:
-      <IsMelee>k__BackingField: 1
+      <IsMelee>k__BackingField: 0
       <IsFirearms>k__BackingField: 0
       <IsProjectile>k__BackingField: 0
       <IsMagic>k__BackingField: 0
-      <IsHeavy>k__BackingField: 1
+      <IsHeavy>k__BackingField: 0
       <IsPistol>k__BackingField: 0
       <IsRifles>k__BackingField: 0
     <MeleeCombatData>k__BackingField:

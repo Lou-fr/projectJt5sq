@@ -6,8 +6,7 @@ namespace BleizEntertainment.Maps
     [Serializable]
     public class WrapDict
     {
-        [field: SerializeField]
-        public int Id { get; private set; }
+        public int Id { get; internal set; }
         [field: SerializeField]
         public Vector3 Wrap { get; private set; }
         [field: SerializeField]

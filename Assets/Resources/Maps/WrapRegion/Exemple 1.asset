@@ -10,20 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 579647f467728b14a94fdbd0acb29cdd, type: 3}
-  m_Name: Exemple
+  m_Name: Exemple 1
   m_EditorClassIdentifier: 
-  <RegionName>k__BackingField: Exemple
-  <RegionId>k__BackingField: 0
+  <RegionName>k__BackingField: Exemple_two
+  <RegionId>k__BackingField: 1
   <Wraps>k__BackingField:
-  - <Wrap>k__BackingField: {x: 45, y: 40, z: 0}
+  - <Wrap>k__BackingField: {x: 45, y: 40, z: 750}
     <CanHeal>k__BackingField: 1
     <WrapName>k__BackingField: South
-  - <Wrap>k__BackingField: {x: -45, y: 40, z: 0}
-    <CanHeal>k__BackingField: 1
-    <WrapName>k__BackingField: North
-  - <Wrap>k__BackingField: {x: 0, y: 40, z: 45}
-    <CanHeal>k__BackingField: 1
-    <WrapName>k__BackingField: East
-  - <Wrap>k__BackingField: {x: 0, y: 40, z: -45}
+  - <Wrap>k__BackingField: {x: -45, y: 40, z: 750}
     <CanHeal>k__BackingField: 0
-    <WrapName>k__BackingField: West
+    <WrapName>k__BackingField: North
